@@ -1,0 +1,179 @@
+﻿Agile Stories
+
+1. As a user I can create a White Board to display the shapes
+   1. Description:
+      1. Creates a white board where the shapes can be displayed and drawing can be drawn
+   2. Tasks:
+      1. As a user I can draw shapes on the whiteboard
+   3. Tests:
+      1. Verify that a white board is successfully created
+      2. Verify that shapes can be modified on the whiteboard
+   4.  Assignee:
+      1. Thomas Tran, implement the UI and code logic behind creating
+a line.
+   5. Estimation: 5
+   6. Priority: 1
+   7. Done:
+      1. When the user enters/modifies the dimensions, color, width, penstyle, pencapstyle, and pen join style of any shape on the whiteboard.
+
+
+2. As a user I can create a line
+   1. Description:
+      1. Identify the dimensions of the line, the color, the width, penstyle, pencapstyle, and pen join style
+   2. Tasks:
+      1. As a user I can create and customize the line
+      2. As a user I can modify the line
+   3. Tests:
+      1. Verify that a line is successfully created and customized
+      2. Verify that a line is properly modified
+   4.  Assignee:
+      1. Houssin Saadeh, implement the UI and code logic behind creating
+a line.
+   5. Estimation: 5
+   6. Priority: 2
+   7. Done:
+      1. When the user enters/modifies the dimensions, color, width, penstyle, pencapstyle, and pen join style of the line
+
+
+3. As a user I can create a polyline
+   1. Description:
+      1. Identify the dimensions of the polyline, the color, the width, penstyle, pencapstyle, and pen join style
+   2. Tasks:
+      1. As a user I can create and customize the polyline
+      2. As a user I can modify the polyline
+   3. Tests:
+      1. Verify that a polyline is successfully created and customized
+      2. Verify that a polyline is properly modified
+   4.  Assignee:
+      1. Niko Fischer, implement the UI and code logic behind creating
+a Polyline.
+   5. Estimation: 6
+   6. Priority: 3
+   7. Done:
+      1. When the user enters/modifies the dimensions, color, width, penstyle, pencapstyle, and pen join style of the polyline
+
+
+4. As a user I can create a polygon
+   1. Description:
+      1. Identify the dimensions of the polygon, the color, the width, penstyle, pencapstyle, pen join style, brush color, and brush style 
+   2. Tasks:
+      1. As a user I can create and customize the polygon
+      2. As a user I can modify the polygon
+   3. Tests:
+      1. Verify that a polygon is successfully created and customized
+      2. Verify that a polygon is properly modified
+   4.  Assignee:
+      1. Juliette Raubolt, implement the UI and code logic behind creating
+a polygon.
+   5. Estimation: 3
+   6. Priority:4
+   7. Done:
+      1. When the user enters/modifies the dimensions, color, width, penstyle, pencapstyle, pen join style, brush style, and color of the polygon
+
+
+5. As a user I can create a rectangle
+   1. Description:
+      1. Identify the dimensions of the rectangle, the color, the width, penstyle, pencapstyle, pen join style, brush color, and brush style
+   2. Tasks:
+      1. As a user I can create and customize the rectangle
+      2. As a user I can modify the rectangle
+   3. Tests:
+      1. Verify that a rectangle is successfully created and customized
+      2. Verify that a rectangle is properly modified
+   4.  Assignee:
+      1. Samuel Choi, implement the UI and code logic behind creating
+a rectangle.
+   5. Estimation: 2
+   6. Priority:5
+   7. Done:
+      1. When the user enters/modifies the dimensions, color, width, penstyle, pencapstyle, and pen join style of the line
+
+
+6. As a user I can create an Ellipse
+   1. Description:
+      1. Identify the dimensions of the ellipse, the color, the width, penstyle, pencapstyle, pen join style, brush color, and brush style
+   2. Tasks:
+      1. As a user I can create and customize the ellipse
+      2. As a user I can modify the ellipse
+   3. Tests:
+      1. Verify that an ellipse is successfully created and customized
+      2. Verify that an ellipse is properly modified
+   4.  Assignee:
+      1. Thomas Tran, implement the UI and code logic behind creating
+an ellipse.
+   5. Estimation: 7
+   6. Priority: 6
+   7. Done:
+      1. When the user enters/modifies the dimensions, color, width, penstyle, pencapstyle, and pen join style of the ellipse
+
+
+7. As a user I can create a text
+   1. Description:
+      1. Identify the dimensions of the text, the color, alignment, point size, font family, font style, and font weight.
+   2. Tasks:
+      1. As a user I can create and customize the text
+      2. As a user I can modify the text
+   3. Tests:
+      1. Verify that a text is successfully created and customized
+      2. Verify that a text is properly modified
+   4.  Assignee:
+      1. Benjamin Qaderi, implement the UI and code logic behind creating
+a text.
+   5. Estimation: 8
+   6. Priority: 7
+   7. Done:
+      1. When the user enters/modifies the text, the color, alignment, point size, font family, font style, and font weight.
+
+
+8. As a user I can choose pen styles
+   1. Description:
+      1. A user can select the pen color, width, style, capstyle, and joinstyle given the available options for each feature
+   2. Tasks:
+      1. As a user I can customize the pen features that are available in order to create the various shape options
+   3. Tests:
+      1. Verify that a user can select the various pen options
+      2. Verify that the selected pen options display accordingly  
+   4.  Assignee:
+      1. Juliette Raubolt, implement the UI and code logic behind creating the pen styles.
+   5. Estimation: 3
+   6. Priority: 8
+   7. Done:
+      1. When the user is able to select an available pen style and displays the according appropriate pattern 
+
+
+9. As a user I can choose brush styles
+   1. Description:
+      1. A user can select the brush color and brush style given the available options for each feature
+   2. Tasks:
+      1. As a user I can customize the brush features that are available in order to create the various shape options
+   3. Tests:
+      1. Verify that a user can select the various brush options
+      2. Verify that the selected brush options display accordingly  
+   4.  Assignee:
+      1. Houssin Saadeh, implement the UI and code logic behind creating
+the brush styles.
+   5. Estimation: 3
+   6. Priority: 9
+   7. Done:
+      1. When the user is able to select an available brush style and displays the according appropriate pattern 
+
+
+10. As a user I can sort my shapes
+   1. Description:
+      1. A user can sort all of the shapes by their perimeter
+      2. A user can sort all of the shapes by their area
+   2. Tasks:
+      1. As a user I can create a list of sorted shape IDs organized by their perimeter or area
+   3. Tests:
+      1. Verify That they are sorted correctly.
+   4.  Assignee:
+      1. Niko Fischer, implement the UI and code logic behind creating
+a line.
+   5. Estimation: 9
+   6. Priority: 10
+   7. Done:
+      1. When the user enters/modifies the dimensions, color, width, penstyle, pencapstyle, and pen join style of the line
+
+
+Baseline story point estimate value of one = 1 hr of development time for a single developer
+
