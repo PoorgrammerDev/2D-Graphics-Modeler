@@ -1,4 +1,11 @@
-﻿Agile Stories
+Agile User Stories
+
+Thomas Tran
+Houssin Saadeh
+Samuel Choi
+Niko Fischer
+Benjamin Qaderi
+Juliette Raubolt
 
 1. As a user I can create a White Board to display the shapes
    1. Description:
@@ -9,8 +16,7 @@
       1. Verify that a white board is successfully created
       2. Verify that shapes can be modified on the whiteboard
    4.  Assignee:
-      1. Thomas Tran, implement the UI and code logic behind creating
-a line.
+      1. Thomas Tran, implement the UI and code logic behind creating a whiteboard display.
    5. Estimation: 5
    6. Priority: 1
    7. Done:
@@ -27,8 +33,7 @@ a line.
       1. Verify that a line is successfully created and customized
       2. Verify that a line is properly modified
    4.  Assignee:
-      1. Houssin Saadeh, implement the UI and code logic behind creating
-a line.
+      1. Houssin Saadeh, implement the UI and code logic behind creating a line.
    5. Estimation: 5
    6. Priority: 2
    7. Done:
@@ -45,8 +50,7 @@ a line.
       1. Verify that a polyline is successfully created and customized
       2. Verify that a polyline is properly modified
    4.  Assignee:
-      1. Niko Fischer, implement the UI and code logic behind creating
-a Polyline.
+      1. Niko Fischer, implement the UI and code logic behind creating a Polyline.
    5. Estimation: 6
    6. Priority: 3
    7. Done:
@@ -63,8 +67,7 @@ a Polyline.
       1. Verify that a polygon is successfully created and customized
       2. Verify that a polygon is properly modified
    4.  Assignee:
-      1. Juliette Raubolt, implement the UI and code logic behind creating
-a polygon.
+      1. Juliette Raubolt, implement the UI and code logic behind creating a polygon.
    5. Estimation: 3
    6. Priority:4
    7. Done:
@@ -81,8 +84,7 @@ a polygon.
       1. Verify that a rectangle is successfully created and customized
       2. Verify that a rectangle is properly modified
    4.  Assignee:
-      1. Samuel Choi, implement the UI and code logic behind creating
-a rectangle.
+      1. Samuel Choi, implement the UI and code logic behind creating a rectangle.
    5. Estimation: 2
    6. Priority:5
    7. Done:
@@ -99,8 +101,7 @@ a rectangle.
       1. Verify that an ellipse is successfully created and customized
       2. Verify that an ellipse is properly modified
    4.  Assignee:
-      1. Thomas Tran, implement the UI and code logic behind creating
-an ellipse.
+      1. Thomas Tran, implement the UI and code logic behind creating an ellipse.
    5. Estimation: 7
    6. Priority: 6
    7. Done:
@@ -117,8 +118,7 @@ an ellipse.
       1. Verify that a text is successfully created and customized
       2. Verify that a text is properly modified
    4.  Assignee:
-      1. Benjamin Qaderi, implement the UI and code logic behind creating
-a text.
+      1. Benjamin Qaderi, implement the UI and code logic behind creating a text.
    5. Estimation: 8
    6. Priority: 7
    7. Done:
@@ -150,8 +150,7 @@ a text.
       1. Verify that a user can select the various brush options
       2. Verify that the selected brush options display accordingly  
    4.  Assignee:
-      1. Houssin Saadeh, implement the UI and code logic behind creating
-the brush styles.
+      1. Houssin Saadeh, implement the UI and code logic behind creating the brush styles.
    5. Estimation: 3
    6. Priority: 9
    7. Done:
@@ -167,8 +166,7 @@ the brush styles.
    3. Tests:
       1. Verify That they are sorted correctly.
    4.  Assignee:
-      1. Niko Fischer, implement the UI and code logic behind creating
-a line.
+      1. Niko Fischer, implement the UI and code logic behind creating a shape sorting feature.
    5. Estimation: 9
    6. Priority: 10
    7. Done:
