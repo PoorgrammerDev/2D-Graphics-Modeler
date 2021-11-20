@@ -32,7 +32,6 @@ public:
 	void push_back(T val); // add element
 	void reserve(int newalloc); // get more space
 
-	//TODO: I don't understand what this is saying, is anyone else familiar with this syntax? - Thomas
 	using iterator = T*;
 	using const_iterator = const T*;
 	iterator begin(); // points to first element
@@ -113,7 +112,7 @@ vector<T>::~vector<T>() {
 template<typename T>
 T& vector<T>::operator[] (int n) {
 	if (n < 0 || n >= size()) {
-		throw 0;//TODO: add out of bounds exception
+		throw std::out_of_range("Vector random access out of bounds!");
 	}
 
 	return elem[n];
@@ -139,18 +138,17 @@ int vector<T>::capacity() const {
 template<typename T>
 void vector<T>::resize(int newsize) {
 	T* newElem = new T[newsize];
-	int iterLength = ((newsize > space) ? newsize : space); //This is to ensure that we don't overstep bounds in case user is shrinking array
+	int iterLength = ((newsize < space) ? newsize : space); //minimum(newsize, space)
 
-	//copy all elements into new array
+	//move all elements into new array
 	for (int i = 0; i < iterLength; ++i) {
-		newElem[i] = this->elem[i];
+		newElem[i] = std::move(this->elem[i]);
 	}
 
-	delete[] elem;
-	this->size_v = ((newsize < this->size_v) ? newsize : this->size_v); //TODO: see if this is needed
+	delete[] this->elem;
+	this->size_v = ((newsize < this->size_v) ? newsize : this->size_v); //minimum(newsize, size_v)
 	this->elem = newElem;
 	this->space = newsize;
-
 }
 
 template<typename T>
@@ -163,41 +161,75 @@ void vector<T>::push_back(T val) {
 	++size_v;
 }
 
+//According to cplusplus.com, the std::vector implementation has this function behave as follows:
+//If n is greater than the current vector capacity, the function causes the container to reallocate its storage increasing its capacity to n (or greater)
+//Source: https://www.cplusplus.com/reference/vector/vector/reserve/
 template<typename T>
 void vector<T>::reserve(int newalloc) {
-	//TODO: Unimplemented method stub
+	if (newalloc > this->space) {
+		resize(newalloc);
+	}
 }
- 
 
+//======================
 
-/*
+template <typename T>
 using iterator = T*;
+
+template <typename T>
 using const_iterator = const T*;
-iterator begin() {
-	//TODO: Unimplemented method stub
+
+
+template <typename T>
+iterator<T> vector<T>::begin() {
+	return elem[0];	
+}
+
+template <typename T>
+const_iterator<T> vector<T>::begin() const {
+	return elem[0];
+}
+
+
+template <typename T>
+iterator<T> vector<T>::end() {
+	return elem[size_v - 1];
 }
  
-const_iterator begin() const {
+template <typename T>
+const_iterator<T> vector<T>::end() const {
+	return elem[size_v - 1];
+}
+
+//TODO: not really sure what these are supposed to do
+/*
+template <typename T>
+iterator<T> vector<T>::insert(iterator<T> p, const T& v) {
 	//TODO: Unimplemented method stub
 }
 
-iterator end() {
-	//TODO: Unimplemented method stub
-}
- 
-const_iterator end() const {
-	//TODO: Unimplemented method stub
-}
-
-iterator insert(iterator p, const T& v) {
-	//TODO: Unimplemented method stub
-}
-
-iterator erase(iterator p) {
+template <typename T>
+iterator<T> vector<T>::erase(iterator<T> p) {
 	//TODO: Unimplemented method stub
 }
 */
- 
 
+
+
+//unused function - was created for debugging
+//TODO: remove or implement a cleaner version of this
+/*template <typename T>
+void vector<T>::print(std::ostream& out) {
+	out << "Size_V: " << size_v << "\n";
+	out << "Space: " << space << "\n";
+
+	out << "[";
+	for (int i = 0; i < space; ++i) {
+		out << elem[i];
+		if (i != space - 1) out << ",";
+	}
+	out << "]\n\n";
+}
+*/
 
 #endif
