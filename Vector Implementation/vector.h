@@ -4,10 +4,18 @@
 //vector.h - class specification
 // a vector which approximates the stl vector
 
+/**
+ * @file vector.h
+ * @author Thomas Tran
+ * @date 11/19/2021
+ */
+
+#include <ostream>
 #include <exception> 
 
 const int VECTOR_DEFAULT_CAPACITY = 5;
 
+//Class declaration copied from 2D_Graphics_Modeler_Class_Project.pdf on Canvas, with minor adjustments and additions
 template<class T>
 class vector {
 private:
@@ -40,10 +48,17 @@ public:
 	const_iterator end() const;
 	iterator insert(iterator p, const T& v);// insert a new element v before p
 	iterator erase(iterator p); // remove element pointed to by p
+
+	//Added methods
+	void print(std::ostream& out) const;
 };
 
+//Added method - overloaded extraction operator for easy printing
+template <typename T>
+std::ostream& operator<<(std::ostream& out, const vector<T>& vec);
+
 //================================
-// METHOD IMPLEMENTATIONS
+// CONSTRUCTORS AND DESTRUCTOR
 //================================
 
 //Default constructor
@@ -107,7 +122,9 @@ vector<T>::~vector<T>() {
 	delete[] elem;
 }
 
-//======================
+//================================
+// "NORMAL" METHODS
+//================================
 
 template<typename T>
 T& vector<T>::operator[] (int n) {
@@ -171,7 +188,9 @@ void vector<T>::reserve(int newalloc) {
 	}
 }
 
-//======================
+//================================
+// ITERATOR METHODS
+//================================
 
 template <typename T>
 using iterator = T*;
@@ -181,55 +200,108 @@ using const_iterator = const T*;
 
 
 template <typename T>
+// points to first element
 iterator<T> vector<T>::begin() {
-	return elem[0];	
+	return &elem[0];	
 }
 
 template <typename T>
+// points to first element
 const_iterator<T> vector<T>::begin() const {
-	return elem[0];
+	return &elem[0];
 }
 
 
 template <typename T>
+// points to one beyond the last element
 iterator<T> vector<T>::end() {
-	return elem[size_v - 1];
+	return &elem[size_v];
 }
  
 template <typename T>
+// points to one beyond the last element
 const_iterator<T> vector<T>::end() const {
-	return elem[size_v - 1];
-}
-
-//TODO: not really sure what these are supposed to do
-/*
-template <typename T>
-iterator<T> vector<T>::insert(iterator<T> p, const T& v) {
-	//TODO: Unimplemented method stub
+	return &elem[size_v];
 }
 
 template <typename T>
-iterator<T> vector<T>::erase(iterator<T> p) {
-	//TODO: Unimplemented method stub
-}
-*/
+// insert a new element v before p
+iterator<T> vector<T>::insert(iterator p, const T& v) {
+	iterator trailingIter;
+	int offset;
 
-
-
-//unused function - was created for debugging
-//TODO: remove or implement a cleaner version of this
-/*template <typename T>
-void vector<T>::print(std::ostream& out) {
-	out << "Size_V: " << size_v << "\n";
-	out << "Space: " << space << "\n";
-
-	out << "[";
-	for (int i = 0; i < space; ++i) {
-		out << elem[i];
-		if (i != space - 1) out << ",";
+	//Ensure p is in this vector
+	if (p < begin() || p > end()) {
+		throw std::out_of_range("Iterator p is out of bounds!");
 	}
-	out << "]\n\n";
+
+	if (size_v + 1 > space) {
+		//resizing the array would mean allocating it somewhere else, so p would be invalid.
+		//instead, calculate offset from p to start of array, then re-apply it after with updated begin() value
+		offset = p - begin(); 
+
+		resize(space * 2); //double the capacity of array if we need more space
+		p = begin() + offset;
+	}
+
+	//moves all elements from p onward one space forward, starting at end
+	for (iterator leadingIter = end() - 1; leadingIter >= p; --leadingIter) {
+		trailingIter = leadingIter + 1;
+		*trailingIter = std::move(*leadingIter);
+	}
+
+	//Insert new element and update size
+	*p = v;
+	++size_v;
+
+	return p;
 }
-*/
+
+template <typename T>
+// remove element pointed to by p
+iterator<T> vector<T>::erase(iterator p) {
+	iterator trailingIter;
+
+	//Ensure p is in this vector
+	if (p < begin() || p > end()) {
+		throw std::out_of_range("Iterator p is out of bounds!");
+	}
+
+	//moves all elements from p onward one space backward, starting at p
+	for (iterator leadingIter = p + 1; leadingIter < end(); ++leadingIter) {
+		trailingIter = leadingIter - 1;
+		*trailingIter = std::move(*leadingIter);
+	}
+
+	--size_v;
+
+	return p;
+}
+
+//================================
+// ADDED METHODS
+//================================
+
+//Added print method for easy debugging and output
+template <typename T>
+void vector<T>::print(std::ostream& out) const {
+	out << "[";
+	for (int i = 0; i < size_v; ++i) {
+		out << elem[i];
+		
+		if (i != size_v - 1) {
+			out << ",";
+		}
+	}
+	out << "]\n";
+}
+
+//Output stream extraction operator overload for printing
+template <typename T>
+std::ostream& operator<<(std::ostream& out, const vector<T>& vec) {
+	vec.print(out);
+	return out;
+}
+
 
 #endif
