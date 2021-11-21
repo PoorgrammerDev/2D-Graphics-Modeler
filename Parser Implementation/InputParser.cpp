@@ -6,26 +6,97 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <sstream>
 
-
-enum shapeType
-{
-	LINE,
-	POLYGON,
-	TEXT
-};
-
+// General Input Function that does everything atm, note will have parameters once put with class implementation
 void InputShapes ();
+
+// Lines and Shapes have pen info for the input that this function reads in, note will have dif parameters with class implementation
 void GetPenInfo (std::ifstream& in, std::string& color, int& width, std::string& style, std::string& capStyle, std::string& joinStyle);
+
+// Shapes have brush info for the input that this function reads in, note will have dif parameters with class implementation
 void GetBrushInfo (std::ifstream& in, std::string& color, std::string& style);
+
+// Texts have text info for the input that this function reads in, note will have dif paramaters with class implementation
 void GetTextInfo (std::ifstream& in, std::string& text, std::string& color, std::string& alignment, int& size,
 		  std::string& fontFam, std::string& fontStyle, std::string& fontWeight);
+
+// Takes a string of dimensions for lines and seperates it into individual ints
+void InterpretLineDimensions (std::string lineDim, int& x1, int& x2, int& y1,int& y2);
+
+// Takes a string of dimensions for rectangles and seperates it into individual ints
+// Rectangles, texts, and ellipses are defined with rectangle dimensions
+void InterpretRectDimensions (std::string rectDim, int& x, int& y, int& width, int&height);
+
+ 
+// Takes a string of dimensions for squares and seperates it into individual ints
+// Squares and circles are defined with rectangle dimensions
+void InterpretSqaureDimensions (std::string squareDim, int& x, int& y, int& side);
+
+// Need to implement InterpertPolyDimensions for polylines and polygons
 
 int main()
 {
 	InputShapes();
-	std::cout << std::endl << "Test" << std::endl;
+	return 0;
 }
+
+/*****************
+ * Function Defs *
+ *****************/
+
+void InterpretLineDimensions (std::string lineDim, int& x1, int& x2, int& y1,int& y2)
+{
+	// Using stringstream to extract integer points
+	std::stringstream ss;
+	
+	ss << lineDim;
+	ss >> x1;
+	ss.ignore(2, ' ');
+	ss >> y1;
+	ss.ignore(2, ' ');
+	ss >> x2;
+	ss.ignore(2, ' ');
+	ss >> y2;
+
+	// Remove testing when done
+	std::cout << x1 << std::endl << y1 << std::endl << x2 << std::endl << y2 << std::endl << std::endl;
+
+}
+
+// InterpretPolyDimensions (std::string polyDim) // need help with class info 
+
+void InterpretRectDimensions (std::string rectDim, int& x, int& y, int& width, int&height)
+{
+	std::stringstream ss;
+	
+	ss << rectDim;
+	ss >> x;
+	ss.ignore(2, ' ');
+	ss >> y;
+	ss.ignore(2, ' ');
+	ss >> width;
+	ss.ignore(2, ' ');
+	ss >> height;
+
+	std::cout << x << std::endl << y << std::endl << width << std::endl << height << std::endl << std::endl;
+}
+
+void InterpretSqaureDimensions (std::string squareDim, int& x, int& y, int& side)
+{
+	
+	std::stringstream ss;
+	
+	ss << squareDim;
+	ss >> x;
+	ss.ignore(2, ' ');
+	ss >> y;
+	ss.ignore(2, ' ');
+	ss >> side;
+
+	std::cout << x1 << std::endl << y1 << std::endl << side << std::endl << std::endl;
+}
+
 
 void GetPenInfo (std::ifstream& in, std::string& color, int& width, std::string& style, std::string& capStyle, std::string& joinStyle)
 {
