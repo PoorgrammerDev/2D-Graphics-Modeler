@@ -48,14 +48,7 @@ public:
 	const_iterator end() const;
 	iterator insert(iterator p, const T& v);// insert a new element v before p
 	iterator erase(iterator p); // remove element pointed to by p
-
-	//Added methods
-	void print(std::ostream& out) const;
 };
-
-//Added method - overloaded extraction operator for easy printing
-template <typename T>
-std::ostream& operator<<(std::ostream& out, const vector<T>& vec);
 
 //================================
 // CONSTRUCTORS AND DESTRUCTOR
@@ -155,7 +148,7 @@ int vector<T>::capacity() const {
 template<typename T>
 void vector<T>::resize(int newsize) {
 	T* newElem = new T[newsize];
-	int iterLength = ((newsize < space) ? newsize : space); //minimum(newsize, space)
+	int iterLength = ((newsize < this->space) ? newsize : this->space); //minimum(newsize, space)
 
 	//move all elements into new array
 	for (int i = 0; i < iterLength; ++i) {
@@ -253,7 +246,6 @@ iterator<T> vector<T>::insert(iterator p, const T& v) {
 	//Insert new element and update size
 	*p = v;
 	++size_v;
-
 	return p;
 }
 
@@ -274,34 +266,7 @@ iterator<T> vector<T>::erase(iterator p) {
 	}
 
 	--size_v;
-
 	return p;
 }
-
-//================================
-// ADDED METHODS
-//================================
-
-//Added print method for easy debugging and output
-template <typename T>
-void vector<T>::print(std::ostream& out) const {
-	out << "[";
-	for (int i = 0; i < size_v; ++i) {
-		out << elem[i];
-		
-		if (i != size_v - 1) {
-			out << ",";
-		}
-	}
-	out << "]\n";
-}
-
-//Output stream extraction operator overload for printing
-template <typename T>
-std::ostream& operator<<(std::ostream& out, const vector<T>& vec) {
-	vec.print(out);
-	return out;
-}
-
 
 #endif
