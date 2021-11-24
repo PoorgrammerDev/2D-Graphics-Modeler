@@ -11,7 +11,7 @@
  */
 
 #include <ostream>
-#include <exception> 
+#include <exception>
 
 const int VECTOR_DEFAULT_CAPACITY = 5;
 
@@ -33,11 +33,12 @@ public:
 	~vector(); // destructor
 
 	T& operator[] (int n); // access: return reference
-	//const T& operator[] (int n); // access: return reference //FIXME: duplicate of previous line (?)
+	const T& operator[] (int n) const; // access: return reference
 	int size() const; // the current size
 	int capacity() const; // current available space
 	void resize(int newsize); // grow
-	void push_back(T val); // add element
+	void push_back(const T& val); // add element
+	void push_back(T&& val); // add element
 	void reserve(int newalloc); // get more space
 
 	using iterator = T*;
@@ -128,12 +129,14 @@ T& vector<T>::operator[] (int n) {
 	return elem[n];
 }
 
-/* FIXME: See comment above (in class declaration)
 template<typename T>
-const T& vector<T>::operator[] (int n) {
-	
+const T& vector<T>::operator[] (int n) const {
+	if (n < 0 || n >= size()) {
+		throw std::out_of_range("Vector random access out of bounds!");
+	}
+
+	return elem[n];
 }
-*/
 
 template<typename T>
 int vector<T>::size() const {
@@ -162,12 +165,23 @@ void vector<T>::resize(int newsize) {
 }
 
 template<typename T>
-void vector<T>::push_back(T val) {
+void vector<T>::push_back(const T& val) {
 	if (size_v + 1 > space) {
 		resize(space * 2); //double the capacity of array if we need more space
 	}
 
 	elem[size_v] = val;
+	++size_v;
+}
+
+
+template<typename T>
+void vector<T>::push_back(T&& val) {
+	if (size_v + 1 > space) {
+		resize(space * 2); //double the capacity of array if we need more space
+	}
+
+	elem[size_v] = std::move(val);
 	++size_v;
 }
 

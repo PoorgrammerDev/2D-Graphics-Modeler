@@ -1,0 +1,54 @@
+/************************************************
+THIS IS A TEST SCRIPT FOR VECTOR.H AND 
+IS NOT TO BE INCLUDED IN THE QT PROJECT
+THE FILE EXTENSION HAS BEEN CHANGED TO .TXT 
+AS TO NOT CONFUSE IT WITH OTHER SOURCE FILES
+************************************************/
+
+#include <iostream>
+#include <memory>
+#include <utility>
+#include <string>
+#include "vector.h"
+
+int main() {
+    vector<int> intVec;
+    int testInt = 3;
+
+    intVec.push_back(5);
+    intVec.push_back(5);
+    intVec.push_back(5);
+    intVec.push_back(std::move(testInt));
+    intVec.push_back(5);
+    intVec.push_back(5);
+    std::cout << testInt << std::endl;
+
+    vector<std::string> strVec;
+    std::string moveStr = "move";
+    std::string nonMoveStr = "nomove";
+
+    strVec.push_back("a");
+    strVec.push_back("b");
+    strVec.push_back("c");
+    strVec.push_back(std::move(moveStr));
+    strVec.push_back(nonMoveStr);
+    strVec.push_back("d");
+    strVec.push_back("e");
+    std::cout << moveStr << std::endl;
+    std::cout << nonMoveStr << std::endl;
+
+    vector<std::unique_ptr<int>> ptrvec;
+    std::unique_ptr<int> testPtr = std::make_unique<int>(3);
+
+    ptrvec.push_back(std::make_unique<int>(5));
+    ptrvec.push_back(std::make_unique<int>(5));
+    //ptrvec.push_back(testPtr); //NOTE: not possible, MUST use std::move
+    ptrvec.push_back(std::move(testPtr));
+    ptrvec.push_back(std::make_unique<int>(5));
+    ptrvec.push_back(std::make_unique<int>(5));
+    ptrvec.push_back(std::make_unique<int>(5));
+    
+   //std::cout << *testPtr << std::endl; //NOTE: not possible, has been moved
+
+    return 0;
+}
