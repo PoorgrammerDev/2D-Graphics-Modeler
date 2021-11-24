@@ -1,13 +1,6 @@
 
 #include "InputManager.h"
 
-int main()
-{
-	InputManager input;
-
-	input.ReadShapes();
-}	
-
 /**********************
  * Method Definitions *
  **********************/
