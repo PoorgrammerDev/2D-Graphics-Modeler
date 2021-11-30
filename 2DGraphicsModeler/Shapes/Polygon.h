@@ -9,10 +9,9 @@ class Polygon: public Shape
 public:
     void GetPolygon();
 
-    int penWidth;
-    QString penStyle;
-    QString penCapStyle;
-    QString penJoinStlye;
+    Polygon();
+    ~Polygon();
+private:
     QString fillColor;
     QString fillStyle;
     int shapeSimensions[8];

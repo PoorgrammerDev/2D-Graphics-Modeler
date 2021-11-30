@@ -2,17 +2,16 @@
 #define CIRCLE_H
 
 #include <QString>
-#include "Shape.h"
+#include "Polygon.h"
 
-class Circle: public Shape
+class Circle: public Polygon
 {
 public:
     void GetCircle();
 
-    int penWidth;
-    QString penStyle;
-    QString penCapStyle;
-    QString penJoinStlye;
+    Circle();
+    ~Circle();
+private:
     QString fillColor;
     QString fillStyle;
     int shapeDimensions[3];

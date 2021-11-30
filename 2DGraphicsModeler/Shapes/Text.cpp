@@ -8,6 +8,7 @@ using std::cin;
 
 void Text::GetText()
 {
+    /*
     string word;
     shapeId = 8;
     shapeType = "Text";
@@ -38,5 +39,16 @@ void Text::GetText()
     cout << "What do you want the text to say: ";
     getline(cin,word);
     textString = QString::fromStdString(word);
+    */
     //********* set dimentions here ******************
+}
+
+Text::Text()
+{
+
+}
+
+Text::~Text()
+{
+
 }

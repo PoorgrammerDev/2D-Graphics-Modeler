@@ -1,5 +1,5 @@
-#ifndef POLYLINE_H
-#define POLYLINE_H
+#ifndef LINE_H
+#define LINE_H
 
 #include <QString>
 #include "Shape.h"
@@ -7,13 +7,12 @@
 class Polyline: public Shape
 {
 public:
-    void GetPolyline();
+    void GetPolyine();
 
-    int penWidth;
-    QString penStyle;
-    QString penCapStyle;
-    QString penJoinStlye;
-    int shapeDimensions[8];
+    Polyline();
+    ~Polyline();
+private:
+    int shapeSimensions[8];
 };
 
-#endif // POLYLINE_H
+#endif // LINE_H

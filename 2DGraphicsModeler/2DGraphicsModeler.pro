@@ -28,6 +28,7 @@ HEADERS += \
     Shapes/Ellipse.h \
     Shapes/Line.h \
     Shapes/Polygon.h \
+    Shapes/Polyline.h \
     Shapes/Rectangle.h \
     Shapes/Shape.h \
     Shapes/Square.h \

@@ -9,10 +9,8 @@ class Line: public Shape
 public:
     void GetLine();
 
-    int penWidth;
-    QString penStyle;
-    QString penCapStyle;
-    QString penJoinStlye;
+    Line();
+    ~Line();
 };
 
 #endif // LINE_H

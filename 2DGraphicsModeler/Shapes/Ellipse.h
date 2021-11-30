@@ -2,19 +2,19 @@
 #define ELLIPSE_H
 
 #include <QString>
-#include "Shape.h"
+#include "Polygon.h"
 
-class Ellipse: public Shape
+class Ellipse: public Polygon
 {
 public:
     void GetEllipse();
 
-    int penWidth;
-    QString penStyle;
-    QString penCapStyle;
-    QString penJoinStlye;
+    Ellipse();
+    ~Ellipse();
+private:
     QString fillColor;
     QString fillStyle;
+    int shapeDimensions[4];
 };
 
 #endif // ELLIPSE_H

@@ -2,17 +2,16 @@
 #define SQUARE_H
 
 #include <QString>
-#include "Shape.h"
+#include "Polygon.h"
 
-class Square: public Shape
+class Square: public Polygon
 {
 public:
     void GetSquare();
 
-    int penWidth;
-    QString penStyle;
-    QString penCapStyle;
-    QString penJoinStlye;
+    Square();
+    ~Square();
+private:
     QString fillColor;
     QString fillStyle;
     int shapeDimensions[3];

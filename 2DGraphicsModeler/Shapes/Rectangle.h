@@ -2,19 +2,19 @@
 #define RECTANGLE_H
 
 #include <QString>
-#include "Shape.h"
+#include "Polygon.h"
 
-class Rectangle: public Shape
+class Rectangle: public Polygon
 {
 public:
     void GetRectangle();
 
-    int penWidth;
-    QString penStyle;
-    QString penCapStyle;
-    QString penJoinStlye;
+    Rectangle();
+    ~Rectangle();
+private:
     QString fillColor;
     QString fillStyle;
+    int shapeDimensions[4];
 };
 
 #endif // RECTANGLE_H

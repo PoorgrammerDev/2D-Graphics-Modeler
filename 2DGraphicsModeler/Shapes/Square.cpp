@@ -8,6 +8,7 @@ using std::cin;
 
 void Square::GetSquare()
 {
+    /*
     string word;
     shapeId = 5;
     shapeType = "Square";
@@ -38,5 +39,16 @@ void Square::GetSquare()
     cout << "What FillStyle do you want the shape to have: ";
     getline(cin,word);
     fillStyle = QString::fromStdString(word);
+    */
     //********* set dimentions here ******************
+}
+
+Square::Square()
+{
+
+}
+
+Square::~Square()
+{
+
 }
