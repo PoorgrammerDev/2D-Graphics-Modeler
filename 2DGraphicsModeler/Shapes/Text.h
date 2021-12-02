@@ -7,10 +7,12 @@
 class Text: public Shape
 {
 public:
-    void GetText();
-
     Text();
-    ~Text();
+    Text(const Text& obj) = delete;
+    virtual ~Text() override;
+
+    void GetText();
+    virtual void Serialize(std::ostream& out) override;
 private:
     QString textString;
     QString textAli;

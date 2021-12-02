@@ -20,3 +20,7 @@ Rectangle::~Rectangle()
 {
 
 }
+
+void Rectangle::Serialize(std::ostream& out) {
+    //TODO: Method stub
+}

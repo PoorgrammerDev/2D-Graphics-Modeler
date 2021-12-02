@@ -20,3 +20,7 @@ Line::~Line()
 {
 
 }
+
+void Line::Serialize(std::ostream& out) {
+    //TODO: Method stub
+}

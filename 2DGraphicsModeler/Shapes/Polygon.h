@@ -7,14 +7,16 @@
 class Polygon: public Shape
 {
 public:
-    void GetPolygon();
-
     Polygon();
-    ~Polygon();
+    Polygon(const Polygon& obj) = delete;
+    virtual ~Polygon() override;
+
+    void GetPolygon();
+    virtual void Serialize(std::ostream& out) override;
 private:
     QString fillColor;
     QString fillStyle;
-    int shapeSimensions[8];
+    int shapeDimensions[8];
 };
 
 #endif // POLYGON_H

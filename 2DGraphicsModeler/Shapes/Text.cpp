@@ -52,3 +52,7 @@ Text::~Text()
 {
 
 }
+
+void Text::Serialize(std::ostream& out) {
+    //TODO: Method stub
+}

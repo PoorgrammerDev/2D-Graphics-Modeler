@@ -7,10 +7,12 @@
 class Rectangle: public Polygon
 {
 public:
-    void GetRectangle();
-
     Rectangle();
-    ~Rectangle();
+    Rectangle(const Rectangle& obj) = delete;
+    virtual ~Rectangle() override;
+
+    void GetRectangle();
+    virtual void Serialize(std::ostream& out) override;
 private:
     QString fillColor;
     QString fillStyle;

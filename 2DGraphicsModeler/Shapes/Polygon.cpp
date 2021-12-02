@@ -21,3 +21,7 @@ Polygon::~Polygon()
 {
 
 }
+
+void Polygon::Serialize(std::ostream& out) {
+    //TODO: Method stub
+}

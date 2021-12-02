@@ -7,10 +7,12 @@
 class Ellipse: public Polygon
 {
 public:
-    void GetEllipse();
-
     Ellipse();
-    ~Ellipse();
+    Ellipse(const Ellipse& obj) = delete;
+    virtual ~Ellipse() override;
+
+    void GetEllipse();
+    virtual void Serialize(std::ostream& out) override;
 private:
     QString fillColor;
     QString fillStyle;

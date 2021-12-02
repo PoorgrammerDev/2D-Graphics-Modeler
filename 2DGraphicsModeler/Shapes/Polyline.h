@@ -7,12 +7,14 @@
 class Polyline: public Shape
 {
 public:
-    void GetPolyine();
-
     Polyline();
-    ~Polyline();
+    Polyline(const Polyline& obj) = delete;
+    virtual ~Polyline() override;
+
+    void GetPolyline();
+    virtual void Serialize(std::ostream& out) override;
 private:
-    int shapeSimensions[8];
+    int shapeDimensions[8];
 };
 
 #endif // LINE_H

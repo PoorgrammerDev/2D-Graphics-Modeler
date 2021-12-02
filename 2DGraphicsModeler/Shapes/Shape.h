@@ -6,11 +6,29 @@
 class Shape
 {
 public:
-    int ChooseShape();
-  //  virtual void paint();
-
+    /******************
+     * CTORS AND DTOR *
+     ******************/
     Shape();
-    ~Shape();
+    Shape(const Shape& obj) = delete;
+    virtual ~Shape();
+
+
+    /******************
+     * OTHER METHODS *
+     ******************/
+    int ChooseShape(); //Is this required? - Thomas
+    virtual void Draw() = 0;
+    virtual void Move() = 0;
+    virtual double Perimeter() = 0;
+    virtual double Area() = 0;
+
+
+
+
+    virtual void Serialize(std::ostream& out) = 0; //pure virtual serialize function - for writing to file
+
+
 private:
     int shapeId;
     QString shapeType;
@@ -18,7 +36,7 @@ private:
     int penWidth;
     QString penStyle;
     QString penCapStyle;
-    QString penJoinStlye;
+    QString penJoinStyle;
     int shapeDimensions[4];
 };
 

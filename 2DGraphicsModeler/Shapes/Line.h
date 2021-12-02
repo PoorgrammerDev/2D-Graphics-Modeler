@@ -7,10 +7,12 @@
 class Line: public Shape
 {
 public:
-    void GetLine();
-
     Line();
-    ~Line();
+    Line(const Line& obj) = delete;
+    virtual ~Line() override;
+
+    void GetLine();
+    virtual void Serialize(std::ostream& out) override;
 };
 
 #endif // LINE_H

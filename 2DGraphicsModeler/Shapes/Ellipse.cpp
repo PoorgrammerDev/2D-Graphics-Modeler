@@ -20,3 +20,7 @@ Ellipse::~Ellipse()
 {
 
 }
+
+void Ellipse::Serialize(std::ostream& out) {
+    //TODO: Method stub
+}
