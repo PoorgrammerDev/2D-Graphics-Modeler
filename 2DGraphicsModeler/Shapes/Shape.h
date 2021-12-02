@@ -29,7 +29,9 @@ public:
     virtual void Serialize(std::ostream& out) = 0; //pure virtual serialize function - for writing to file
 
 
-private:
+//I changed this to protected so Serialize() of derived could access it.
+//Not sure if this is right way to do it - Thomas
+protected:
     int shapeId;
     QString shapeType;
     QString shapeColor;
