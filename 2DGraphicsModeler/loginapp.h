@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "paint.h"
+#include "form.h"
+#include "dialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class LoginApp; }
@@ -21,6 +23,6 @@ private slots:
 
 private:
     Ui::LoginApp *ui;
-    paint *paint1;
+    Dialog *dialog1;
 };
 #endif // LOGINAPP_H

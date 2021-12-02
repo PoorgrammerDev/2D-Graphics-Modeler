@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>paint</class>
- <widget class="QDialog" name="paint">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1163</width>
-    <height>710</height>
+    <width>842</width>
+    <height>573</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Form</string>
   </property>
-  <widget class="QStackedWidget" name="stackwidget">
+  <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>650</x>
-     <y>100</y>
-     <width>421</width>
-     <height>441</height>
+     <x>230</x>
+     <y>90</y>
+     <width>361</width>
+     <height>471</height>
     </rect>
    </property>
    <property name="currentIndex">
     <number>1</number>
    </property>
-   <widget class="QWidget" name="Polygon">
+   <widget class="QWidget" name="Line">
     <widget class="QWidget" name="layoutWidget_2">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>20</y>
+       <x>90</x>
+       <y>90</y>
        <width>231</width>
        <height>401</height>
       </rect>
@@ -94,65 +94,65 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QWidget" name="Line">
-    <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="Polygon">
+    <widget class="QWidget" name="layoutWidget_3">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>20</y>
+       <x>80</x>
+       <y>50</y>
        <width>231</width>
        <height>401</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
+     <layout class="QGridLayout" name="gridLayout_3">
       <item row="1" column="0" colspan="2">
-       <widget class="QPushButton" name="pushButton_7">
+       <widget class="QPushButton" name="pushButton_9">
         <property name="text">
          <string>Build</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="lineEdit_3"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox"/>
+         <widget class="QComboBox" name="comboBox_7"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_2"/>
+         <widget class="QComboBox" name="comboBox_8"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_3"/>
+         <widget class="QComboBox" name="comboBox_9"/>
         </item>
        </layout>
       </item>
       <item row="0" column="0">
-       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="label_9">
           <property name="text">
            <string>PenWidth:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="label_10">
           <property name="text">
            <string>PenStyle:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_3">
+         <widget class="QLabel" name="label_11">
           <property name="text">
            <string>PenCap:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_4">
+         <widget class="QLabel" name="label_12">
           <property name="text">
            <string>PenJoin:</string>
           </property>
@@ -163,13 +163,12 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QWidget" name="page"/>
   </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>1080</x>
-     <y>30</y>
+     <x>710</x>
+     <y>0</y>
      <width>77</width>
      <height>551</height>
     </rect>
@@ -197,7 +196,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="pushButton_2">
       <property name="text">
        <string>Polygon</string>
       </property>
@@ -211,61 +210,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="text">
-       <string>Polyline</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget_3">
-   <property name="geometry">
-    <rect>
-     <x>940</x>
-     <y>470</y>
-     <width>77</width>
-     <height>551</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout_6">
-    <item>
-     <widget class="QPushButton" name="pushButton_9">
-      <property name="text">
-       <string>Line</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_10">
-      <property name="text">
-       <string>Text</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_11">
-      <property name="text">
-       <string>Rectangle</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_12">
-      <property name="text">
-       <string>Polygon</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_13">
-      <property name="text">
-       <string>Elipse</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_14">
+     <widget class="QPushButton" name="pushButton_7">
       <property name="text">
        <string>Polyline</string>
       </property>
@@ -275,22 +220,5 @@
   </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>pushButton_5</sender>
-   <signal>clicked()</signal>
-   <receiver>paint</receiver>
-   <slot>open()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>899</x>
-     <y>87</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>545</x>
-     <y>182</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

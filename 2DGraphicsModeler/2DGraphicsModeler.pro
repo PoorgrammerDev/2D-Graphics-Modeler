@@ -20,7 +20,8 @@ SOURCES += \
     Shapes/Text.cpp \
     loginapp.cpp \
     main.cpp \
-    paint.cpp
+    dialog.cpp \
+    renderarea.cpp
 
 HEADERS += \
     Parser/InputManager.h \
@@ -34,14 +35,18 @@ HEADERS += \
     Shapes/Square.h \
     Shapes/Text.h \
     Util/vector.h \
+    dialog.h \
     loginapp.h \
-    paint.h
+    renderarea.h
 
 FORMS += \
-    loginapp.ui \
-    paint.ui
+    dialog.ui \
+    loginapp.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    images.qrc

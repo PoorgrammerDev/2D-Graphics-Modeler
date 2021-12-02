@@ -6,9 +6,16 @@ paint::paint(QWidget *parent) :
     ui(new Ui::paint)
 {
     ui->setupUi(this);
+
+
+
+
 }
 
 paint::~paint()
 {
     delete ui;
 }
+
+
+

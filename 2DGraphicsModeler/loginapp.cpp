@@ -15,7 +15,6 @@ LoginApp::~LoginApp()
 }
 
 
-
 void LoginApp::on_pushButton_login_clicked()
 {
     QString username = ui->lineEdit_username->text();
@@ -25,8 +24,10 @@ void LoginApp::on_pushButton_login_clicked()
     {
         //QMessageBox::information(this, "Login", "Username and password is correct");
         hide();
-        paint1 = new paint(this);
-        paint1->show();
+        dialog1 = new Dialog(this);
+        dialog1->show();
+
+
     }
     else
     {
