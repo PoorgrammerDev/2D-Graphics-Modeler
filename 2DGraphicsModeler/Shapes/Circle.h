@@ -15,6 +15,8 @@
  * but instead be a special type of Rectangle and Ellipse, respectively?
  */
 
+// - I saw the same thing and did not implement the renderarea aspects since you're right. Though still need to update parser to reflect this
+
 class Circle: public Polygon
 {
 public:

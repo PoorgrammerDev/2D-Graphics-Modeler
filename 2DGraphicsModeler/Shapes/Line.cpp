@@ -7,19 +7,35 @@ using std::string;
 using std::cout;
 using std::cin;
 
-void Line::GetLine()
-{
 
-}
 
 Line::Line()
 {
-
+    line.setLine(10, 10, 20, 20);
+    shapeType = ShapeType(0);
 }
 
 Line::~Line()
 {
 
+}
+
+// Setting line dimensions from an array loaded in input for rendering
+void Line:: setDimensions(int point[])
+{
+    line.setLine(point[0], point[1], point[2], point[3]);
+}
+
+// May not actually need
+QLine Line:: getLine()
+{
+    return line;
+}
+
+// calling drawLine to draw the line
+void Line:: draw(QPainter& aPainter)
+{
+    aPainter.drawLine(line);
 }
 
 void Line::Serialize(std::ostream& out) {

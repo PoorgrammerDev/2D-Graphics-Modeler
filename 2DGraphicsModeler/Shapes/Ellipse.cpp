@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <QString>
+#include <QPainter>
 #include "Ellipse.h"
 #include "Util/EnumStrConv.h"
 
@@ -8,10 +9,7 @@ using std::string;
 using std::cout;
 using std::cin;
 
-void Ellipse::GetEllipse()
-{
 
-}
 
 Ellipse::Ellipse()
 {
@@ -21,6 +19,24 @@ Ellipse::Ellipse()
 Ellipse::~Ellipse()
 {
 
+}
+
+// Using an array loaded in input parser to set dimensions for painter
+void Ellipse:: setDimensions(int point[])
+{
+    ellipse.setCoords(point[0], point[1], point[2], point[3]);
+}
+
+// May not actually need this as mentioned before
+QRect Ellipse:: getEllipse()
+{
+    return ellipse;
+}
+
+// Calling drawEllipse with painter to draw
+void Ellipse:: draw(QPainter& aPainter)
+{
+    aPainter.drawEllipse(ellipse);
 }
 
 void Ellipse::Serialize(std::ostream& out) {

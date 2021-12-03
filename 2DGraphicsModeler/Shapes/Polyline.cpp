@@ -36,6 +36,8 @@ void Polyline::GetPolyline()
     //********* set dimentions here ******************
 }
 
+// Have not implemented these until done with polygon as they are very similar and having the same todo list for both
+
 void Polyline::Serialize(std::ostream& out) {
     //TODO: Using filler variables until Shape is updated
     auto penColor = Qt::black;

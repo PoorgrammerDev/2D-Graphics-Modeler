@@ -2,6 +2,7 @@
 #include <string>
 #include "Polygon.h"
 #include "Util/EnumStrConv.h"
+#include <QPainter>
 
 using std::string;
 using std::cout;
@@ -22,6 +23,21 @@ Polygon::~Polygon()
 {
 
 }
+
+// Not done, need to add some sort of loop to add all of the points
+void Polygon:: setDimensions(int point[])
+{
+    QPoint points[10] {QPoint(point[0],(point[1])), QPoint(point[2], point[3])};
+
+}
+
+
+void Polygon:: draw(QPainter& aPainter)
+{
+    // These variables are dummy fillers
+    aPainter.drawPolygon(points, 10);
+}
+
 
 void Polygon::Serialize(std::ostream& out) {
     //TODO: Using filler variables until class is updated

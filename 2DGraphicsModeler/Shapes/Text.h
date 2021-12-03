@@ -11,6 +11,12 @@ public:
     Text(const Text& obj) = delete;
     virtual ~Text() override;
 
+    // Added these three methods to each shape
+    virtual void draw(QPainter& aPainter) override;
+    virtual void setDimensions(int point[]) override;
+    // Reading more on text with the enums and datatypes to assign to
+    // Will likely add a QRect to store the dimensions as this is used in the painter.drawText() call
+
     void GetText();
     virtual void Serialize(std::ostream& out) override;
 private:

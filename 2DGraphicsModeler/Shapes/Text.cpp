@@ -8,6 +8,8 @@ using std::string;
 using std::cout;
 using std::cin;
 
+// Have not added the methods for rendering and input as I am working on getting the enums and all the fields in the input
+
 void Text::GetText()
 {
     /*
