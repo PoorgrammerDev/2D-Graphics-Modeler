@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
+#include <QString>
 #include "Ellipse.h"
-#include <QColor>
+#include "Util/EnumStrConv.h"
 
 using std::string;
 using std::cout;
@@ -23,17 +24,30 @@ Ellipse::~Ellipse()
 }
 
 void Ellipse::Serialize(std::ostream& out) {
-    Qt::GlobalColor a = Qt::lightGray;
-/*
+    //TODO: Using filler variables until class is updated
+    auto penColor = Qt::black;
+    auto penStyle = Qt::DashDotDotLine;
+    auto penCapStyle = Qt::FlatCap;
+    auto penJoinStyle = Qt::MiterJoin;
+    auto brushColor = Qt::black;
+    auto brushStyle = Qt::NoBrush;
+
+    //TODO: add special case for circle? or keep in separate class?
 
     out << "ShapeId: " << shapeId << '\n'
     << "ShapeType: Ellipse\n"
-    << "ShapeDimensions: " << 520, 200, 170, 100 << '\n'
-    << "PenColor: " << black << '\n'
+
+    << "ShapeDimensions: "
+        << shapeDimensions[0] << ", "
+        << shapeDimensions[1] << ", "
+        << shapeDimensions[2] << ", "
+        << shapeDimensions[3] << '\n'
+
+    << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
     << "PenWidth: " << penWidth << '\n'
-    << "PenStyle: " << penStyle << '\n'
-    << "PenCapStyle: " << penCapStyle << '\n'
-    << "PenJoinStyle: " << penJoinStyle << '\n'
-    << "BrushColor: " << white << '\n'
-    << "BrushStyle: " << NoBrush << '\n';*/
+    << "PenStyle: " << PenStyleToStr(penStyle).toStdString() << '\n'
+    << "PenCapStyle: " << PenCapStyleToStr(penCapStyle).toStdString() << '\n'
+    << "PenJoinStyle: " << PenJoinStyleToStr(penJoinStyle).toStdString() << '\n'
+    << "BrushColor: " << GColorToStr(brushColor).toStdString() << '\n'
+    << "BrushStyle: " << BrushStyleToStr(brushStyle).toStdString() << "\n\n";
 }

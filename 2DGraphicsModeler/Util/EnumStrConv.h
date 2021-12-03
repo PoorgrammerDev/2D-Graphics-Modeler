@@ -8,8 +8,8 @@
 #include <QFont>
 #include <QString>
 
-QString GColorEnumToStr(Qt::GlobalColor val);
-Qt::GlobalColor GColorEnumFromStr(QString str);
+QString GColorToStr(Qt::GlobalColor val);
+Qt::GlobalColor GColorFromStr(QString str);
 
 QString PenStyleToStr(Qt::PenStyle val);
 Qt::PenStyle PenStyleFromStr(QString str);

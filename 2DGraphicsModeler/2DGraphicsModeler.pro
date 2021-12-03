@@ -14,6 +14,7 @@ SOURCES += \
     Shapes/Ellipse.cpp \
     Shapes/Line.cpp \
     Shapes/Polygon.cpp \
+    Shapes/Polyline.cpp \
     Shapes/Rectangle.cpp \
     Shapes/Shape.cpp \
     Shapes/Square.cpp \
