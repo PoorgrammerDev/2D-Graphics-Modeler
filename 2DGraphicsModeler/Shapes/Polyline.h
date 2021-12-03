@@ -1,5 +1,5 @@
-#ifndef LINE_H
-#define LINE_H
+#ifndef POLYLINE_H
+#define POLYLINE_H
 
 #include <QString>
 #include "Shape.h"
@@ -17,4 +17,4 @@ private:
     int shapeDimensions[8];
 };
 
-#endif // LINE_H
+#endif // POLYLINE_H
