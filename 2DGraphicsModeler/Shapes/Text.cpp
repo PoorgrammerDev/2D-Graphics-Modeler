@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
+#include <QString>
 #include "Text.h"
+#include "Util/EnumStrConv.h"
 
 using std::string;
 using std::cout;
@@ -54,5 +56,25 @@ Text::~Text()
 }
 
 void Text::Serialize(std::ostream& out) {
-    //TODO: Method stub
+    //TODO: Using filler variables until class is updated
+    auto textColor = Qt::black;
+    auto textAli = Qt::AlignRight;
+    auto fontStyle = QFont::StyleNormal;
+    auto fontWeight = QFont::Bold;
+
+    out << "ShapeId: " << shapeId << '\n'
+    << "ShapeType: Text\n"
+    << "ShapeDimensions: "
+            << shapeDimensions[0] << ", "
+            << shapeDimensions[1] << ", "
+            << shapeDimensions[2] << ", "
+            << shapeDimensions[3] << '\n'
+
+    << "TextString: " << textString.toStdString() << '\n'
+    << "TextColor: " << GColorToStr(textColor).toStdString() << '\n'
+    << "TextAlignment: " << AlignFlagToStr(textAli).toStdString() << '\n'
+    << "TextPointSize: " << textPointSize << '\n'
+    << "TextFontFamily: " << fontFamily.toStdString() << '\n'
+    << "TextFontStyle: " << FontStyleToStr(fontStyle).toStdString() << '\n'
+    << "TextFontWeight: " << FontWeightToStr(fontWeight).toStdString() << "\n\n";
 }

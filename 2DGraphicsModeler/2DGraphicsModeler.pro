@@ -14,10 +14,12 @@ SOURCES += \
     Shapes/Ellipse.cpp \
     Shapes/Line.cpp \
     Shapes/Polygon.cpp \
+    Shapes/Polyline.cpp \
     Shapes/Rectangle.cpp \
     Shapes/Shape.cpp \
     Shapes/Square.cpp \
     Shapes/Text.cpp \
+    Util/EnumStrConv.cpp \
     loginapp.cpp \
     main.cpp \
     dialog.cpp \
@@ -34,6 +36,7 @@ HEADERS += \
     Shapes/Shape.h \
     Shapes/Square.h \
     Shapes/Text.h \
+    Util/EnumStrConv.h \
     Util/vector.h \
     dialog.h \
     loginapp.h \
