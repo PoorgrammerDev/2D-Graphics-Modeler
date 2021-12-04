@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
     RenderArea render;
     render.show();
 
+
     LoginApp w;
     w.show();
     return a.exec();

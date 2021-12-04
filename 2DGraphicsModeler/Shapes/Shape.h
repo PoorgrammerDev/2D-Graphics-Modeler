@@ -37,8 +37,8 @@ public:
     void SetTextAlign(Qt::AlignmentFlag anAlignment);
 
     // Each class has its own draw and setdimensions depending on the shape
-    virtual void Draw(QPainter& aPainter);
-    virtual void SetDimensions (int points[]);
+    virtual void Draw(QPainter& aPainter) = 0;
+    virtual void SetDimensions (int points[]) = 0;
 
     // The following simply return the fields for use in renderarea paintevent
     ShapeType GetType() const;

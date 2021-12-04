@@ -5,6 +5,8 @@
 RenderArea::RenderArea(QWidget *parent)
     : QWidget(parent)
 {
+    QWidget::setFixedHeight(500);
+    QWidget::setFixedWidth(1000);
     input.ReadShapes(shapes);
 }
 
@@ -19,11 +21,12 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
     QPainter painter(this);
     int index = 0;
 
-    // Looing through entire vector to display
+    // Looping through entire vector to display
     while (index < shapes.size())
     {
    //     Used for testing QPoints with poly shapes
-   //     QPoint points[4]={QPoint(10,20), QPoint(20, 30), QPoint(30, 40), QPoint(40, 50)};
+   //   QPoint somepoints[4]={QPoint(900,90), QPoint(910, 20), QPoint(970, 40), QPoint(980, 80)};
+   //   painter.drawPolygon(somepoints, 4);
 
             switch (shapes[index]->GetType()) {
             case ShapeType::Line :
@@ -57,10 +60,11 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
             case ShapeType::Text :
                 // Drawing text
                 // need to add the text details
+                painter.setFont(shapes[index]->GetFont());
                 shapes[index]->Draw(painter);
                 break;
             }
-
+            painter.restore();
             ++index;
     }
 }

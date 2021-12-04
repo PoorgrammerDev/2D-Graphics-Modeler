@@ -41,6 +41,7 @@ void Rectangle:: Draw(QPainter& aPainter)
     aPainter.drawRect(rectangle);
 }
 
+
 // Thomas I changed line 64 from penWidth to pen.width() purely for compilation this is here in case I forgot to change it back!
 void Rectangle::Serialize(std::ostream& out) {
     //TODO: Using filler variables until class is updated

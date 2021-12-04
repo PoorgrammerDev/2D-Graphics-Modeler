@@ -28,15 +28,16 @@ Polygon::~Polygon()
 void Polygon:: SetDimensions(int point[])
 {
     int index = 0;
+    int index2 = 0;
     pointCount = 0;
-    while(index < 20 && point[index] != 0)
+    while(index < 20 && point[index+1] != 0)
     {
-        points[0].setX(point[index]);
-        points[0].setY(point[index+1]);
+        points[index2].setX(point[index]);
+        points[index2].setY(point[index+1]);
         ++pointCount;
         ++index;
         ++index;
-
+        ++index2;
     }
 }
 

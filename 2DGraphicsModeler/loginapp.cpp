@@ -28,6 +28,7 @@ void LoginApp::on_pushButton_login_clicked()
         dialog1->show();
 
 
+
     }
     else
     {

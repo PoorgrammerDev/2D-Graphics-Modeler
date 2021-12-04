@@ -35,6 +35,7 @@ void InputManager:: ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
     std::string type;
     std::string dimensions;
     std::unique_ptr<Shape> aShape;
+    int index = 0;
 
     // Should be kept
     int points[20];
@@ -42,7 +43,7 @@ void InputManager:: ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
     std::ifstream in("shapes.txt");
     // exception??
 
-    while(in)
+    while(!in.eof())
     {
         in.ignore(9, ' '); // Ignoring "ShapeId: "
         in >> id;
@@ -110,11 +111,11 @@ void InputManager:: ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
         aShape->SetShapeId(id);
         shapes.push_back(std::move(aShape));
 
+        ++index;
 
         // Ignore for extra line between each shape
         in.ignore (std::numeric_limits<std::streamsize>::max(), '\n');
     }
-
     in.close();
 }
 
@@ -221,6 +222,7 @@ void InputManager:: InterpretPolyDimensions (std::string polyDim, std::unique_pt
         ss >> dimensions[index+1];
         ss.ignore(2, ' '); // Ignoring ", "
 
+        ++index;
         ++index;
     }
     shape->SetDimensions(dimensions);
