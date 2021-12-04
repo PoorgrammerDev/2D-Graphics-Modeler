@@ -1,38 +1,35 @@
-#include <iostream>
 #include "Shape.h"
 
-using std::cout;
-using std::cin;
-
-int Shape::ChooseShape()
-{
-    return 0;
-}
+/*******************************
+ * Constructors and Destructor *
+ *******************************/
 
 Shape::Shape()
 {
 
 }
 
-Shape::~Shape()
-{
+Shape::~Shape() {}
 
-}
+
+/***********************
+ * Setters and Getters *
+ ***********************/
 
 // Used in input parser
-void Shape:: SetShapeId(int id)
+void Shape::SetShapeId(int id)
 {
     shapeId = id;
 }
 
 // Used in input parser so type can be used in renderarea
-void Shape:: SetShapeType(ShapeType aType)
+void Shape::SetShapeType(ShapeType aType)
 {
     shapeType = aType;
 }
 
 // Sets pen attributes from input
-void Shape:: SetPen(Qt::GlobalColor color, int width, Qt::PenStyle style, Qt::PenCapStyle cap, Qt::PenJoinStyle join)
+void Shape::SetPen(Qt::GlobalColor color, int width, Qt::PenStyle style, Qt::PenCapStyle cap, Qt::PenJoinStyle join)
 {
     pen.setColor(color);
     pen.setWidth(width);
@@ -42,14 +39,14 @@ void Shape:: SetPen(Qt::GlobalColor color, int width, Qt::PenStyle style, Qt::Pe
 }
 
 // Sets brush attributes from input
-void Shape:: SetBrush(Qt::GlobalColor color, Qt::BrushStyle style)
+void Shape::SetBrush(Qt::GlobalColor color, Qt::BrushStyle style)
 {
     brush.setColor(color);
     brush.setStyle(style);
 }
 
 // Will have set text methods here
-void Shape:: SetFont(int pointSize, QString fontFam, QFont::Style fontStyle, QFont::Weight fontWeight)
+void Shape::SetFont(int pointSize, QString fontFam, QFont::Style fontStyle, QFont::Weight fontWeight)
 {
     font.setPointSize(pointSize);
     font.setFamily(fontFam);
@@ -57,53 +54,53 @@ void Shape:: SetFont(int pointSize, QString fontFam, QFont::Style fontStyle, QFo
     font.setWeight(fontWeight);
 }
 
-void Shape:: SetText(QString aText)
+void Shape::SetText(QString aText)
 {
     text = aText;
 }
 
-void Shape:: SetTextColor(Qt::GlobalColor color)
+void Shape::SetTextColor(Qt::GlobalColor color)
 {
     textColor = color;
 }
 
 
-void Shape:: SetTextAlign(Qt::AlignmentFlag anAlignment)
+void Shape::SetTextAlign(Qt::AlignmentFlag anAlignment)
 {
     textAlign = anAlignment;
 }
 
 // Returns the type for paint event switch in renderarea
-ShapeType Shape:: GetType() const
+ShapeType Shape::GetType() const
 {
     return shapeType;
 }
 
 // Returns the pen so painter can be updated in renderarea
-QPen Shape:: GetPen() const
+QPen Shape::GetPen() const
 {
     return pen;
 }
 
 // Returns the brush so the painter can be updated in renderarea
-QBrush Shape:: GetBrush() const
+QBrush Shape::GetBrush() const
 {
     return brush;
 }
 
-QFont Shape:: GetFont() const
+QFont Shape::GetFont() const
 {
     return font;
 }
-QString Shape:: GetText() const
+QString Shape::GetText() const
 {
     return text;
 }
-Qt::GlobalColor Shape:: GetTextColor() const
+Qt::GlobalColor Shape::GetTextColor() const
 {
     return textColor;
 }
-Qt::AlignmentFlag Shape:: GetTextAlight() const
+Qt::AlignmentFlag Shape::GetTextAlight() const
 {
     return textAlign;
 }

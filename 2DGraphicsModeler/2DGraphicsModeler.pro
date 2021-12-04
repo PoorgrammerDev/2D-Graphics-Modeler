@@ -10,14 +10,12 @@ CONFIG += c++14
 
 SOURCES += \
     Parser/InputManager.cpp \
-    Shapes/Circle.cpp \
     Shapes/Ellipse.cpp \
     Shapes/Line.cpp \
     Shapes/Polygon.cpp \
     Shapes/Polyline.cpp \
     Shapes/Rectangle.cpp \
     Shapes/Shape.cpp \
-    Shapes/Square.cpp \
     Shapes/Text.cpp \
     Util/EnumStrConv.cpp \
     loginapp.cpp \
@@ -27,14 +25,12 @@ SOURCES += \
 
 HEADERS += \
     Parser/InputManager.h \
-    Shapes/Circle.h \
     Shapes/Ellipse.h \
     Shapes/Line.h \
     Shapes/Polygon.h \
     Shapes/Polyline.h \
     Shapes/Rectangle.h \
     Shapes/Shape.h \
-    Shapes/Square.h \
     Shapes/Text.h \
     Util/EnumStrConv.h \
     Util/vector.h \

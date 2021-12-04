@@ -8,19 +8,33 @@
 class Line: public Shape
 {
 public:
+    /*******************************
+     * Constructors and Destructor *
+     *******************************/
     Line();
     Line(const Line& obj) = delete;
     virtual ~Line() override;
 
-    // Added these three methods to each shape
+    /***********************************
+     * Non-Setter/Getter Class Methods *
+     ***********************************/
     virtual void Draw(QPainter& aPainter) override;
     virtual void SetDimensions(int point[]) override;
+    virtual void Serialize(std::ostream& out) override;
+
+    virtual void Move() override;
+    virtual double Perimeter() override;
+    virtual double Area() override;
+
+    /***********************
+     * Setters and Getters *
+     ***********************/
     // May not actually need this
     QLine getLine();
 
-    virtual void Serialize(std::ostream& out) override;
+
 private:
-    // USed for render area ease with dimensions, may change like discusses
+    // USed for render area ease with dimensions, may change like discussed
     QLine line;
 };
 

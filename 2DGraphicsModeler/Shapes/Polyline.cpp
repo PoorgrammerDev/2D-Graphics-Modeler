@@ -3,9 +3,9 @@
 #include "Polyline.h"
 #include "Util/EnumStrConv.h"
 
-using std::string;
-using std::cout;
-using std::cin;
+/*******************************
+ * Constructors and Destructor *
+ *******************************/
 
 Polyline::Polyline()
 {
@@ -13,55 +13,13 @@ Polyline::Polyline()
 }
 
 Polyline::~Polyline() {}
-void Polyline::GetPolyline()
-{
-    /*
-    string word;
-    shapeId = 2;
-    shapeType = "Polyline";
-
-    cout << "What Color do you want the shape to be: ";
-    getline(cin,word);
-    shapeColor = QString::fromStdString(word);
-
-    cout << "What Size do you want the Pen to be: ";
-    cin  >> penWidth;
-
-    cout << "What PenStyle do you want the shape to have: ";
-    getline(cin,word);
-    penStyle = QString::fromStdString(word);
-
-    cout << "What PenCapStlye do you want the shape to have: ";
-    getline(cin,word);
-    penCapStyle = QString::fromStdString(word);
-
-    cout << "What PenJoinStyle do you want the shape to be: ";
-    getline(cin,word);
-    penJoinStlye = QString::fromStdString(word);
-    */
-
-    //********* set dimentions here ******************
-}
-
-// Have not implemented these until done with polygon as they are very similar and having the same todo list for both
-void Polyline:: SetDimensions(int point[])
-{
-    int index = 0;
-    int index2 = 0;
-    pointCount = 0;
-    while(index < 20 && point[index+1] != 0)
-    {
-        points[index2].setX(point[index]);
-        points[index2].setY(point[index+1]);
-        ++pointCount;
-        ++index;
-        ++index;
-        ++index2;
-    }
-}
 
 
-void Polyline:: Draw(QPainter& aPainter)
+/***********************************
+ * Non-Setter/Getter Class Methods *
+ ***********************************/
+
+void Polyline::Draw(QPainter& aPainter)
 {
     // These variables are dummy fillers
     aPainter.drawPolyline(points, pointCount);
@@ -95,3 +53,38 @@ void Polyline::Serialize(std::ostream& out) {
     << "PenCapStyle: " << PenCapStyleToStr(penCapStyle).toStdString() << '\n'
     << "PenJoinStyle: " << PenJoinStyleToStr(penJoinStyle).toStdString() << "\n\n";
 }
+
+void Polyline::Move() {
+    //TODO: Unimplemented method stub
+}
+
+double Polyline::Perimeter() {
+    return 0.0; //TODO: Unimplemented method stub
+}
+
+double Polyline::Area() {
+    return 0.0; //TODO: Unimplemented method stub
+}
+
+/***********************
+ * Setters and Getters *
+ ***********************/
+
+// Have not implemented these until done with polygon as they are very similar and having the same todo list for both
+void Polyline::SetDimensions(int point[])
+{
+    int index = 0;
+    int index2 = 0;
+    pointCount = 0;
+    while(index < 20 && point[index+1] != 0)
+    {
+        points[index2].setX(point[index]);
+        points[index2].setY(point[index+1]);
+        ++pointCount;
+        ++index;
+        ++index;
+        ++index2;
+    }
+}
+
+

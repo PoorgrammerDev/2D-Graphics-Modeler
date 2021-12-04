@@ -1,13 +1,10 @@
-#include <iostream>
 #include <string>
 #include "Line.h"
 #include "Util/EnumStrConv.h"
 
-using std::string;
-using std::cout;
-using std::cin;
-
-
+/*******************************
+ * Constructors and Destructor *
+ *******************************/
 
 Line::Line()
 {
@@ -15,25 +12,14 @@ Line::Line()
     shapeType = ShapeType(0);
 }
 
-Line::~Line()
-{
+Line::~Line() {}
 
-}
 
-// Setting line dimensions from an array loaded in input for rendering
-void Line:: SetDimensions(int point[])
-{
-    line.setLine(point[0], point[1], point[2], point[3]);
-}
+/***********************************
+ * Non-Setter/Getter Class Methods *
+ ***********************************/
 
-// May not actually need
-QLine Line:: getLine()
-{
-    return line;
-}
-
-// calling drawLine to draw the line
-void Line:: Draw(QPainter& aPainter)
+void Line::Draw(QPainter& aPainter)
 {
     aPainter.drawLine(line);
 }
@@ -60,3 +46,32 @@ void Line::Serialize(std::ostream& out) {
     << "PenCapStyle: " << PenCapStyleToStr(penCapStyle).toStdString() << '\n'
     << "PenJoinStyle: " << PenJoinStyleToStr(penJoinStyle).toStdString() << "\n\n";
 }
+
+void Line::Move() {
+    //TODO: Unimplemented method stub
+}
+
+double Line::Perimeter() {
+    return 0.0; //TODO: Unimplemented method stub
+}
+
+double Line::Area() {
+    return 0.0; //TODO: Unimplemented method stub
+}
+
+/***********************
+ * Setters and Getters *
+ ***********************/
+
+// Setting line dimensions from an array loaded in input for rendering
+void Line::SetDimensions(int point[])
+{
+    line.setLine(point[0], point[1], point[2], point[3]);
+}
+
+// May not actually need
+QLine Line::getLine()
+{
+    return line;
+}
+

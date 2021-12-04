@@ -1,46 +1,39 @@
-#include <iostream>
 #include <string>
 #include <QPainter>
 #include "Rectangle.h"
 #include "Util/EnumStrConv.h"
-
-using std::string;
-using std::cout;
-using std::cin;
-
-void Rectangle::GetRectangle()
-{
-
-}
+/*******************************
+ * Constructors and Destructor *
+ *******************************/
 
 Rectangle::Rectangle()
 {
 
 }
 
-Rectangle::~Rectangle()
-{
+Rectangle::~Rectangle() {}
 
-}
-
-// Setting Rectangle dimensions from input for rendering
-void Rectangle:: SetDimensions(int point[])
-{
-    rectangle.setCoords(point[0], point[1], point[2], point[3]);
-}
-
-// May not actually need this
-QRect Rectangle:: getRectangle()
-{
-    return rectangle;
-}
+/***********************************
+ * Non-Setter/Getter Class Methods *
+ ***********************************/
 
 // Drawing a rectangle with the QRectangle
-void Rectangle:: Draw(QPainter& aPainter)
+void Rectangle::Draw(QPainter& aPainter)
 {
     aPainter.drawRect(rectangle);
 }
 
+void Rectangle::Move() {
+    //TODO: Unimplemented method stub
+}
+
+double Rectangle::Perimeter() {
+    return 0.0; //TODO: Unimplemented method stub
+}
+
+double Rectangle::Area() {
+    return 0.0; //TODO: Unimplemented method stub
+}
 
 // Thomas I changed line 64 from penWidth to pen.width() purely for compilation this is here in case I forgot to change it back!
 void Rectangle::Serialize(std::ostream& out) {
@@ -69,3 +62,21 @@ void Rectangle::Serialize(std::ostream& out) {
     << "BrushColor: " << GColorToStr(brushColor).toStdString() << '\n'
     << "BrushStyle: " << BrushStyleToStr(brushStyle).toStdString() << "\n\n";
 }
+
+/***********************
+ * Setters and Getters *
+ ***********************/
+
+// Setting Rectangle dimensions from input for rendering
+void Rectangle::SetDimensions(int point[])
+{
+    rectangle.setCoords(point[0], point[1], point[2], point[3]);
+}
+
+// May not actually need this
+QRect Rectangle::getRectangle()
+{
+    return rectangle;
+}
+
+

@@ -7,19 +7,30 @@
 class Polygon: public Shape
 {
 public:
+    /*******************************
+     * Constructors and Destructor *
+     *******************************/
     Polygon();
     Polygon(const Polygon& obj) = delete;
     virtual ~Polygon() override;
 
+    /***********************************
+     * Non-Setter/Getter Class Methods *
+     ***********************************/
     // Added these three methods to each shape
     virtual void Draw(QPainter& aPainter) override;
     virtual void SetDimensions(int point[]) override;
-    // May not actually need
-    QPoint getPoints();
-
-
-    void GetPolygon();
     virtual void Serialize(std::ostream& out) override;
+
+    virtual void Move() override;
+    virtual double Perimeter() override;
+    virtual double Area() override;
+
+    /***********************
+     * Setters and Getters *
+     ***********************/
+    QPoint getPoints(); // May not actually need
+
 private:
     QString fillColor;
     QString fillStyle;

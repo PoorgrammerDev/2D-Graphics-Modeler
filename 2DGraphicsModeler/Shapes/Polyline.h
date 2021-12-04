@@ -7,18 +7,30 @@
 class Polyline: public Shape
 {
 public:
+    /*******************************
+     * Constructors and Destructor *
+     *******************************/
     Polyline();
     Polyline(const Polyline& obj) = delete;
     virtual ~Polyline() override;
 
+    /***********************************
+     * Non-Setter/Getter Class Methods *
+     ***********************************/
     // Added these three methods to each shape
     virtual void Draw(QPainter& aPainter) override;
     virtual void SetDimensions(int point[]) override;
-    // May not actually need
-    QPoint getPoints();
-
-    void GetPolyline();
     virtual void Serialize(std::ostream& out) override;
+
+    virtual void Move() override;
+    virtual double Perimeter() override;
+    virtual double Area() override;
+
+    /***********************
+     * Setters and Getters *
+     ***********************/
+    QPoint getPoints(); // May not actually need
+
 private:
     int shapeDimensions[8];
     // Like polygon this may have more with adding QPoints for rendering

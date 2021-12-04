@@ -1,40 +1,27 @@
-#include <iostream>
 #include <string>
 #include <QString>
 #include <QPainter>
 #include "Ellipse.h"
 #include "Util/EnumStrConv.h"
 
-using std::string;
-using std::cout;
-using std::cin;
-
-
+/*******************************
+ * Constructors and Destructor *
+ *******************************/
 
 Ellipse::Ellipse()
 {
 
 }
 
-Ellipse::~Ellipse()
-{
+Ellipse::~Ellipse() {}
 
-}
 
-// Using an array loaded in input parser to set dimensions for painter
-void Ellipse:: SetDimensions(int point[])
-{
-    ellipse.setCoords(point[0], point[1], point[2], point[3]);
-}
-
-// May not actually need this as mentioned before
-QRect Ellipse:: getEllipse()
-{
-    return ellipse;
-}
+/***********************************
+ * Non-Setter/Getter Class Methods *
+ ***********************************/
 
 // Calling drawEllipse with painter to draw
-void Ellipse:: Draw(QPainter& aPainter)
+void Ellipse::Draw(QPainter& aPainter)
 {
     aPainter.drawEllipse(ellipse);
 }
@@ -67,3 +54,33 @@ void Ellipse::Serialize(std::ostream& out) {
     << "BrushColor: " << GColorToStr(brushColor).toStdString() << '\n'
     << "BrushStyle: " << BrushStyleToStr(brushStyle).toStdString() << "\n\n";
 }
+
+void Ellipse::Move() {
+    //TODO: Unimplemented method stub
+}
+
+double Ellipse::Perimeter() {
+    return 0.0; //TODO: Unimplemented method stub
+}
+
+double Ellipse::Area() {
+    return 0.0; //TODO: Unimplemented method stub
+}
+
+/***********************
+ * Setters and Getters *
+ ***********************/
+
+// Using an array loaded in input parser to set dimensions for painter
+void Ellipse::SetDimensions(int point[])
+{
+    ellipse.setCoords(point[0], point[1], point[2], point[3]);
+}
+
+// May not actually need this as mentioned before
+QRect Ellipse::getEllipse()
+{
+    return ellipse;
+}
+
+

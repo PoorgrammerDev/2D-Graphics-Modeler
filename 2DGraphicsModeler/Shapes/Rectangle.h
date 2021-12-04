@@ -7,18 +7,29 @@
 class Rectangle: public Shape
 {
 public:
+    /*******************************
+     * Constructors and Destructor *
+     *******************************/
     Rectangle();
     Rectangle(const Rectangle& obj) = delete;
     virtual ~Rectangle() override;
 
-    // Added these three methods to each shape
+    /***********************************
+     * Non-Setter/Getter Class Methods *
+     ***********************************/
     virtual void Draw(QPainter& aPainter) override;
     virtual void SetDimensions(int point[]) override;
-    // May not actrually need this
-    QRect getRectangle();
-
-    void GetRectangle();
     virtual void Serialize(std::ostream& out) override;
+
+    virtual void Move() override;
+    virtual double Perimeter() override;
+    virtual double Area() override;
+
+    /***********************
+     * Setters and Getters *
+     ***********************/
+    QRect getRectangle(); // May not actually need this
+
 private:
     QString fillColor;
     QString fillStyle;

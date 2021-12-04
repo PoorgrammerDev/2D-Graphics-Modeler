@@ -1,48 +1,25 @@
-#include <iostream>
 #include <string>
+#include <QPainter>
 #include "Polygon.h"
 #include "Util/EnumStrConv.h"
-#include <QPainter>
 
-using std::string;
-using std::cout;
-using std::cin;
-
-
-void Polygon::GetPolygon()
-{
-
-}
+/*******************************
+ * Constructors and Destructor *
+ *******************************/
 
 Polygon::Polygon()
 {
 
 }
 
-Polygon::~Polygon()
-{
-
-}
-
-// Not done, need to add some sort of loop to add all of the points
-void Polygon:: SetDimensions(int point[])
-{
-    int index = 0;
-    int index2 = 0;
-    pointCount = 0;
-    while(index < 20 && point[index+1] != 0)
-    {
-        points[index2].setX(point[index]);
-        points[index2].setY(point[index+1]);
-        ++pointCount;
-        ++index;
-        ++index;
-        ++index2;
-    }
-}
+Polygon::~Polygon() {}
 
 
-void Polygon:: Draw(QPainter& aPainter)
+/***********************************
+ * Non-Setter/Getter Class Methods *
+ ***********************************/
+
+void Polygon::Draw(QPainter& aPainter)
 {
     // These variables are dummy fillers
     aPainter.drawPolygon(points, pointCount);
@@ -78,4 +55,37 @@ void Polygon::Serialize(std::ostream& out) {
     << "PenJoinStyle: " << PenJoinStyleToStr(penJoinStyle).toStdString() << '\n'
     << "BrushColor: " << GColorToStr(brushColor).toStdString() << '\n'
     << "BrushStyle: " << BrushStyleToStr(brushStyle).toStdString() << "\n\n";
+}
+
+void Polygon::Move() {
+    //TODO: Unimplemented method stub
+}
+
+double Polygon::Perimeter() {
+    return 0.0; //TODO: Unimplemented method stub
+}
+
+double Polygon::Area() {
+    return 0.0; //TODO: Unimplemented method stub
+}
+
+/***********************
+ * Setters and Getters *
+ ***********************/
+
+// Not done, need to add some sort of loop to add all of the points
+void Polygon::SetDimensions(int point[])
+{
+    int index = 0;
+    int index2 = 0;
+    pointCount = 0;
+    while(index < 20 && point[index+1] != 0)
+    {
+        points[index2].setX(point[index]);
+        points[index2].setY(point[index+1]);
+        ++pointCount;
+        ++index;
+        ++index;
+        ++index2;
+    }
 }
