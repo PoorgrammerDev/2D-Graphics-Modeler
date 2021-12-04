@@ -40,8 +40,11 @@ void InputManager:: ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
     // Should be kept
     int points[20];
 
-    std::ifstream in("shapes.txt");
-    // exception??
+    std::ifstream in("..\\2DGraphicsModeler\\shapes.txt");
+    if (in.fail()) {
+        std::cerr << "Shapes input file failed to open.\n";
+        return; // Doesn't terminate the entire program - will just keep running with no starting shapes.
+    }
 
     while(!in.eof())
     {
