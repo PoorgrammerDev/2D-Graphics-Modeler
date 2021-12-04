@@ -27,6 +27,7 @@ private:
     QString fontStyle;
     QString fontWeight;
     int shapeDimensions[4];
+    QRect textBox;
 };
 
 #endif // TEXT_H

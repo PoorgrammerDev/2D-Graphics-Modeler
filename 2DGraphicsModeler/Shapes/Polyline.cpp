@@ -7,6 +7,8 @@ using std::string;
 using std::cout;
 using std::cin;
 
+Polyline::Polyline() {}
+
 void Polyline::GetPolyline()
 {
     /*

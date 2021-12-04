@@ -2,7 +2,7 @@
 #define ELLIPSE_H
 
 #include <QString>
-#include "Polygon.h"
+#include "Shape.h"
 
 class Ellipse: public Shape
 {

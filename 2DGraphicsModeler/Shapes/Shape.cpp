@@ -68,7 +68,10 @@ void Shape:: SetTextColor(Qt::GlobalColor color)
 }
 
 
-void SetTextAlign(Qt::AlignmentFlag anAlignment);
+void Shape:: SetTextAlign(Qt::AlignmentFlag anAlignment)
+{
+    textAlign = anAlignment;
+}
 
 // Returns the type for paint event switch in renderarea
 ShapeType Shape:: GetType() const

@@ -3,6 +3,7 @@
 #include <QString>
 #include "Text.h"
 #include "Util/EnumStrConv.h"
+#include <QPainter>
 
 using std::string;
 using std::cout;
@@ -55,6 +56,18 @@ Text::Text()
 Text::~Text()
 {
 
+}
+
+// Setting Rectangle dimensions from input for rendering
+void Text:: SetDimensions(int point[])
+{
+    textBox.setCoords(point[0], point[1], point[2], point[3]);
+}
+
+// Drawing a rectangle with the QRectangle
+void Text:: Draw(QPainter& aPainter)
+{
+    aPainter.drawText(textBox, textAlign, text);
 }
 
 void Text::Serialize(std::ostream& out) {
