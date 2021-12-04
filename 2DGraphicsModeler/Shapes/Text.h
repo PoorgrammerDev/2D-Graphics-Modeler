@@ -12,8 +12,8 @@ public:
     virtual ~Text() override;
 
     // Added these three methods to each shape
-    virtual void draw(QPainter& aPainter) override;
-    virtual void setDimensions(int point[]) override;
+    virtual void Draw(QPainter& aPainter) override;
+    virtual void SetDimensions(int point[]) override;
     // Reading more on text with the enums and datatypes to assign to
     // Will likely add a QRect to store the dimensions as this is used in the painter.drawText() call
 

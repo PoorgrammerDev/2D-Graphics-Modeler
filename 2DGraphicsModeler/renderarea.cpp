@@ -26,38 +26,38 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
    //     QPoint points[4]={QPoint(10,20), QPoint(20, 30), QPoint(30, 40), QPoint(40, 50)};
 
             switch (shapes[index]->GetType()) {
-            case 0:
+            case ShapeType::Line :
                 // Drawing a line
                 painter.setPen(shapes[index]->GetPen());
-                shapes[index]->draw(painter);
+                shapes[index]->Draw(painter);
                 break;
-            case 1:
+            case ShapeType::Polyline :
                 // Drawing a polyline
                 painter.setPen(shapes[index]->GetPen());
-                shapes[index]->draw(painter);
+                shapes[index]->Draw(painter);
                 break;
-            case 2:
+            case ShapeType::Ellipse :
                 // Drawing an Ellipse
                 painter.setPen(shapes[index]->GetPen());
                 painter.setBrush(shapes[index]->GetBrush());
-                shapes[index]->draw(painter);
+                shapes[index]->Draw(painter);
                 break;
-            case 3:
+            case ShapeType::Polygon :
                 // Drawing a Polygon
                 painter.setPen(shapes[index]->GetPen());
                 painter.setBrush(shapes[index]->GetBrush());
-                shapes[index]->draw(painter);
+                shapes[index]->Draw(painter);
                 break;
-            case 4:
+            case ShapeType::Rectangle :
                 // Drawing a Rectangle
                 painter.setPen(shapes[index]->GetPen());
                 painter.setBrush(shapes[index]->GetBrush());
-                shapes[index]->draw(painter);
+                shapes[index]->Draw(painter);
                 break;
-            case 5:
+            case ShapeType::Text :
                 // Drawing text
                 // need to add the text details
-                shapes[index]->draw(painter);
+                shapes[index]->Draw(painter);
                 break;
             }
 

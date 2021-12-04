@@ -24,7 +24,7 @@ Rectangle::~Rectangle()
 }
 
 // Setting Rectangle dimensions from input for rendering
-void Rectangle:: setDimensions(int point[])
+void Rectangle:: SetDimensions(int point[])
 {
     rectangle.setCoords(point[0], point[1], point[2], point[3]);
 }
@@ -36,11 +36,12 @@ QRect Rectangle:: getRectangle()
 }
 
 // Drawing a rectangle with the QRectangle
-void Rectangle:: draw(QPainter& aPainter)
+void Rectangle:: Draw(QPainter& aPainter)
 {
     aPainter.drawRect(rectangle);
 }
 
+// Thomas I changed line 64 from penWidth to pen.width() purely for compilation this is here in case I forgot to change it back!
 void Rectangle::Serialize(std::ostream& out) {
     //TODO: Using filler variables until class is updated
     auto penColor = Qt::black;
@@ -60,7 +61,7 @@ void Rectangle::Serialize(std::ostream& out) {
             << shapeDimensions[3] << '\n'
 
     << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
-    << "PenWidth: " << penWidth << '\n'
+    << "PenWidth: " << pen.width() << '\n'
     << "PenStyle: " << PenStyleToStr(penStyle).toStdString() << '\n'
     << "PenCapStyle: " << PenCapStyleToStr(penCapStyle).toStdString() << '\n'
     << "PenJoinStyle: " << PenJoinStyleToStr(penJoinStyle).toStdString() << '\n'

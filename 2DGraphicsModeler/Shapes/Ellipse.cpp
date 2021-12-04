@@ -22,7 +22,7 @@ Ellipse::~Ellipse()
 }
 
 // Using an array loaded in input parser to set dimensions for painter
-void Ellipse:: setDimensions(int point[])
+void Ellipse:: SetDimensions(int point[])
 {
     ellipse.setCoords(point[0], point[1], point[2], point[3]);
 }
@@ -34,7 +34,7 @@ QRect Ellipse:: getEllipse()
 }
 
 // Calling drawEllipse with painter to draw
-void Ellipse:: draw(QPainter& aPainter)
+void Ellipse:: Draw(QPainter& aPainter)
 {
     aPainter.drawEllipse(ellipse);
 }
@@ -60,7 +60,7 @@ void Ellipse::Serialize(std::ostream& out) {
         << shapeDimensions[3] << '\n'
 
     << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
-    << "PenWidth: " << penWidth << '\n'
+    << "PenWidth: " << pen.width() << '\n'
     << "PenStyle: " << PenStyleToStr(penStyle).toStdString() << '\n'
     << "PenCapStyle: " << PenCapStyleToStr(penCapStyle).toStdString() << '\n'
     << "PenJoinStyle: " << PenJoinStyleToStr(penJoinStyle).toStdString() << '\n'

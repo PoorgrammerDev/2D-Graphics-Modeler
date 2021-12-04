@@ -12,8 +12,8 @@ public:
     virtual ~Polyline() override;
 
     // Added these three methods to each shape
-    virtual void draw(QPainter& aPainter) override;
-    virtual void setDimensions(int point[]) override;
+    virtual void Draw(QPainter& aPainter) override;
+    virtual void SetDimensions(int point[]) override;
     // May not actually need
     QPoint getPoints();
 
@@ -22,6 +22,8 @@ public:
 private:
     int shapeDimensions[8];
     // Like polygon this may have more with adding QPoints for rendering
+    QPoint points[10];
+    int pointCount;
 };
 
 #endif // POLYLINE_H

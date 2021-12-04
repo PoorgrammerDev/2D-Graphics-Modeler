@@ -12,8 +12,8 @@ public:
     virtual ~Polygon() override;
 
     // Added these three methods to each shape
-    virtual void draw(QPainter& aPainter) override;
-    virtual void setDimensions(int point[]) override;
+    virtual void Draw(QPainter& aPainter) override;
+    virtual void SetDimensions(int point[]) override;
     // May not actually need
     QPoint getPoints();
 
@@ -25,6 +25,8 @@ private:
     QString fillStyle;
     int shapeDimensions[8];
     // May add QPoints as the getPoints and setPoints may be used for this, figuring out with setting the dimensions and drawing
+    QPoint points[10];
+    int pointCount;
 };
 
 #endif // POLYGON_H

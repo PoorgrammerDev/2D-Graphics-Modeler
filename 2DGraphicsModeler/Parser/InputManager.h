@@ -21,21 +21,20 @@ class InputManager
 		InputManager();
 		~InputManager();
 
-        void ReadShapes(vector<std::unique_ptr<Shape>> shapes);
+        void ReadShapes(vector<std::unique_ptr<Shape>>& shapes);
 	private:
         // Get Pen and Brush info is set
         void GetPenInfo (std::ifstream& in, std::unique_ptr<Shape>& shape);
         void GetBrushInfo (std::ifstream& in, std::unique_ptr<Shape>& shape);
 
         // Need to update
-        void GetTextInfo (std::ifstream& in, std::string& text, std::string& color, std::string& alignment, int& size,
-		                  std::string& fontFam, std::string& fontStyle, std::string& fontWeight);
+        void GetTextInfo (std::ifstream& in, std::unique_ptr<Shape>& shape);
 
         // Some are done, some need a little more work
-		void InterpretLineDimensions (std::string lineDim, int& x1, int& x2, int& y1,int& y2);
-		void InterpretRectDimensions (std::string rectDim, int& x, int& y, int& width, int&height);
-		void InterpretSquareDimensions (std::string squareDim, int& x, int& y, int& side);
-		void InterpretPolyDimensions (std::string polyDim, int x[], int y[]);	
+        void InterpretLineDimensions (std::string lineDim, std::unique_ptr<Shape>& shape, int dimensions[]);
+        void InterpretRectDimensions (std::string rectDim, std::unique_ptr<Shape>& shape, int dimensions[], std::string type);
+        //void InterpretSquareDimensions (std::string squareDim, int& x, int& y, int& side);
+        void InterpretPolyDimensions (std::string polyDim, std::unique_ptr<Shape>& shape, int dimensions[], int size);
 };	
 
 #endif

@@ -4,7 +4,7 @@
 #include <QString>
 #include "Polygon.h"
 
-class Ellipse: public Polygon
+class Ellipse: public Shape
 {
 public:
     Ellipse();
@@ -12,8 +12,8 @@ public:
     virtual ~Ellipse() override;
 
     // Added these three methods for renderArea/input
-    virtual void draw(QPainter& aPainter) override;
-    virtual void setDimensions(int point[]) override;
+    virtual void Draw(QPainter& aPainter) override;
+    virtual void SetDimensions(int point[]) override;
     // May not actually need this but kept it in case until I am done (was used in one of my fiest ideas with renderarea
     QRect getEllipse();
 

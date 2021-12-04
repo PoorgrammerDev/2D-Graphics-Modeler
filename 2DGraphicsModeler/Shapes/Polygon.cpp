@@ -25,17 +25,26 @@ Polygon::~Polygon()
 }
 
 // Not done, need to add some sort of loop to add all of the points
-void Polygon:: setDimensions(int point[])
+void Polygon:: SetDimensions(int point[])
 {
-    QPoint points[10] {QPoint(point[0],(point[1])), QPoint(point[2], point[3])};
+    int index = 0;
+    pointCount = 0;
+    while(index < 20 && point[index] != 0)
+    {
+        points[0].setX(point[index]);
+        points[0].setY(point[index+1]);
+        ++pointCount;
+        ++index;
+        ++index;
 
+    }
 }
 
 
-void Polygon:: draw(QPainter& aPainter)
+void Polygon:: Draw(QPainter& aPainter)
 {
     // These variables are dummy fillers
-    aPainter.drawPolygon(points, 10);
+    aPainter.drawPolygon(points, pointCount);
 }
 
 
@@ -62,7 +71,7 @@ void Polygon::Serialize(std::ostream& out) {
             << shapeDimensions[7] << '\n'
 
     << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
-    << "PenWidth: " << penWidth << '\n'
+    << "PenWidth: " << pen.width() << '\n'
     << "PenStyle: " << PenStyleToStr(penStyle).toStdString() << '\n'
     << "PenCapStyle: " << PenCapStyleToStr(penCapStyle).toStdString() << '\n'
     << "PenJoinStyle: " << PenJoinStyleToStr(penJoinStyle).toStdString() << '\n'

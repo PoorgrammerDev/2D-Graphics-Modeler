@@ -21,7 +21,7 @@ Line::~Line()
 }
 
 // Setting line dimensions from an array loaded in input for rendering
-void Line:: setDimensions(int point[])
+void Line:: SetDimensions(int point[])
 {
     line.setLine(point[0], point[1], point[2], point[3]);
 }
@@ -33,7 +33,7 @@ QLine Line:: getLine()
 }
 
 // calling drawLine to draw the line
-void Line:: draw(QPainter& aPainter)
+void Line:: Draw(QPainter& aPainter)
 {
     aPainter.drawLine(line);
 }
@@ -55,7 +55,7 @@ void Line::Serialize(std::ostream& out) {
         << shapeDimensions[3] << '\n'
 
     << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
-    << "PenWidth: " << penWidth << '\n'
+    << "PenWidth: " << pen.width() << '\n'
     << "PenStyle: " << PenStyleToStr(penStyle).toStdString() << '\n'
     << "PenCapStyle: " << PenCapStyleToStr(penCapStyle).toStdString() << '\n'
     << "PenJoinStyle: " << PenJoinStyleToStr(penJoinStyle).toStdString() << "\n\n";

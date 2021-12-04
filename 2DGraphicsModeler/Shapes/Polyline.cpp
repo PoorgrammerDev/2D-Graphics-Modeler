@@ -1,4 +1,5 @@
 #include <iostream>
+#include <QPainter>
 #include "Polyline.h"
 #include "Util/EnumStrConv.h"
 
@@ -37,6 +38,29 @@ void Polyline::GetPolyline()
 }
 
 // Have not implemented these until done with polygon as they are very similar and having the same todo list for both
+void Polyline:: SetDimensions(int point[])
+{
+    int index = 0;
+    pointCount = 0;
+    while(index < 20 && point[index] != 0)
+    {
+        points[0].setX(point[index]);
+        points[0].setY(point[index+1]);
+        ++pointCount;
+        ++index;
+        ++index;
+
+    }
+}
+
+
+void Polyline:: Draw(QPainter& aPainter)
+{
+    // These variables are dummy fillers
+    aPainter.drawPolyline(points, pointCount);
+}
+
+
 
 void Polyline::Serialize(std::ostream& out) {
     //TODO: Using filler variables until Shape is updated
@@ -59,7 +83,7 @@ void Polyline::Serialize(std::ostream& out) {
         << shapeDimensions[7] << '\n'
 
     << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
-    << "PenWidth: " << penWidth << '\n'
+    << "PenWidth: " << pen.width() << '\n'
     << "PenStyle: " << PenStyleToStr(penStyle).toStdString() << '\n'
     << "PenCapStyle: " << PenCapStyleToStr(penCapStyle).toStdString() << '\n'
     << "PenJoinStyle: " << PenJoinStyleToStr(penJoinStyle).toStdString() << "\n\n";

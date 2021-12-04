@@ -4,7 +4,7 @@
 #include <QString>
 #include "Polygon.h"
 
-class Rectangle: public Polygon
+class Rectangle: public Shape
 {
 public:
     Rectangle();
@@ -12,8 +12,8 @@ public:
     virtual ~Rectangle() override;
 
     // Added these three methods to each shape
-    virtual void draw(QPainter& aPainter) override;
-    virtual void setDimensions(int point[]) override;
+    virtual void Draw(QPainter& aPainter) override;
+    virtual void SetDimensions(int point[]) override;
     // May not actrually need this
     QRect getRectangle();
 
