@@ -11,6 +11,7 @@ public:
      * Constructors and Destructor *
      *******************************/
     Ellipse();
+    Ellipse(int id, ShapeType type, QPen pen, QBrush brush, int dimensions[]);
     Ellipse(const Ellipse& obj) = delete;
     virtual ~Ellipse() override;
 

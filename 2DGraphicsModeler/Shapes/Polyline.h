@@ -11,6 +11,7 @@ public:
      * Constructors and Destructor *
      *******************************/
     Polyline();
+    Polyline(int id, QPen pen, int dimensions[]);
     Polyline(const Polyline& obj) = delete;
     virtual ~Polyline() override;
 
@@ -32,9 +33,7 @@ public:
     QPoint getPoints(); // May not actually need
 
 private:
-    int shapeDimensions[8];
-    // Like polygon this may have more with adding QPoints for rendering
-    QPoint points[10];
+    QPoint points[10]; // Like polygon this may have more with adding QPoints for rendering
     int pointCount;
 };
 

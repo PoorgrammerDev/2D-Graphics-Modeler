@@ -40,6 +40,7 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
                 shapes[index]->Draw(painter);
                 break;
             case ShapeType::Ellipse :
+            case ShapeType::Circle :
                 // Drawing an Ellipse
                 painter.setPen(shapes[index]->GetPen());
                 painter.setBrush(shapes[index]->GetBrush());
@@ -52,17 +53,23 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
                 shapes[index]->Draw(painter);
                 break;
             case ShapeType::Rectangle :
+            case ShapeType::Square :
                 // Drawing a Rectangle
                 painter.setPen(shapes[index]->GetPen());
                 painter.setBrush(shapes[index]->GetBrush());
                 shapes[index]->Draw(painter);
                 break;
-            case ShapeType::Text :
-                // Drawing text
-                // need to add the text details
-                painter.setFont(shapes[index]->GetFont());
-                shapes[index]->Draw(painter);
-                break;
+            case ShapeType::Text : {
+                    // Drawing text
+                    // need to add the text details
+
+                    Text* castedText = static_cast<Text*>(&(*shapes[index])); //TODO: janky solution - thomas
+                    painter.setFont(castedText->GetFont());
+                    castedText = nullptr;
+
+                    shapes[index]->Draw(painter);
+                    break;
+                }
             }
             painter.restore();
             ++index;

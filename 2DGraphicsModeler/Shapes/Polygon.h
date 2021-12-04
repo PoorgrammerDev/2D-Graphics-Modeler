@@ -11,6 +11,7 @@ public:
      * Constructors and Destructor *
      *******************************/
     Polygon();
+    Polygon(int id, QPen pen, QBrush brush, int dimensions[]);
     Polygon(const Polygon& obj) = delete;
     virtual ~Polygon() override;
 
@@ -34,9 +35,7 @@ public:
 private:
     QString fillColor;
     QString fillStyle;
-    int shapeDimensions[8];
-    // May add QPoints as the getPoints and setPoints may be used for this, figuring out with setting the dimensions and drawing
-    QPoint points[10];
+    QPoint points[10]; // May add QPoints as the getPoints and setPoints may be used for this, figuring out with setting the dimensions and drawing
     int pointCount;
 };
 
