@@ -4,9 +4,9 @@
 #include <QBrush>
 #include <QPen>
 #include <QWidget>
-#include "/Util/vector.h"
-#include "/Shapes/Shape.h"
-#include "/Parser/InputManager.h"
+#include "Util/vector.h"
+#include "Shapes/Shape.h"
+#include "Parser/InputManager.h"
 
 
 class RenderArea : public QWidget

@@ -1,9 +1,12 @@
 
 #include "InputManager.h"
-#include "/Shapes/Shape.h"
-#include "/Shapes/Line.h"
-#include "/Shapes/Polyline.h"
-
+#include "Shapes/Shape.h"
+#include "Shapes/Ellipse.h"
+#include "Shapes/Line.h"
+#include "Shapes/Polygon.h"
+#include "Shapes/Polyline.h"
+#include "Shapes/Rectangle.h"
+#include "Shapes/Text.h"
 
 
 /**********************
@@ -71,7 +74,7 @@ void InputManager:: ReadShapes(vector<std::unique_ptr<Shape>> shapes)
         // Within each stmt am allocating a new object assigning all the values and pushing back *Not done with this yet!
 		if(type[0] == 'L')
 		{
-            aShape = std::make_unique<class Line>();
+            aShape = std::make_unique<Line>();
             // Getting pen information for line or polyline
             InterpretLineDimensions (dimensions, point[0], point[1], point[2], point[3]);
             aShape->setDimensions(point);
@@ -81,7 +84,7 @@ void InputManager:: ReadShapes(vector<std::unique_ptr<Shape>> shapes)
 		}	
 		else if(type == "Polyline")
 		{
-            aShape = std::make_unique<class PolyLine>();
+            aShape = std::make_unique<Polyline>();
             // Getting pen information for line or polyline
             InterpretPolyDimensions (dimensions, point);
             // Load dimensions
@@ -96,7 +99,7 @@ void InputManager:: ReadShapes(vector<std::unique_ptr<Shape>> shapes)
 		}
         else if (type[0] == 'R')
 		{
-            aShape = std::make_unique<class Rectangle>();
+            aShape = std::make_unique<Rectangle>();
 			// Getting pen & brush information
             GetPenInfo (in, aShape);
             GetBrushInfo (in, aShape);

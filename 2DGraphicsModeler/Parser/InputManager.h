@@ -9,9 +9,11 @@
 #include <ios>
 #include <limits>
 #include <QString>
-#include "/Util/vector.h"
-#include "/Shapes/Shape.h"
-#include "/Util/EnumStrConv.h"
+#include <memory>
+#include <utility>
+#include "../Util/vector.h"
+#include "../Shapes/Shape.h"
+#include "../Util/EnumStrConv.h"
 
 class InputManager
 {

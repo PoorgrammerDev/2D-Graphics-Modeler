@@ -6,7 +6,7 @@
 #include <QBrush>
 
 // Added this enum to make an easy switch in renderarea
-enum ShapeType {Line, PolyLine, Ellipse, Polygon, Rectangle, Text};
+enum class ShapeType {Line, Polyline, Ellipse, Polygon, Rectangle, Text};
 
 class Shape
 {
