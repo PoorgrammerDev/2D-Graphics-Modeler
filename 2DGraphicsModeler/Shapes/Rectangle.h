@@ -11,6 +11,7 @@ public:
      * Constructors and Destructor *
      *******************************/
     Rectangle();
+    Rectangle(int id, ShapeType type, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor, int dimensions[]);
     Rectangle(const Rectangle& obj) = delete;
     virtual ~Rectangle() override;
 

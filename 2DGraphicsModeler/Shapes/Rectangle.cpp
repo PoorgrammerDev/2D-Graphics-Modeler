@@ -6,9 +6,14 @@
  * Constructors and Destructor *
  *******************************/
 
-Rectangle::Rectangle()
+Rectangle::Rectangle() : Shape()
 {
 
+}
+
+Rectangle::Rectangle(int id, ShapeType type, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor, int dimensions[])
+    : Shape(id, type, pen, penColor, brush, brushColor) {
+    Rectangle::SetDimensions(dimensions);
 }
 
 Rectangle::~Rectangle() {}
@@ -37,30 +42,25 @@ double Rectangle::Area() {
 
 // Thomas I changed line 64 from penWidth to pen.width() purely for compilation this is here in case I forgot to change it back!
 void Rectangle::Serialize(std::ostream& out) {
-    //TODO: Using filler variables until class is updated
-    auto penColor = Qt::black;
-    auto penStyle = Qt::DashDotDotLine;
-    auto penCapStyle = Qt::FlatCap;
-    auto penJoinStyle = Qt::MiterJoin;
-    auto brushColor = Qt::black;
-    auto brushStyle = Qt::NoBrush;
+    int* coords[4] = {};
+    rectangle.getCoords(coords[0], coords[1], coords[2], coords[3]);
 
     out << "ShapeId: " << shapeId << '\n'
     << "ShapeType: Rectangle\n"
 
     << "ShapeDimensions: "
-            << shapeDimensions[0] << ", "
-            << shapeDimensions[1] << ", "
-            << shapeDimensions[2] << ", "
-            << shapeDimensions[3] << '\n'
+        << *coords[0] << ", "
+        << *coords[1] << ", "
+        << *coords[2] << ", "
+        << *coords[3] << '\n'
 
     << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
     << "PenWidth: " << pen.width() << '\n'
-    << "PenStyle: " << PenStyleToStr(penStyle).toStdString() << '\n'
-    << "PenCapStyle: " << PenCapStyleToStr(penCapStyle).toStdString() << '\n'
-    << "PenJoinStyle: " << PenJoinStyleToStr(penJoinStyle).toStdString() << '\n'
+    << "PenStyle: " << PenStyleToStr(pen.style()).toStdString() << '\n'
+    << "PenCapStyle: " << PenCapStyleToStr(pen.capStyle()).toStdString() << '\n'
+    << "PenJoinStyle: " << PenJoinStyleToStr(pen.joinStyle()).toStdString() << '\n'
     << "BrushColor: " << GColorToStr(brushColor).toStdString() << '\n'
-    << "BrushStyle: " << BrushStyleToStr(brushStyle).toStdString() << "\n\n";
+    << "BrushStyle: " << BrushStyleToStr(brush.style()).toStdString() << "\n\n";
 }
 
 /***********************

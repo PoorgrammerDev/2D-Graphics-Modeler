@@ -13,6 +13,7 @@
 #include <utility>
 #include "../Util/vector.h"
 #include "../Shapes/Shape.h"
+#include "../Shapes/Text.h"
 #include "../Util/EnumStrConv.h"
 
 class InputManager
@@ -22,19 +23,16 @@ class InputManager
 		~InputManager();
 
         void ReadShapes(vector<std::unique_ptr<Shape>>& shapes);
-	private:
-        // Get Pen and Brush info is set
-        void GetPenInfo (std::ifstream& in, std::unique_ptr<Shape>& shape);
-        void GetBrushInfo (std::ifstream& in, std::unique_ptr<Shape>& shape);
 
-        // Need to update
-        void GetTextInfo (std::ifstream& in, std::unique_ptr<Shape>& shape);
+	private:
+        QPen GetPenInfo(std::ifstream& in, Qt::GlobalColor& colorOut);
+        QBrush GetBrushInfo(std::ifstream& in,  Qt::GlobalColor& colorOut);
+        TextData GetTextInfo(std::ifstream& in);
 
         // Some are done, some need a little more work
-        void InterpretLineDimensions (std::string lineDim, std::unique_ptr<Shape>& shape, int dimensions[]);
-        void InterpretRectDimensions (std::string rectDim, std::unique_ptr<Shape>& shape, int dimensions[], std::string type);
-        //void InterpretSquareDimensions (std::string squareDim, int& x, int& y, int& side);
-        void InterpretPolyDimensions (std::string polyDim, std::unique_ptr<Shape>& shape, int dimensions[], int size);
+        void PopulateLineDimensions (std::string lineDim, int dimensions[]);
+        void PopulateRectDimensions (std::string rectDim, int dimensions[], ShapeType type);
+        void PopulatePolyDimensions (std::string polyDim, int dimensions[], int size);
 };	
 
 #endif

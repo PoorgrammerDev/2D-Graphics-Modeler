@@ -8,9 +8,21 @@
  * Constructors and Destructor *
  *******************************/
 
-Text::Text()
+Text::Text() : Shape()
 {
 
+}
+
+Text::Text(int id, TextData textData, int dimensions[])
+    : Shape(id, ShapeType::Text, QPen(), Qt::GlobalColor(), QBrush(), Qt::GlobalColor()) {
+    Text::SetDimensions(dimensions);
+
+    QFont font = textData.font;
+    SetFont(font.pointSize(), font.family(), font.style(), font.weight());
+
+    SetText(textData.text);
+    SetTextColor(textData.textColor);
+    SetTextAlign(textData.textAlign);
 }
 
 Text::~Text() {}
@@ -28,27 +40,24 @@ void Text::Draw(QPainter& aPainter)
 }
 
 void Text::Serialize(std::ostream& out) {
-    //TODO: Using filler variables until class is updated
-    auto textColor = Qt::black;
-    auto textAli = Qt::AlignRight;
-    auto fontStyle = QFont::StyleNormal;
-    auto fontWeight = QFont::Bold;
+    int* coords[4] = {};
+    textBox.getCoords(coords[0], coords[1], coords[2], coords[3]);
 
     out << "ShapeId: " << shapeId << '\n'
     << "ShapeType: Text\n"
     << "ShapeDimensions: "
-            << shapeDimensions[0] << ", "
-            << shapeDimensions[1] << ", "
-            << shapeDimensions[2] << ", "
-            << shapeDimensions[3] << '\n'
+        << *coords[0] << ", "
+        << *coords[1] << ", "
+        << *coords[2] << ", "
+        << *coords[3] << '\n'
 
-    << "TextString: " << textString.toStdString() << '\n'
+    << "TextString: " << text.toStdString() << '\n'
     << "TextColor: " << GColorToStr(textColor).toStdString() << '\n'
-    << "TextAlignment: " << AlignFlagToStr(textAli).toStdString() << '\n'
-    << "TextPointSize: " << textPointSize << '\n'
-    << "TextFontFamily: " << fontFamily.toStdString() << '\n'
-    << "TextFontStyle: " << FontStyleToStr(fontStyle).toStdString() << '\n'
-    << "TextFontWeight: " << FontWeightToStr(fontWeight).toStdString() << "\n\n";
+    << "TextAlignment: " << AlignFlagToStr(textAlign).toStdString() << '\n'
+    << "TextPointSize: " << font.pointSize() << '\n'
+    << "TextFontFamily: " << font.family().toStdString() << '\n'
+    << "TextFontStyle: " << FontStyleToStr(font.style()).toStdString() << '\n'
+    << "TextFontWeight: " << FontWeightToStr(font.weight()).toStdString() << "\n\n";
 }
 
 void Text::Move() {
@@ -73,3 +82,48 @@ void Text::SetDimensions(int point[])
     textBox.setCoords(point[0], point[1], point[2], point[3]);
 }
 
+
+// Will have set text methods here
+void Text::SetFont(int pointSize, QString fontFam, QFont::Style fontStyle, QFont::Weight fontWeight)
+{
+    font.setPointSize(pointSize);
+    font.setFamily(fontFam);
+    font.setStyle(fontStyle);
+    font.setWeight(fontWeight);
+}
+
+void Text::SetText(QString aText)
+{
+    text = aText;
+}
+
+void Text::SetTextColor(Qt::GlobalColor color)
+{
+    textColor = color;
+}
+
+
+void Text::SetTextAlign(Qt::AlignmentFlag anAlignment)
+{
+    textAlign = anAlignment;
+}
+
+QFont Text::GetFont() const
+{
+    return font;
+}
+
+QString Text::GetText() const
+{
+    return text;
+}
+
+Qt::GlobalColor Text::GetTextColor() const
+{
+    return textColor;
+}
+
+Qt::AlignmentFlag Text::GetTextAlign() const
+{
+    return textAlign;
+}

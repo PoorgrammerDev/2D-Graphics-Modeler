@@ -14,8 +14,8 @@
  **********************/
 
 // Constructor & Destructor
-InputManager:: InputManager() {}
-InputManager:: ~InputManager() {}
+InputManager::InputManager() {}
+InputManager::~InputManager() {}
 
 /*******************************************
  * Not done updating this with the classes
@@ -29,18 +29,30 @@ InputManager:: ~InputManager() {}
  ******************************************/
 
 // Method to read in shapes from input file
-void InputManager:: ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
+void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
 {
     int id;
+    int points[20];
     std::string type;
     std::string dimensions;
     std::unique_ptr<Shape> aShape;
-    int index = 0;
 
-    // Should be kept
-    int points[20];
+    QPen pen;
+    QBrush brush;
+    Qt::GlobalColor penColor;
+    Qt::GlobalColor brushColor;
+    TextData textData;
 
-    std::ifstream in("..\\2DGraphicsModeler\\shapes.txt");
+    std::ifstream in;
+
+    //For some reason when I run this on my Mac, it needs a different path to get to the same place - Thomas
+    //So I added some pre-processor directives that (hopefully) detect this
+#if __APPLE__ && TARGET_OS_MAC
+    in.open("../../../../2DGraphicsModeler/shapes.txt");
+#else
+    in.open("..\\2DGraphicsModeler\\shapes.txt");
+#endif
+
     if (in.fail()) {
         std::cerr << "Shapes input file failed to open.\n";
         return; // Doesn't terminate the entire program - will just keep running with no starting shapes.
@@ -58,63 +70,60 @@ void InputManager:: ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
         in.ignore (17, ' '); // Ignoring "ShapeDimensions: "
         getline(in, dimensions);
 
-        // Within each stmt am allocating a new object assigning all the values and pushing back *Not done with this yet!
-        if(type[0] == 'L')
+        // Within each stmt am allocating a new object assigning all the values and pushing back
+        if(type == "Line")
         {
-            aShape = std::make_unique<Line>();
-            aShape->SetShapeType(ShapeType::Line);
-            // Getting pen information for line or polyline
-            InterpretLineDimensions (dimensions, aShape, points);
-            GetPenInfo (in, aShape);
+            pen = GetPenInfo(in, penColor);
+            PopulateLineDimensions(dimensions, points);
+            aShape = std::make_unique<Line>(id, pen, penColor, points);
         }
         else if(type == "Polyline")
         {
-            aShape = std::make_unique<Polyline>();
-            aShape->SetShapeType(ShapeType::Polyline);
-            // Getting pen information for line or polyline
-            InterpretPolyDimensions (dimensions, aShape, points, 20);
-            // Load dimensions
-            GetPenInfo (in, aShape);
+            pen = GetPenInfo(in, penColor);
+            PopulatePolyDimensions(dimensions, points, 20);
+            aShape = std::make_unique<Polyline>(id, pen, penColor, points);
         }
-        else if (type[0] == 'T')
+        else if (type == "Text")
         {
-            aShape = std::make_unique<class Text>();
-            aShape->SetShapeType(ShapeType::Text);
-            // Getting text information for texts
-            GetTextInfo (in, aShape);
-            InterpretRectDimensions (dimensions, aShape, points, type);
+            textData = GetTextInfo(in);
+            PopulateRectDimensions(dimensions, points, ShapeType::Text);
+            aShape = std::make_unique<Text>(id, textData, points);
         }
-        else if (type[0] == 'R' || type[0] == 'S')
+        else if (type == "Rectangle")
         {
-            aShape = std::make_unique<Rectangle>();
-            aShape->SetShapeType(ShapeType::Rectangle);
-            // Getting pen & brush information
-            GetPenInfo (in, aShape);
-            GetBrushInfo (in, aShape);
-            InterpretRectDimensions (dimensions, aShape, points, type);
-
+            pen = GetPenInfo(in, penColor);
+            brush = GetBrushInfo(in, brushColor);
+            PopulateRectDimensions(dimensions, points, ShapeType::Rectangle);
+            aShape = std::make_unique<Rectangle>(id, ShapeType::Rectangle, pen, penColor, brush, brushColor, points);
         }
-        else if (type[0] == 'E' || type[0] == 'C')
+        else if (type == "Square") {
+            pen = GetPenInfo(in, penColor);
+            brush = GetBrushInfo(in, brushColor);
+            PopulateRectDimensions(dimensions, points, ShapeType::Square);
+            aShape = std::make_unique<Rectangle>(id, ShapeType::Square, pen, penColor, brush, brushColor, points);
+        }
+        else if (type == "Ellipse")
         {
-            aShape = std::make_unique<Ellipse>();
-            aShape->SetShapeType(ShapeType::Ellipse);
-            GetPenInfo (in, aShape);
-            GetBrushInfo (in, aShape);
-            InterpretRectDimensions (dimensions, aShape, points, type);
+            pen = GetPenInfo(in, penColor);
+            brush = GetBrushInfo(in, brushColor);
+            PopulateRectDimensions(dimensions, points, ShapeType::Ellipse);
+            aShape = std::make_unique<Ellipse>(id, ShapeType::Ellipse, pen, penColor, brush, brushColor, points);
+        }
+        else if (type == "Circle") {
+            pen = GetPenInfo(in, penColor);
+            brush = GetBrushInfo(in, brushColor);
+            PopulateRectDimensions(dimensions, points, ShapeType::Circle);
+            aShape = std::make_unique<Ellipse>(id, ShapeType::Circle, pen, penColor, brush, brushColor, points);
         }
         else if (type == "Polygon")
         {
-            aShape = std::make_unique<Polygon>();
-            aShape->SetShapeType(ShapeType::Polygon);
-            GetPenInfo (in, aShape);
-            GetBrushInfo (in, aShape);
-            InterpretPolyDimensions (dimensions, aShape, points, 20);
+            pen = GetPenInfo(in, penColor);
+            brush = GetBrushInfo(in, brushColor);
+            PopulatePolyDimensions(dimensions, points, 20); //TODO: remove magic number
+            aShape = std::make_unique<Polygon>(id, pen, penColor, brush, brushColor, points);
         }
 
-        aShape->SetShapeId(id);
         shapes.push_back(std::move(aShape));
-
-        ++index;
 
         // Ignore for extra line between each shape
         in.ignore (std::numeric_limits<std::streamsize>::max(), '\n');
@@ -123,11 +132,14 @@ void InputManager:: ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
 }
 
 // Reading pen information from file
-void InputManager:: GetPenInfo (std::ifstream& in, std::unique_ptr<Shape>& shape)
+QPen InputManager::GetPenInfo (std::ifstream& in, Qt::GlobalColor& colorOut)
 {
+    QPen pen;
     std::string penInfo;
     int width;
 
+
+    //Read in attributes from file
     in.ignore(10, ' '); // Ignoring "PenColor: "
     getline(in, penInfo);
     QString colorQ(penInfo.c_str());
@@ -143,57 +155,91 @@ void InputManager:: GetPenInfo (std::ifstream& in, std::unique_ptr<Shape>& shape
     in.ignore(14, ' '); // Ignoring "PenJoinStyle: "
     getline(in, penInfo);
     QString joinQ(penInfo.c_str());
-    shape->SetPen(GColorFromStr(colorQ), width, PenStyleFromStr(styleQ), PenCapStyleFromStr(capQ), PenJoinStyleFromStr(joinQ));
 
+    //Set attributes
+    colorOut = GColorFromStr(colorQ);
+    pen.setColor(colorOut);
+    pen.setWidth(width);
+    pen.setStyle(PenStyleFromStr(styleQ));
+    pen.setCapStyle(PenCapStyleFromStr(capQ));
+    pen.setJoinStyle(PenJoinStyleFromStr(joinQ));
+    return pen;
 }
 
 // Reading brush information from file
-void InputManager:: GetBrushInfo (std::ifstream& in, std::unique_ptr<Shape>& shape)
+QBrush InputManager::GetBrushInfo (std::ifstream& in, Qt::GlobalColor& colorOut)
 {
+    QBrush brush;
     std::string brushInfo;
+
+    //Read attributes in from file
     in.ignore(12, ' '); // Ignoring "BrushColor: "
     getline(in, brushInfo);
     QString colorQ(brushInfo.c_str());
     in.ignore(12, ' '); // Ignoring "BrushStyle: "
     getline(in, brushInfo);
     QString styleQ(brushInfo.c_str());
-    shape->SetBrush(GColorFromStr(colorQ), BrushStyleFromStr(styleQ));
+
+    //Set attributes
+    colorOut = GColorFromStr(colorQ);
+    brush.setColor(colorOut);
+    brush.setStyle(BrushStyleFromStr(styleQ));
+    return brush;
 }
 
 // Reading text information from file
-void InputManager:: GetTextInfo (std::ifstream& in, std::unique_ptr<Shape>& shape)
+TextData InputManager::GetTextInfo (std::ifstream& in)
 {
+    TextData output;
+    QFont font;
     std::string textInfo;
     int size;
+
+    //Getting attributes from file
     in.ignore(12, ' '); // Ignoring "TextString: "
     getline(in, textInfo);
     QString textQ(textInfo.c_str());
-    shape->SetText(textQ);
+
     in.ignore(11, ' '); // Ignoring "TextColor: "
     getline(in, textInfo);
     QString colorQ(textInfo.c_str());
-    shape->SetTextColor(GColorFromStr(colorQ));
+
     in.ignore(15, ' '); // Ignoring "TextAlignment: "
     getline (in, textInfo);
     QString alignQ(textInfo.c_str());
-    shape->SetTextAlign(AlignFlagFromStr(alignQ));
+
     in.ignore(15, ' '); // Ignoring "TextPointSize: "
     in >> size;
     in.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Usual ignore for >> to getline
+
     in.ignore(16, ' '); // Ignoring "TextFontFamily: "
     getline(in, textInfo);
     QString fontFamQ(textInfo.c_str());
+
     in.ignore(15, ' '); // Ignoring "TextFontStyle: "
     getline(in, textInfo);
     QString fontStyleQ(textInfo.c_str());
+
     in.ignore(16, ' '); // Ignoring "TextFontWeight: "
     getline(in, textInfo);
     QString fontWeightQ(textInfo.c_str());
-    shape->SetFont(size, fontFamQ, FontStyleFromStr(fontStyleQ), FontWeightFromStr(fontWeightQ));
+
+    //Setting attributes
+    font.setPointSize(size);
+    font.setFamily(fontFamQ);
+    font.setStyle(FontStyleFromStr(fontStyleQ));
+    font.setWeight(FontWeightFromStr(fontWeightQ));
+
+    output.text = textQ;
+    output.textColor = GColorFromStr(colorQ);
+    output.textAlign = AlignFlagFromStr(alignQ);
+    output.font = font;
+
+    return output;
 }
 
 // Converting string of dimensions into individual ints
-void InputManager:: InterpretLineDimensions (std::string lineDim, std::unique_ptr<Shape>& shape, int dimensions[])
+void InputManager::PopulateLineDimensions(std::string lineDim, int dimensions[])
 {
     // Using stringstream to extract integer points
     std::stringstream ss;
@@ -206,11 +252,10 @@ void InputManager:: InterpretLineDimensions (std::string lineDim, std::unique_pt
     ss >> dimensions[3];
     ss.ignore(2, ' '); // Ignoring ", "
     ss >> dimensions[4];
-    shape->SetDimensions(dimensions);
 }
 
 // Converting string of dimensions into individual ints
-void InputManager:: InterpretPolyDimensions (std::string polyDim, std::unique_ptr<Shape>& shape, int dimensions[], int size)
+void InputManager::PopulatePolyDimensions (std::string polyDim, int dimensions[], int size)
 {
     int index = 0;
 
@@ -222,17 +267,16 @@ void InputManager:: InterpretPolyDimensions (std::string polyDim, std::unique_pt
     {
         ss >> dimensions[index];
         ss.ignore(2, ' '); // Ignoring ", "
-        ss >> dimensions[index+1];
-        ss.ignore(2, ' '); // Ignoring ", "
-
         ++index;
+
+        ss >> dimensions[index];
+        ss.ignore(2, ' '); // Ignoring ", "
         ++index;
     }
-    shape->SetDimensions(dimensions);
 }
 
 // Converting string of dimensions into individual ints
-void InputManager:: InterpretRectDimensions (std::string rectDim, std::unique_ptr<Shape>& shape, int dimensions[], std::string type)
+void InputManager::PopulateRectDimensions (std::string rectDim, int dimensions[], ShapeType type)
 {
     // Using stringstream to extract integer points
     std::stringstream ss;
@@ -244,7 +288,7 @@ void InputManager:: InterpretRectDimensions (std::string rectDim, std::unique_pt
     ss.ignore(2, ' '); // Ignoring ", "
     ss >> dimensions[2];
 
-    if(type[0] == 'S' || type[0] == 'C')
+    if(type == ShapeType::Square || type == ShapeType::Circle)
     {
         dimensions[3] = dimensions[2];
     }
@@ -253,12 +297,10 @@ void InputManager:: InterpretRectDimensions (std::string rectDim, std::unique_pt
         ss.ignore(2, ' '); // Ignoring ", "
         ss >> dimensions[3];
     }
-
-    shape->SetDimensions(dimensions);
 }
 
 // Converting string of dimensions into individual ints
-//void InputManager:: InterpretSquareDimensions (std::string squareDim, int& x, int& y, int& side)
+//void InputManager::InterpretSquareDimensions (std::string squareDim, int& x, int& y, int& side)
 //{
 //	// Using stringstream to extract integer points
 //	std::stringstream ss;
