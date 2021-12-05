@@ -8,6 +8,13 @@
 #include <sstream>
 #include <ios>
 #include <limits>
+#include <QString>
+#include <memory>
+#include <utility>
+#include "../Util/vector.h"
+#include "../Shapes/Shape.h"
+#include "../Shapes/Text.h"
+#include "../Util/EnumStrConv.h"
 
 class InputManager
 {
@@ -15,16 +22,17 @@ class InputManager
 		InputManager();
 		~InputManager();
 
-		void ReadShapes();
+        void ReadShapes(vector<std::unique_ptr<Shape>>& shapes);
+
 	private:
-		void GetPenInfo (std::ifstream& in, std::string& color, int& width, std::string& style, std::string& capStyle, std::string& joinStyle);
-		void GetBrushInfo (std::ifstream& in, std::string& color, std::string& style);
-		void GetTextInfo (std::ifstream& in, std::string& text, std::string& color, std::string& alignment, int& size,
-		                  std::string& fontFam, std::string& fontStyle, std::string& fontWeight);
-		void InterpretLineDimensions (std::string lineDim, int& x1, int& x2, int& y1,int& y2);
-		void InterpretRectDimensions (std::string rectDim, int& x, int& y, int& width, int&height);
-		void InterpretSquareDimensions (std::string squareDim, int& x, int& y, int& side);
-		void InterpretPolyDimensions (std::string polyDim, int x[], int y[]);	
+        QPen GetPenInfo(std::ifstream& in, Qt::GlobalColor& colorOut);
+        QBrush GetBrushInfo(std::ifstream& in,  Qt::GlobalColor& colorOut);
+        TextData GetTextInfo(std::ifstream& in);
+
+        // Some are done, some need a little more work
+        void PopulateLineDimensions (std::string lineDim, int dimensions[]);
+        void PopulateRectDimensions (std::string rectDim, int dimensions[], ShapeType type);
+        void PopulatePolyDimensions (std::string polyDim, int dimensions[], int size);
 };	
 
 #endif

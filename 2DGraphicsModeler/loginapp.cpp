@@ -26,8 +26,6 @@ void LoginApp::on_pushButton_login_clicked()
         hide();
         dialog1 = new Dialog(this);
         dialog1->show();
-
-
     }
     else
     {

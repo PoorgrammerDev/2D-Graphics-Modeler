@@ -1,46 +1,75 @@
-#include <iostream>
 #include <string>
 #include "Line.h"
 #include "Util/EnumStrConv.h"
 
-using std::string;
-using std::cout;
-using std::cin;
+/*******************************
+ * Constructors and Destructor *
+ *******************************/
 
-void Line::GetLine()
+Line::Line() : Shape()
 {
 
 }
 
-Line::Line()
-{
-
+Line::Line(int id, QPen pen, Qt::GlobalColor penColor, int dimensions[])
+    : Shape(id, ShapeType::Line, pen, penColor, QBrush(), Qt::GlobalColor()) {
+    Line::SetDimensions(dimensions);
 }
 
-Line::~Line()
-{
+Line::~Line() {}
 
+
+/***********************************
+ * Non-Setter/Getter Class Methods *
+ ***********************************/
+
+void Line::Draw(QPainter& aPainter)
+{
+    aPainter.drawLine(line);
 }
 
 void Line::Serialize(std::ostream& out) {
-    //TODO: Using filler variables until class is updated
-    auto penColor = Qt::black;
-    auto penStyle = Qt::DashDotDotLine;
-    auto penCapStyle = Qt::FlatCap;
-    auto penJoinStyle = Qt::MiterJoin;
-
     out << "ShapeId: " << shapeId << '\n'
     << "ShapeType: Line\n"
 
     << "ShapeDimensions: "
-        << shapeDimensions[0] << ", "
-        << shapeDimensions[1] << ", "
-        << shapeDimensions[2] << ", "
-        << shapeDimensions[3] << '\n'
+        << line.x1() << ", "
+        << line.y1() << ", "
+        << line.x2() << ", "
+        << line.y2() << '\n'
 
     << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
-    << "PenWidth: " << penWidth << '\n'
-    << "PenStyle: " << PenStyleToStr(penStyle).toStdString() << '\n'
-    << "PenCapStyle: " << PenCapStyleToStr(penCapStyle).toStdString() << '\n'
-    << "PenJoinStyle: " << PenJoinStyleToStr(penJoinStyle).toStdString() << "\n\n";
+    << "PenWidth: " << pen.width() << '\n'
+    << "PenStyle: " << PenStyleToStr(pen.style()).toStdString() << '\n'
+    << "PenCapStyle: " << PenCapStyleToStr(pen.capStyle()).toStdString() << '\n'
+    << "PenJoinStyle: " << PenJoinStyleToStr(pen.joinStyle()).toStdString() << "\n\n";
 }
+
+void Line::Move() {
+    //TODO: Unimplemented method stub
+}
+
+double Line::Perimeter() {
+    return 0.0; //TODO: Unimplemented method stub
+}
+
+double Line::Area() {
+    return 0.0; //TODO: Unimplemented method stub
+}
+
+/***********************
+ * Setters and Getters *
+ ***********************/
+
+// Setting line dimensions from an array loaded in input for rendering
+void Line::SetDimensions(int point[])
+{
+    line.setLine(point[0], point[1], point[2], point[3]);
+}
+
+// May not actually need
+QLine Line::getLine()
+{
+    return line;
+}
+
