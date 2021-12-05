@@ -25,8 +25,8 @@ class InputManager
         void ReadShapes(vector<std::unique_ptr<Shape>>& shapes);
 
 	private:
-        QPen GetPenInfo(std::ifstream& in);
-        QBrush GetBrushInfo(std::ifstream& in);
+        QPen GetPenInfo(std::ifstream& in, Qt::GlobalColor& colorOut);
+        QBrush GetBrushInfo(std::ifstream& in,  Qt::GlobalColor& colorOut);
         TextData GetTextInfo(std::ifstream& in);
 
         // Some are done, some need a little more work

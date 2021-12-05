@@ -13,8 +13,8 @@ Ellipse::Ellipse() : Shape()
 
 }
 
-Ellipse::Ellipse(int id, ShapeType type, QPen pen, QBrush brush, int dimensions[])
-    : Shape(id, type, pen, brush){
+Ellipse::Ellipse(int id, ShapeType type, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor, int dimensions[])
+    : Shape(id, type, pen, penColor, brush, brushColor){
     Ellipse::SetDimensions(dimensions);
 }
 
@@ -33,32 +33,31 @@ void Ellipse::Draw(QPainter& aPainter)
 
 
 void Ellipse::Serialize(std::ostream& out) {
-//    //TODO: add special case for circle
+    int* coords[4] = {};
+    ellipse.getCoords(coords[0], coords[1], coords[2], coords[3]);
 
-//    if (shapeType == ShapeType::Circle) {
+    if (shapeType == ShapeType::Circle) {
+        //TODO: define circle output
+    }
 
-//    }
+    else {
+        out << "ShapeId: " << shapeId << '\n'
+        << "ShapeType: Ellipse\n"
 
-//    else {
+        << "ShapeDimensions: "
+            << *coords[0] << ", "
+            << *coords[1] << ", "
+            << *coords[2] << ", "
+            << *coords[3] << '\n'
 
-//    }
-
-//    out << "ShapeId: " << shapeId << '\n'
-//    << "ShapeType: Ellipse\n"
-
-//    << "ShapeDimensions: "
-//        << shapeDimensions[0] << ", "
-//        << shapeDimensions[1] << ", "
-//        << shapeDimensions[2] << ", "
-//        << shapeDimensions[3] << '\n'
-
-//    << "PenColor: " << GColorToStr(pen.color()).toStdString() << '\n'
-//    << "PenWidth: " << pen.width() << '\n'
-//    << "PenStyle: " << PenStyleToStr(pen.style()).toStdString() << '\n'
-//    << "PenCapStyle: " << PenCapStyleToStr(penCapStyle).toStdString() << '\n'
-//    << "PenJoinStyle: " << PenJoinStyleToStr(penJoinStyle).toStdString() << '\n'
-//    << "BrushColor: " << GColorToStr(brushColor).toStdString() << '\n'
-//    << "BrushStyle: " << BrushStyleToStr(brushStyle).toStdString() << "\n\n";
+        << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
+        << "PenWidth: " << pen.width() << '\n'
+        << "PenStyle: " << PenStyleToStr(pen.style()).toStdString() << '\n'
+        << "PenCapStyle: " << PenCapStyleToStr(pen.capStyle()).toStdString() << '\n'
+        << "PenJoinStyle: " << PenJoinStyleToStr(pen.joinStyle()).toStdString() << '\n'
+        << "BrushColor: " << GColorToStr(brushColor).toStdString() << '\n'
+        << "BrushStyle: " << BrushStyleToStr(brush.style()).toStdString() << "\n\n";
+    }
 }
 
 void Ellipse::Move() {

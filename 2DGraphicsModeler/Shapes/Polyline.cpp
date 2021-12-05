@@ -12,8 +12,8 @@ Polyline::Polyline() : Shape()
 
 }
 
-Polyline::Polyline(int id, QPen pen, int dimensions[])
-    : Shape(id, ShapeType::Polyline, pen, QBrush()) {
+Polyline::Polyline(int id, QPen pen, Qt::GlobalColor penColor, int dimensions[])
+    : Shape(id, ShapeType::Polyline, pen, penColor, QBrush(), Qt::GlobalColor()) {
     Polyline::SetDimensions(dimensions);
 }
 
@@ -33,30 +33,24 @@ void Polyline::Draw(QPainter& aPainter)
 
 
 void Polyline::Serialize(std::ostream& out) {
-//    //TODO: Using filler variables until Shape is updated
-//    auto penColor = Qt::black;
-//    auto penStyle = Qt::DashDotDotLine;
-//    auto penCapStyle = Qt::FlatCap;
-//    auto penJoinStyle = Qt::MiterJoin;
+    out << "ShapeId: " << shapeId << '\n'
+    << "ShapeType: Polyline\n"
 
-//    out << "ShapeId: " << shapeId << '\n'
-//    << "ShapeType: Polyline\n"
+    << "ShapeDimensions: "
+        /*<< shapeDimensions[0]*/ << ", " //FIXME: fix this
+        /*<< shapeDimensions[1]*/ << ", "
+        /*<< shapeDimensions[2]*/ << ", "
+        /*<< shapeDimensions[3]*/ << ", "
+        /*<< shapeDimensions[4]*/ << ", "
+        /*<< shapeDimensions[5]*/ << ", "
+        /*<< shapeDimensions[6]*/ << ", "
+        /*<< shapeDimensions[7]*/ << '\n'
 
-//    << "ShapeDimensions: "
-//        << shapeDimensions[0] << ", "
-//        << shapeDimensions[1] << ", "
-//        << shapeDimensions[2] << ", "
-//        << shapeDimensions[3] << ", "
-//        << shapeDimensions[4] << ", "
-//        << shapeDimensions[5] << ", "
-//        << shapeDimensions[6] << ", "
-//        << shapeDimensions[7] << '\n'
-
-//    << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
-//    << "PenWidth: " << pen.width() << '\n'
-//    << "PenStyle: " << PenStyleToStr(penStyle).toStdString() << '\n'
-//    << "PenCapStyle: " << PenCapStyleToStr(penCapStyle).toStdString() << '\n'
-//    << "PenJoinStyle: " << PenJoinStyleToStr(penJoinStyle).toStdString() << "\n\n";
+    << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
+    << "PenWidth: " << pen.width() << '\n'
+    << "PenStyle: " << PenStyleToStr(pen.style()).toStdString() << '\n'
+    << "PenCapStyle: " << PenCapStyleToStr(pen.capStyle()).toStdString() << '\n'
+    << "PenJoinStyle: " << PenJoinStyleToStr(pen.joinStyle()).toStdString() << "\n\n";
 }
 
 void Polyline::Move() {

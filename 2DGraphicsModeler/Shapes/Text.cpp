@@ -14,7 +14,7 @@ Text::Text() : Shape()
 }
 
 Text::Text(int id, TextData textData, int dimensions[])
-    : Shape(id, ShapeType::Text, QPen(), QBrush()) {
+    : Shape(id, ShapeType::Text, QPen(), Qt::GlobalColor(), QBrush(), Qt::GlobalColor()) {
     Text::SetDimensions(dimensions);
 
     QFont font = textData.font;
@@ -40,27 +40,24 @@ void Text::Draw(QPainter& aPainter)
 }
 
 void Text::Serialize(std::ostream& out) {
-//    //TODO: Using filler variables until class is updated
-//    auto textColor = Qt::black;
-//    auto textAli = Qt::AlignRight;
-//    auto fontStyle = QFont::StyleNormal;
-//    auto fontWeight = QFont::Bold;
+    int* coords[4] = {};
+    textBox.getCoords(coords[0], coords[1], coords[2], coords[3]);
 
-//    out << "ShapeId: " << shapeId << '\n'
-//    << "ShapeType: Text\n"
-//    << "ShapeDimensions: "
-//            << shapeDimensions[0] << ", "
-//            << shapeDimensions[1] << ", "
-//            << shapeDimensions[2] << ", "
-//            << shapeDimensions[3] << '\n'
+    out << "ShapeId: " << shapeId << '\n'
+    << "ShapeType: Text\n"
+    << "ShapeDimensions: "
+        << *coords[0] << ", "
+        << *coords[1] << ", "
+        << *coords[2] << ", "
+        << *coords[3] << '\n'
 
-//    << "TextString: " << textString.toStdString() << '\n'
-//    << "TextColor: " << GColorToStr(textColor).toStdString() << '\n'
-//    << "TextAlignment: " << AlignFlagToStr(textAli).toStdString() << '\n'
-//    << "TextPointSize: " << textPointSize << '\n'
-//    << "TextFontFamily: " << fontFamily.toStdString() << '\n'
-//    << "TextFontStyle: " << FontStyleToStr(fontStyle).toStdString() << '\n'
-//    << "TextFontWeight: " << FontWeightToStr(fontWeight).toStdString() << "\n\n";
+    << "TextString: " << text.toStdString() << '\n'
+    << "TextColor: " << GColorToStr(textColor).toStdString() << '\n'
+    << "TextAlignment: " << AlignFlagToStr(textAlign).toStdString() << '\n'
+    << "TextPointSize: " << font.pointSize() << '\n'
+    << "TextFontFamily: " << font.family().toStdString() << '\n'
+    << "TextFontStyle: " << FontStyleToStr(font.style()).toStdString() << '\n'
+    << "TextFontWeight: " << FontWeightToStr(font.weight()).toStdString() << "\n\n";
 }
 
 void Text::Move() {

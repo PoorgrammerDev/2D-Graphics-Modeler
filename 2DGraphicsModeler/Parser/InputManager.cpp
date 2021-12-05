@@ -39,9 +39,20 @@ void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
 
     QPen pen;
     QBrush brush;
+    Qt::GlobalColor penColor;
+    Qt::GlobalColor brushColor;
     TextData textData;
 
-    std::ifstream in("..\\2DGraphicsModeler\\shapes.txt");
+    std::ifstream in;
+
+    //For some reason when I run this on my Mac, it needs a different path to get to the same place - Thomas
+    //So I added some pre-processor directives that (hopefully) detect this
+#if __APPLE__ && TARGET_OS_MAC
+    in.open("../../../../2DGraphicsModeler/shapes.txt");
+#else
+    in.open("..\\2DGraphicsModeler\\shapes.txt");
+#endif
+
     if (in.fail()) {
         std::cerr << "Shapes input file failed to open.\n";
         return; // Doesn't terminate the entire program - will just keep running with no starting shapes.
@@ -62,15 +73,15 @@ void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
         // Within each stmt am allocating a new object assigning all the values and pushing back
         if(type == "Line")
         {
-            pen = GetPenInfo(in);
+            pen = GetPenInfo(in, penColor);
             PopulateLineDimensions(dimensions, points);
-            aShape = std::make_unique<Line>(id, pen, points);
+            aShape = std::make_unique<Line>(id, pen, penColor, points);
         }
         else if(type == "Polyline")
         {
-            pen = GetPenInfo(in);
+            pen = GetPenInfo(in, penColor);
             PopulatePolyDimensions(dimensions, points, 20);
-            aShape = std::make_unique<Polyline>(id, pen, points);
+            aShape = std::make_unique<Polyline>(id, pen, penColor, points);
         }
         else if (type == "Text")
         {
@@ -80,36 +91,36 @@ void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
         }
         else if (type == "Rectangle")
         {
-            pen = GetPenInfo(in);
-            brush = GetBrushInfo(in);
+            pen = GetPenInfo(in, penColor);
+            brush = GetBrushInfo(in, brushColor);
             PopulateRectDimensions(dimensions, points, ShapeType::Rectangle);
-            aShape = std::make_unique<Rectangle>(id, ShapeType::Rectangle, pen, brush, points);
+            aShape = std::make_unique<Rectangle>(id, ShapeType::Rectangle, pen, penColor, brush, brushColor, points);
         }
         else if (type == "Square") {
-            pen = GetPenInfo(in);
-            brush = GetBrushInfo(in);
+            pen = GetPenInfo(in, penColor);
+            brush = GetBrushInfo(in, brushColor);
             PopulateRectDimensions(dimensions, points, ShapeType::Square);
-            aShape = std::make_unique<Rectangle>(id, ShapeType::Square, pen, brush, points);
+            aShape = std::make_unique<Rectangle>(id, ShapeType::Square, pen, penColor, brush, brushColor, points);
         }
         else if (type == "Ellipse")
         {
-            pen = GetPenInfo(in);
-            brush = GetBrushInfo(in);
+            pen = GetPenInfo(in, penColor);
+            brush = GetBrushInfo(in, brushColor);
             PopulateRectDimensions(dimensions, points, ShapeType::Ellipse);
-            aShape = std::make_unique<Ellipse>(id, ShapeType::Ellipse, pen, brush, points);
+            aShape = std::make_unique<Ellipse>(id, ShapeType::Ellipse, pen, penColor, brush, brushColor, points);
         }
         else if (type == "Circle") {
-            pen = GetPenInfo(in);
-            brush = GetBrushInfo(in);
+            pen = GetPenInfo(in, penColor);
+            brush = GetBrushInfo(in, brushColor);
             PopulateRectDimensions(dimensions, points, ShapeType::Circle);
-            aShape = std::make_unique<Ellipse>(id, ShapeType::Circle, pen, brush, points);
+            aShape = std::make_unique<Ellipse>(id, ShapeType::Circle, pen, penColor, brush, brushColor, points);
         }
         else if (type == "Polygon")
         {
-            pen = GetPenInfo(in);
-            brush = GetBrushInfo(in);
+            pen = GetPenInfo(in, penColor);
+            brush = GetBrushInfo(in, brushColor);
             PopulatePolyDimensions(dimensions, points, 20); //TODO: remove magic number
-            aShape = std::make_unique<Polygon>(id, pen, brush, points);
+            aShape = std::make_unique<Polygon>(id, pen, penColor, brush, brushColor, points);
         }
 
         shapes.push_back(std::move(aShape));
@@ -121,7 +132,7 @@ void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
 }
 
 // Reading pen information from file
-QPen InputManager::GetPenInfo (std::ifstream& in)
+QPen InputManager::GetPenInfo (std::ifstream& in, Qt::GlobalColor& colorOut)
 {
     QPen pen;
     std::string penInfo;
@@ -146,17 +157,17 @@ QPen InputManager::GetPenInfo (std::ifstream& in)
     QString joinQ(penInfo.c_str());
 
     //Set attributes
-    pen.setColor(GColorFromStr(colorQ));
+    colorOut = GColorFromStr(colorQ);
+    pen.setColor(colorOut);
     pen.setWidth(width);
     pen.setStyle(PenStyleFromStr(styleQ));
     pen.setCapStyle(PenCapStyleFromStr(capQ));
     pen.setJoinStyle(PenJoinStyleFromStr(joinQ));
-
     return pen;
 }
 
 // Reading brush information from file
-QBrush InputManager::GetBrushInfo (std::ifstream& in)
+QBrush InputManager::GetBrushInfo (std::ifstream& in, Qt::GlobalColor& colorOut)
 {
     QBrush brush;
     std::string brushInfo;
@@ -170,9 +181,9 @@ QBrush InputManager::GetBrushInfo (std::ifstream& in)
     QString styleQ(brushInfo.c_str());
 
     //Set attributes
-    brush.setColor(GColorFromStr(colorQ));
+    colorOut = GColorFromStr(colorQ);
+    brush.setColor(colorOut);
     brush.setStyle(BrushStyleFromStr(styleQ));
-
     return brush;
 }
 

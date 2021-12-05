@@ -1,6 +1,7 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
+#include <ostream>
 #include <QString>
 #include <QPen>
 #include <QBrush>
@@ -16,7 +17,7 @@ public:
      * Constructors and Destructor *
      *******************************/
     Shape();
-    Shape(int id, ShapeType type, QPen pen, QBrush brush);
+    Shape(int id, ShapeType type, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor);
     Shape(const Shape& obj) = delete;
     virtual ~Shape();
 
@@ -53,7 +54,9 @@ protected:
     int shapeId;
     ShapeType shapeType;
     QPen pen;
+    Qt::GlobalColor penColor; //Required for serializer even though it's redundant
     QBrush brush;
+    Qt::GlobalColor brushColor; //Required for serializer even though it's redundant
 };
 
 #endif // SHAPE_H

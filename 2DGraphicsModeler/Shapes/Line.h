@@ -12,7 +12,7 @@ public:
      * Constructors and Destructor *
      *******************************/
     Line();
-    Line(int id, QPen pen, int dimensions[]);
+    Line(int id, QPen pen, Qt::GlobalColor penColor, int dimensions[]);
     Line(const Line& obj) = delete;
     virtual ~Line() override;
 

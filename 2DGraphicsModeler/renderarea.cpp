@@ -18,6 +18,7 @@ RenderArea::~RenderArea()
 
 void RenderArea::paintEvent(QPaintEvent * /* event */)
 {
+
     QPainter painter(this);
     int index = 0;
 
@@ -71,7 +72,7 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
                     break;
                 }
             }
-            painter.restore();
+            //painter.restore(); //What is this supposed to do? It was causing an issue (not a crash) - Thomas
             ++index;
     }
 }

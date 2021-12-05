@@ -8,7 +8,8 @@ Shape::Shape() : shapeId(0), pen(), brush() { //TODO: randomly generate new shap
 
 }
 
-Shape::Shape(int id, ShapeType type, QPen pen, QBrush brush) : shapeId(id), shapeType(type), pen(pen), brush(brush) {
+Shape::Shape(int id, ShapeType type, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor)
+    : shapeId(id), shapeType(type), pen(pen), penColor(penColor), brush(brush), brushColor(brushColor) {
     //Dimensions will be handled by derived classes
 }
 

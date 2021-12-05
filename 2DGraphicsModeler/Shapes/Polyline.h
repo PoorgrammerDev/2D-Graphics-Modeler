@@ -11,7 +11,7 @@ public:
      * Constructors and Destructor *
      *******************************/
     Polyline();
-    Polyline(int id, QPen pen, int dimensions[]);
+    Polyline(int id, QPen pen, Qt::GlobalColor penColor, int dimensions[]);
     Polyline(const Polyline& obj) = delete;
     virtual ~Polyline() override;
 

@@ -11,7 +11,7 @@ public:
      * Constructors and Destructor *
      *******************************/
     Polygon();
-    Polygon(int id, QPen pen, QBrush brush, int dimensions[]);
+    Polygon(int id, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor, int dimensions[]);
     Polygon(const Polygon& obj) = delete;
     virtual ~Polygon() override;
 
