@@ -39,9 +39,9 @@ void Polyline::Serialize(std::ostream& out) {
     << "ShapeDimensions: ";
 
     //Output points, in pairs of x0, y0, x1, y1, ... etc.
-    for (int i = 0; i < 10; ++i) { //TODO: replace with vector and have dynamic size
+    for (int i = 0; i < pointCount; ++i) { //TODO: replace with vector and have dynamic size
         out << points[i].x() << ", " << points[i].y()
-        << ((i != 10 - 1) ? ", " : "\n");
+        << ((i != pointCount - 1) ? ", " : "\n");
     }
 
     out << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
