@@ -33,11 +33,25 @@ void Ellipse::Draw(QPainter& aPainter)
 
 
 void Ellipse::Serialize(std::ostream& out) {
-    int* coords[4] = {};
-    ellipse.getCoords(coords[0], coords[1], coords[2], coords[3]);
+    int coords[4] = {};
+    ellipse.getCoords(&coords[0], &coords[1], &coords[2], &coords[3]);
 
     if (shapeType == ShapeType::Circle) {
-        //TODO: define circle output
+        out << "ShapeId: " << shapeId << '\n'
+        << "ShapeType: Circle\n"
+
+        << "ShapeDimensions: "
+            << coords[0] << ", "
+            << coords[1] << ", "
+            << coords[2] << '\n'
+
+        << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
+        << "PenWidth: " << pen.width() << '\n'
+        << "PenStyle: " << PenStyleToStr(pen.style()).toStdString() << '\n'
+        << "PenCapStyle: " << PenCapStyleToStr(pen.capStyle()).toStdString() << '\n'
+        << "PenJoinStyle: " << PenJoinStyleToStr(pen.joinStyle()).toStdString() << '\n'
+        << "BrushColor: " << GColorToStr(brushColor).toStdString() << '\n'
+        << "BrushStyle: " << BrushStyleToStr(brush.style()).toStdString() << "\n\n";
     }
 
     else {
@@ -45,10 +59,10 @@ void Ellipse::Serialize(std::ostream& out) {
         << "ShapeType: Ellipse\n"
 
         << "ShapeDimensions: "
-            << *coords[0] << ", "
-            << *coords[1] << ", "
-            << *coords[2] << ", "
-            << *coords[3] << '\n'
+            << coords[0] << ", "
+            << coords[1] << ", "
+            << coords[2] << ", "
+            << coords[3] << '\n'
 
         << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
         << "PenWidth: " << pen.width() << '\n'

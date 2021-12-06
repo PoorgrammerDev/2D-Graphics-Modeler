@@ -40,16 +40,16 @@ void Text::Draw(QPainter& aPainter)
 }
 
 void Text::Serialize(std::ostream& out) {
-    int* coords[4] = {};
-    textBox.getCoords(coords[0], coords[1], coords[2], coords[3]);
+    int coords[4] = {};
+    textBox.getCoords(&coords[0], &coords[1], &coords[2], &coords[3]);
 
     out << "ShapeId: " << shapeId << '\n'
     << "ShapeType: Text\n"
     << "ShapeDimensions: "
-        << *coords[0] << ", "
-        << *coords[1] << ", "
-        << *coords[2] << ", "
-        << *coords[3] << '\n'
+        << coords[0] << ", "
+        << coords[1] << ", "
+        << coords[2] << ", "
+        << coords[3] << '\n'
 
     << "TextString: " << text.toStdString() << '\n'
     << "TextColor: " << GColorToStr(textColor).toStdString() << '\n'

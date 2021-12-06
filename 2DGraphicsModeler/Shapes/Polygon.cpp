@@ -35,17 +35,15 @@ void Polygon::Serialize(std::ostream& out) {
     out << "ShapeId: " << shapeId << '\n'
     << "ShapeType: Polygon\n"
 
-    << "ShapeDimensions: "
-            /*<< shapeDimensions[0]*/ << ", " //FIXME: find dims
-            /*<< shapeDimensions[1]*/ << ", "
-            /*<< shapeDimensions[2]*/ << ", "
-            /*<< shapeDimensions[3]*/ << ", "
-            /*<< shapeDimensions[4]*/ << ", "
-            /*<< shapeDimensions[5]*/ << ", "
-            /*<< shapeDimensions[6]*/ << ", "
-            /*<< shapeDimensions[7]*/ << '\n'
+    << "ShapeDimensions: ";
 
-    << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
+    //Output points, in pairs of x0, y0, x1, y1, ... etc.
+    for (int i = 0; i < 10; ++i) { //TODO: replace with vector and have dynamic size
+        out << points[i].x() << ", " << points[i].y()
+        << ((i != 10 - 1) ? ", " : "\n");
+    }
+
+    out << "PenColor: " << GColorToStr(penColor).toStdString() << '\n'
     << "PenWidth: " << pen.width() << '\n'
     << "PenStyle: " << PenStyleToStr(pen.style()).toStdString() << '\n'
     << "PenCapStyle: " << PenCapStyleToStr(pen.capStyle()).toStdString() << '\n'
