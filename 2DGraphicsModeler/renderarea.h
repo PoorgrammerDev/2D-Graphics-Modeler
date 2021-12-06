@@ -16,6 +16,7 @@ class RenderArea : public QWidget
 public:
     explicit RenderArea(QWidget *parent = nullptr);
     ~RenderArea();
+    void Save();
 
 
 public slots:

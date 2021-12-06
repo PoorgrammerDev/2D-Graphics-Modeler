@@ -1,6 +1,6 @@
 #include "renderarea.h"
-
 #include <QPainter>
+#include <fstream>
 
 RenderArea::RenderArea(QWidget *parent)
     : QWidget(parent)
@@ -12,8 +12,7 @@ RenderArea::RenderArea(QWidget *parent)
 
 RenderArea::~RenderArea()
 {
-    // Perhaps add serializer
-    // Do we need to do anything with vector here?
+//   Save(); //TODO: un-comment this
 }
 
 void RenderArea::paintEvent(QPaintEvent * /* event */)
@@ -75,6 +74,30 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
             //painter.restore(); //What is this supposed to do? It was causing an issue (not a crash) - Thomas
             ++index;
     }
+}
+
+void RenderArea::Save() {
+    std::ofstream file;
+
+    //For some reason when I run this on my Mac, it needs a different path to get to the same place - Thomas
+    //So I added some pre-processor directives that (hopefully) detect this
+#if __APPLE__ && TARGET_OS_MAC
+    file.open("../../../../2DGraphicsModeler/shapes.txt");
+#else
+    file.open("..\\2DGraphicsModeler\\shapes.txt");
+#endif
+
+    if (file.fail()) {
+        std::cerr << "Save file failed to open!\n";
+        return; //TODO: replace with exception?
+    }
+
+    file << '\n';
+    for (int i = 0; i < shapes.size(); ++i) {
+        shapes[i]->Serialize(file);
+    }
+
+    file.close();
 }
 
 

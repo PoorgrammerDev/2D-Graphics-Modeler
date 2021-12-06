@@ -32,7 +32,7 @@ InputManager::~InputManager() {}
 void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
 {
     int id;
-    int points[20];
+    int points[20] = {};
     std::string type;
     std::string dimensions;
     std::unique_ptr<Shape> aShape;
