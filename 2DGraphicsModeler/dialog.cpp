@@ -15,58 +15,59 @@ Dialog::~Dialog()
 
 
 
-void Dialog::on_pushButton_5_clicked()
+void Dialog::on_shSelLine_clicked()
 {
-    ui->stackedWidget->addWidget(ui->Line);
-    ui->stackedWidget->setCurrentWidget(ui->Line);
-    ui->comboBox_4->addItem("a");
-    ui->comboBox_5->addItem("a");
-    ui->comboBox_6->addItem("a");
+    ui->shapeBuilder->addWidget(ui->Line);
+    ui->shapeBuilder->setCurrentWidget(ui->Line);
+    ui->l_penStyleBox->addItem("");
+    ui->l_penCapBox->addItem("");
+    ui->l_penJoinBox->addItem("");
 }
 
-void Dialog::on_pushButton_4_clicked()
+void Dialog::on_shSelText_clicked()
 {
-    ui->stackedWidget->addWidget(ui->Text);
-    ui->stackedWidget->setCurrentWidget(ui->Text);
-    ui->comboBox_7->addItem("adfs");
-    ui->comboBox_8->addItem("sdfa");
-    ui->comboBox_9->addItem("dfsa");
+    ui->shapeBuilder->addWidget(ui->Text);
+    ui->shapeBuilder->setCurrentWidget(ui->Text);
+    ui->t_fontFamilyBox->addItem("");
+    ui->t_fontStyleBox->addItem("");
+    ui->t_penJoinBox->addItem("");
 }
 
-void Dialog::on_pushButton_3_clicked()
+void Dialog::on_shSelRect_clicked()
 {
-    ui->stackedWidget->addWidget(ui->Rectangle);
-    ui->stackedWidget->setCurrentWidget(ui->Rectangle);
-    ui->comboBox_10->addItem("afsd");
-    ui->comboBox_11->addItem("fsda");
-    ui->comboBox_12->addItem("fsda");
+    ui->shapeBuilder->addWidget(ui->Rectangle);
+    ui->shapeBuilder->setCurrentWidget(ui->Rectangle);
+    ui->r_penCapBox->addItem("");
+    ui->r_penJoinBox->addItem("");
+    ui->r_penStyleBox->addItem("");
 }
 
-void Dialog::on_pushButton_6_clicked()
+void Dialog::on_shSelPolygon_clicked()
 {
-    ui->stackedWidget->addWidget(ui->Polygon);
-    ui->stackedWidget->setCurrentWidget(ui->Polygon);
-    ui->comboBox_13->addItem("fsda");
-    ui->comboBox_14->addItem("fsad");
-    ui->comboBox_15->addItem("fsda");
-
+    ui->shapeBuilder->addWidget(ui->Polygon);
+    ui->shapeBuilder->setCurrentWidget(ui->Polygon);
+    ui->pg_fillColorBox->addItem("");
+    ui->pg_fillStyleBox->addItem("");
+    ui->pg_penCapBox->addItem("");
+    ui->pg_penJoinBox->addItem("");
+    ui->pg_penStyleBox->addItem("");
 
 }
 
-void Dialog::on_pushButton_9_clicked()
+void Dialog::on_shSelEllipse_clicked()
 {
-    ui->stackedWidget->addWidget(ui->Ellipse);
-    ui->stackedWidget->setCurrentWidget(ui->Ellipse);
-    ui->comboBox_16->addItem("fsad");
-    ui->comboBox_17->addItem("fsad");
-    ui->comboBox_18->addItem("fasd");
+    ui->shapeBuilder->addWidget(ui->Ellipse);
+    ui->shapeBuilder->setCurrentWidget(ui->Ellipse);
+    ui->e_penCapBox->addItem("");
+    ui->e_penJoinBox->addItem("");
+    ui->e_penStyleBox->addItem("");
 }
 
-void Dialog::on_pushButton_10_clicked()
+void Dialog::on_shSelPolyline_clicked()
 {
-    ui->stackedWidget->addWidget(ui->Polyline);
-    ui->stackedWidget->setCurrentWidget(ui->Polyline);
-    ui->comboBox->addItem("sdfa");
-    ui->comboBox_2->addItem("fsda");
-    ui->comboBox_3->addItem("sdfa");
+    ui->shapeBuilder->addWidget(ui->Polyline);
+    ui->shapeBuilder->setCurrentWidget(ui->Polyline);
+    ui->pl_penCapBox->addItem("");
+    ui->pl_penJoinBox->addItem("");
+    ui->pl_penStyleBox->addItem("");
 }

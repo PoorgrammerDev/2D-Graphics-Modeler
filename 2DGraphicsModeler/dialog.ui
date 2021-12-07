@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QStackedWidget" name="stackedWidget">
+  <widget class="QStackedWidget" name="shapeBuilder">
    <property name="geometry">
     <rect>
      <x>910</x>
@@ -46,16 +46,16 @@
       <item row="0" column="1">
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QSpinBox" name="spinBox"/>
+         <widget class="QSpinBox" name="l_penWidthBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_4"/>
+         <widget class="QComboBox" name="l_penStyleBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_5"/>
+         <widget class="QComboBox" name="l_penCapBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_6"/>
+         <widget class="QComboBox" name="l_penJoinBox"/>
         </item>
        </layout>
       </item>
@@ -105,32 +105,6 @@
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="1" column="0" colspan="2">
-       <widget class="QPushButton" name="pushButton_11">
-        <property name="text">
-         <string>Build</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <layout class="QVBoxLayout" name="verticalLayout_6">
-        <item>
-         <widget class="QSpinBox" name="spinBox_3"/>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_7"/>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_8"/>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_9"/>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_21"/>
-        </item>
-       </layout>
-      </item>
       <item row="0" column="0">
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
@@ -163,6 +137,29 @@
         </item>
        </layout>
       </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QPushButton" name="pushButton_11">
+        <property name="text">
+         <string>Build</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QSpinBox" name="t_fontSizeBox"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="t_fontStyleBox"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="t_fontFamilyBox"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="t_penJoinBox"/>
+        </item>
+       </layout>
+      </item>
      </layout>
     </widget>
    </widget>
@@ -170,7 +167,7 @@
     <widget class="QWidget" name="layoutWidget_5">
      <property name="geometry">
       <rect>
-       <x>130</x>
+       <x>140</x>
        <y>20</y>
        <width>231</width>
        <height>401</height>
@@ -187,16 +184,16 @@
       <item row="0" column="1">
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="QSpinBox" name="spinBox_4"/>
+         <widget class="QSpinBox" name="r_penWidthBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_10"/>
+         <widget class="QComboBox" name="r_penStyleBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_11"/>
+         <widget class="QComboBox" name="r_penCapBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_12"/>
+         <widget class="QComboBox" name="r_penJoinBox"/>
         </item>
        </layout>
       </item>
@@ -256,22 +253,22 @@
       <item row="0" column="1">
        <layout class="QVBoxLayout" name="verticalLayout_10">
         <item>
-         <widget class="QSpinBox" name="spinBox_5"/>
+         <widget class="QSpinBox" name="pg_penWidthBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_13"/>
+         <widget class="QComboBox" name="pg_penStyleBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_14"/>
+         <widget class="QComboBox" name="pg_penCapBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_15"/>
+         <widget class="QComboBox" name="pg_penJoinBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_19"/>
+         <widget class="QComboBox" name="pg_fillColorBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_20"/>
+         <widget class="QComboBox" name="pg_fillStyleBox"/>
         </item>
        </layout>
       </item>
@@ -345,16 +342,16 @@
       <item row="0" column="1">
        <layout class="QVBoxLayout" name="verticalLayout_12">
         <item>
-         <widget class="QSpinBox" name="spinBox_6"/>
+         <widget class="QSpinBox" name="e_penWidthBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_16"/>
+         <widget class="QComboBox" name="e_penStyleBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_17"/>
+         <widget class="QComboBox" name="e_penCapBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_18"/>
+         <widget class="QComboBox" name="e_penJoinBox"/>
         </item>
        </layout>
       </item>
@@ -414,16 +411,16 @@
       <item row="0" column="1">
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QSpinBox" name="spinBox_2"/>
+         <widget class="QSpinBox" name="pl_penWidthBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox"/>
+         <widget class="QComboBox" name="pl_penStyleBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_2"/>
+         <widget class="QComboBox" name="pl_penCapBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_3"/>
+         <widget class="QComboBox" name="pl_penJoinBox"/>
         </item>
        </layout>
       </item>
@@ -472,44 +469,44 @@
      <height>551</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="shapeTypeSelector">
     <item>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="shSelLine">
       <property name="text">
        <string>Line</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="shSelText">
       <property name="text">
        <string>Text</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="shSelRect">
       <property name="text">
        <string>Rectangle</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_6">
+     <widget class="QPushButton" name="shSelPolygon">
       <property name="text">
        <string>Polygon</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_9">
+     <widget class="QPushButton" name="shSelEllipse">
       <property name="text">
        <string>Ellipse</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_10">
+     <widget class="QPushButton" name="shSelPolyline">
       <property name="text">
        <string>Polyline</string>
       </property>
@@ -530,7 +527,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/new/prefix2/image/1.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="saveButton">
    <property name="geometry">
     <rect>
      <x>1050</x>
