@@ -26,6 +26,7 @@ private slots:
 
 private:
     Ui::Dialog *ui;
+    void AddFieldValues();
 };
 
 #endif // DIALOG_H
