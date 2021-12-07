@@ -15,7 +15,7 @@ class RenderArea : public QWidget
 
 public:
     explicit RenderArea(QWidget *parent = nullptr);
-    ~RenderArea();
+    virtual ~RenderArea();
     void Save();
 
 
