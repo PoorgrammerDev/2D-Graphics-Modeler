@@ -30,6 +30,11 @@ void Polygon::Draw(QPainter& aPainter)
     aPainter.drawPolygon(points, pointCount);
 }
 
+void Polygon::DrawId(QPainter& aPainter)
+{
+    QString id = std::to_string(shapeId).c_str();
+    aPainter.drawText(points[pointCount-1], id);
+}
 
 void Polygon::Serialize(std::ostream& out) {
     out << "ShapeId: " << shapeId << '\n'

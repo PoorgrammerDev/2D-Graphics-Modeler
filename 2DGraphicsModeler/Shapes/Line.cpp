@@ -28,6 +28,13 @@ void Line::Draw(QPainter& aPainter)
     aPainter.drawLine(line);
 }
 
+void Line::DrawId(QPainter& aPainter)
+{
+    QString id = std::to_string(shapeId).c_str();
+    aPainter.drawText(line.p2(), id);
+}
+
+
 void Line::Serialize(std::ostream& out) {
     out << "ShapeId: " << shapeId << '\n'
     << "ShapeType: Line\n"

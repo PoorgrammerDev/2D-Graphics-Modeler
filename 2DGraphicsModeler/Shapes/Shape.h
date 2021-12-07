@@ -36,6 +36,7 @@ public:
 
     // Each class has its own draw and setdimensions depending on the shape
     virtual void Draw(QPainter& aPainter) = 0;
+    virtual void DrawId(QPainter& aPainter) = 0;
     virtual void SetDimensions (int points[]) = 0;
     virtual void Serialize(std::ostream& out) = 0; //for writing to file
 

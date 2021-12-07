@@ -431,3 +431,24 @@ QFont::Weight FontWeightFromStr(QString str) {
     else throw std::invalid_argument("Invalid String to FontWeight");
 }
 
+ShapeType ShapeFromStr(QString str){
+    if(str == "Ellipse")
+        return ShapeType::Ellipse;
+    else if(str == "Circle")
+        return ShapeType::Circle;
+    else if(str == "Rectangle")
+        return ShapeType::Rectangle;
+    else if(str == "Square")
+        return ShapeType::Square;
+    else if(str == "Line")
+        return ShapeType::Line;
+    else if(str == "Polygon")
+        return ShapeType::Polygon;
+    else if(str == "Polyline")
+        return ShapeType::Polyline;
+    else if(str == "Text")
+        return ShapeType::Text;
+
+    else throw std::invalid_argument("Invalid string to ShapeType");
+}
+

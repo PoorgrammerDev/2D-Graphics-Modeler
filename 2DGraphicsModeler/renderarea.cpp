@@ -33,11 +33,13 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
                 // Drawing a line
                 painter.setPen(shapes[index]->GetPen());
                 shapes[index]->Draw(painter);
+                shapes[index]->DrawId(painter);
                 break;
             case ShapeType::Polyline :
                 // Drawing a polyline
                 painter.setPen(shapes[index]->GetPen());
                 shapes[index]->Draw(painter);
+                shapes[index]->DrawId(painter);
                 break;
             case ShapeType::Ellipse :
             case ShapeType::Circle :
@@ -45,12 +47,14 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
                 painter.setPen(shapes[index]->GetPen());
                 painter.setBrush(shapes[index]->GetBrush());
                 shapes[index]->Draw(painter);
+                shapes[index]->DrawId(painter);
                 break;
             case ShapeType::Polygon :
                 // Drawing a Polygon
                 painter.setPen(shapes[index]->GetPen());
                 painter.setBrush(shapes[index]->GetBrush());
                 shapes[index]->Draw(painter);
+                shapes[index]->DrawId(painter);
                 break;
             case ShapeType::Rectangle :
             case ShapeType::Square :
@@ -58,6 +62,7 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
                 painter.setPen(shapes[index]->GetPen());
                 painter.setBrush(shapes[index]->GetBrush());
                 shapes[index]->Draw(painter);
+                shapes[index]->DrawId(painter);
                 break;
             case ShapeType::Text : {
                     // Drawing text
@@ -68,9 +73,11 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
                     castedText = nullptr;
 
                     shapes[index]->Draw(painter);
+                    shapes[index]->DrawId(painter);
                     break;
                 }
             }
+
             //painter.restore(); //What is this supposed to do? It was causing an issue (not a crash) - Thomas
             ++index;
     }

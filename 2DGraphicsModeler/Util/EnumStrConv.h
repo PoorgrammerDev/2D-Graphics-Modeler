@@ -7,6 +7,7 @@
 #include <Qt>
 #include <QFont>
 #include <QString>
+#include "Shapes/Shape.h"
 
 QString GColorToStr(Qt::GlobalColor val);
 Qt::GlobalColor GColorFromStr(QString str);
@@ -31,5 +32,7 @@ QFont::Style FontStyleFromStr(QString str);
 
 QString FontWeightToStr(QFont::Weight val);
 QFont::Weight FontWeightFromStr(QString str);
+
+ShapeType ShapeFromStr(QString str);
 
 #endif

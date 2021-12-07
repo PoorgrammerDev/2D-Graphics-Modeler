@@ -21,6 +21,7 @@ public:
     Rectangle& operator= (const Rectangle& obj) = delete; //delete copy assignment
 
     virtual void Draw(QPainter& aPainter) override;
+    virtual void DrawId(QPainter& aPainter) override;
     virtual void SetDimensions(int point[]) override;
     virtual void Serialize(std::ostream& out) override;
 

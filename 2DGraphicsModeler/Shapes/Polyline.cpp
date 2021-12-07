@@ -30,7 +30,11 @@ void Polyline::Draw(QPainter& aPainter)
     aPainter.drawPolyline(points, pointCount);
 }
 
-
+void Polyline::DrawId(QPainter& aPainter)
+{
+    QString id = std::to_string(shapeId).c_str();
+    aPainter.drawText(points[pointCount-1], id);
+}
 
 void Polyline::Serialize(std::ostream& out) {
     out << "ShapeId: " << shapeId << '\n'

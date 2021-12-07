@@ -39,6 +39,14 @@ void Text::Draw(QPainter& aPainter)
     aPainter.drawText(textBox, textAlign, text);
 }
 
+void Text::DrawId(QPainter& aPainter)
+{
+    int coords[4] = {};
+    QString id = std::to_string(shapeId).c_str();
+    textBox.getCoords(&coords[0], &coords[1], &coords[2], &coords[3]);
+    aPainter.drawText(coords[0], coords[3], id);
+}
+
 void Text::Serialize(std::ostream& out) {
     int coords[4] = {};
     textBox.getCoords(&coords[0], &coords[1], &coords[2], &coords[3]);

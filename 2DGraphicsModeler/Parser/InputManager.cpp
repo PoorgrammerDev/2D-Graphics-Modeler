@@ -17,16 +17,6 @@
 InputManager::InputManager() {}
 InputManager::~InputManager() {}
 
-/*******************************************
- * Not done updating this with the classes
- * and a lot of renderarea depends on it.
- * Need to:
- * - update some interpret dimension methods
- * - update the text information
- * - assign the type (thought I did this but
- *   apprently not, will be easy with how
- *   this is formatted)
- ******************************************/
 
 // Method to read in shapes from input file
 void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
@@ -66,6 +56,9 @@ void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
 
         in.ignore(11, ' '); // Ignoring "ShapeType: "
         getline(in, type);
+        // TODO Discuss how we want to implement shape type invalid
+        // 1. make an invalid type, make if statement a switch and the invalid case ignores enough lines to reset until new shape
+        // 2. not have a type or method for invalid shape and instead add an else to the if stmts that ignores lines until next shape
 
         in.ignore (17, ' '); // Ignoring "ShapeDimensions: "
         getline(in, dimensions);
@@ -132,37 +125,39 @@ void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
 }
 
 // Reading pen information from file
-QPen InputManager::GetPenInfo (std::ifstream& in, Qt::GlobalColor& colorOut)
+QPen InputManager::GetPenInfo (std::ifstream& in, Qt::GlobalColor& colorOut) // Do we need this colorout parameter, isn't already covered in pen (same with brush)
 {
     QPen pen;
     std::string penInfo;
     int width;
 
 
-    //Read in attributes from file
+    //Read in and set attributes from file
     in.ignore(10, ' '); // Ignoring "PenColor: "
     getline(in, penInfo);
-    QString colorQ(penInfo.c_str());
+    pen.setColor(CheckColor(penInfo));
+    QString colorQ(penInfo.c_str()); //delete if error checking works
+
     in.ignore(10, ' '); // Ignoring "PenWidth: "
     in >> width;
+    pen.setWidth(CheckSize(width, 0, 20));
     in.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Usual ignore for >> to getline
+
     in.ignore(10, ' '); // Ignoring "PenStyle: "
     getline(in, penInfo);
-    QString styleQ(penInfo.c_str());
+    pen.setStyle(CheckPenStyle(penInfo));
+
     in.ignore(13, ' '); // Ignoring "PenCapStyle: "
     getline(in, penInfo);
-    QString capQ(penInfo.c_str());
+    pen.setCapStyle(CheckCapStyle(penInfo));
+
     in.ignore(14, ' '); // Ignoring "PenJoinStyle: "
     getline(in, penInfo);
-    QString joinQ(penInfo.c_str());
+    pen.setJoinStyle(CheckJoinStyle(penInfo));
 
     //Set attributes
     colorOut = GColorFromStr(colorQ);
-    pen.setColor(colorOut);
-    pen.setWidth(width);
-    pen.setStyle(PenStyleFromStr(styleQ));
-    pen.setCapStyle(PenCapStyleFromStr(capQ));
-    pen.setJoinStyle(PenJoinStyleFromStr(joinQ));
+
     return pen;
 }
 
@@ -172,18 +167,19 @@ QBrush InputManager::GetBrushInfo (std::ifstream& in, Qt::GlobalColor& colorOut)
     QBrush brush;
     std::string brushInfo;
 
-    //Read attributes in from file
+    //Read and set attributes in from file
     in.ignore(12, ' '); // Ignoring "BrushColor: "
     getline(in, brushInfo);
+    brush.setColor(CheckColor(brushInfo));
     QString colorQ(brushInfo.c_str());
+
     in.ignore(12, ' '); // Ignoring "BrushStyle: "
     getline(in, brushInfo);
-    QString styleQ(brushInfo.c_str());
+    brush.setStyle(CheckBrushStyle(brushInfo));
 
     //Set attributes
     colorOut = GColorFromStr(colorQ);
-    brush.setColor(colorOut);
-    brush.setStyle(BrushStyleFromStr(styleQ));
+
     return brush;
 }
 
@@ -195,21 +191,22 @@ TextData InputManager::GetTextInfo (std::ifstream& in)
     std::string textInfo;
     int size;
 
-    //Getting attributes from file
+    //Getting and setting attributes from file
     in.ignore(12, ' '); // Ignoring "TextString: "
     getline(in, textInfo);
     QString textQ(textInfo.c_str());
 
     in.ignore(11, ' '); // Ignoring "TextColor: "
     getline(in, textInfo);
-    QString colorQ(textInfo.c_str());
+    output.textColor = CheckColor(textInfo);
 
     in.ignore(15, ' '); // Ignoring "TextAlignment: "
     getline (in, textInfo);
-    QString alignQ(textInfo.c_str());
+    output.textAlign = CheckTextAlign(textInfo);
 
     in.ignore(15, ' '); // Ignoring "TextPointSize: "
     in >> size;
+    font.setPointSize(CheckSize(size, -1, 50));
     in.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Usual ignore for >> to getline
 
     in.ignore(16, ' '); // Ignoring "TextFontFamily: "
@@ -218,21 +215,17 @@ TextData InputManager::GetTextInfo (std::ifstream& in)
 
     in.ignore(15, ' '); // Ignoring "TextFontStyle: "
     getline(in, textInfo);
-    QString fontStyleQ(textInfo.c_str());
+    font.setStyle(CheckFontStyle(textInfo));
 
     in.ignore(16, ' '); // Ignoring "TextFontWeight: "
     getline(in, textInfo);
-    QString fontWeightQ(textInfo.c_str());
+    font.setWeight(CheckFontWeight(textInfo));
 
     //Setting attributes
-    font.setPointSize(size);
     font.setFamily(fontFamQ);
-    font.setStyle(FontStyleFromStr(fontStyleQ));
-    font.setWeight(FontWeightFromStr(fontWeightQ));
 
+    // Loading all text info into struct
     output.text = textQ;
-    output.textColor = GColorFromStr(colorQ);
-    output.textAlign = AlignFlagFromStr(alignQ);
     output.font = font;
 
     return output;
@@ -291,6 +284,8 @@ void InputManager::PopulateRectDimensions (std::string rectDim, int dimensions[]
     if(type == ShapeType::Square || type == ShapeType::Circle)
     {
         dimensions[3] = dimensions[2];
+
+        std::cout << dimensions[2] << "   " << dimensions[3];
     }
     else
     {
@@ -299,17 +294,95 @@ void InputManager::PopulateRectDimensions (std::string rectDim, int dimensions[]
     }
 }
 
-// Converting string of dimensions into individual ints
-//void InputManager::InterpretSquareDimensions (std::string squareDim, int& x, int& y, int& side)
-//{
-//	// Using stringstream to extract integer points
-//	std::stringstream ss;
+/*
+ShapeType InputManager::CheckShapeType (std::string shape)
+{
+    try {
+        return ShapeFromStr(shape.c_str());
+    }  catch (std::invalid_argument) {
+        // Maybe add invalid in enum and handle in switch by ignoring all the rest of the lines of that shape (skip the shape)
+        // return ShapeType::Invalid;
+    }
+}
+*/
+Qt::GlobalColor InputManager::CheckColor (std::string color)
+{
+    try {
+        return GColorFromStr(color.c_str());
+    }  catch (std::invalid_argument&) {
+        return Qt::black;
+    }
+}
 
-//	ss << squareDim;
-//	ss >> x;
-//	ss.ignore(2, ' '); // Ignoring ", "
-//	ss >> y;
-//	ss.ignore(2, ' '); // Ignoring ", "
-//	ss >> side;
-//}
+int InputManager::CheckSize (int size, int min, int max)
+{
+    if(size >= min && size <= max)
+        return size;
+    else
+        return min;
+}
+
+Qt::PenStyle InputManager::CheckPenStyle (std::string style)
+{
+    try {
+        return PenStyleFromStr(style.c_str());
+    }  catch (std::invalid_argument&) {
+        return Qt::SolidLine; // maybe no pen instead? what is no pen?
+    }
+}
+
+Qt::PenCapStyle InputManager::CheckCapStyle (std::string style)
+{
+    try {
+        return PenCapStyleFromStr(style.c_str());
+    }  catch (std::invalid_argument&) {
+        return Qt::FlatCap;
+    }
+}
+
+Qt::PenJoinStyle InputManager::CheckJoinStyle (std::string style)
+{
+    try {
+        return PenJoinStyleFromStr(style.c_str());
+    }  catch (std::invalid_argument&) {
+        return Qt::MiterJoin;
+    }
+}
+
+Qt::BrushStyle InputManager::CheckBrushStyle (std::string style)
+{
+    try {
+        return BrushStyleFromStr(style.c_str());
+    }  catch (std::invalid_argument&) {
+        return Qt::SolidPattern; // maybe no brush, what is no brush?
+    }
+}
+
+Qt::AlignmentFlag InputManager::CheckTextAlign (std::string align)
+{
+    try {
+        return AlignFlagFromStr(align.c_str());
+    }  catch (std::invalid_argument&) {
+        return Qt::AlignLeft;
+    }
+}
+
+QFont::Style InputManager::CheckFontStyle (std::string style)
+{
+    try {
+        return FontStyleFromStr(style.c_str());
+    }  catch (std::invalid_argument&) {
+        return QFont::StyleNormal;
+    }
+}
+
+QFont::Weight InputManager::CheckFontWeight (std::string weight)
+{
+    try {
+        return FontWeightFromStr(weight.c_str());
+    }  catch (std::invalid_argument&) {
+        return QFont::Normal;
+    }
+}
+
 

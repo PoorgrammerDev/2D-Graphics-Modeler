@@ -28,6 +28,14 @@ void Rectangle::Draw(QPainter& aPainter)
     aPainter.drawRect(rectangle);
 }
 
+void Rectangle::DrawId(QPainter& aPainter)
+{
+    int coords[4] = {};
+    QString id = std::to_string(shapeId).c_str();
+    rectangle.getCoords(&coords[0], &coords[1], &coords[2], &coords[3]);
+    aPainter.drawText(coords[0], coords[3], id);
+}
+
 void Rectangle::Move() {
     //TODO: Unimplemented method stub
 }

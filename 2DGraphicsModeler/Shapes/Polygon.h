@@ -22,6 +22,7 @@ public:
 
     // Added these three methods to each shape
     virtual void Draw(QPainter& aPainter) override;
+    virtual void DrawId(QPainter& aPainter) override;
     virtual void SetDimensions(int point[]) override;
     virtual void Serialize(std::ostream& out) override;
 
