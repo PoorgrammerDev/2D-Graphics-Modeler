@@ -13,12 +13,14 @@ public:
      *******************************/
     Line();
     Line(int id, QPen pen, Qt::GlobalColor penColor, int dimensions[]);
-    Line(const Line& obj) = delete;
+    Line(const Line& obj) = delete; //delete copy constructor
     virtual ~Line() override;
 
     /***********************************
      * Non-Setter/Getter Class Methods *
      ***********************************/
+    Line& operator= (const Line& obj) = delete; //delete copy assignment
+
     virtual void Draw(QPainter& aPainter) override;
     virtual void SetDimensions(int point[]) override;
     virtual void Serialize(std::ostream& out) override;

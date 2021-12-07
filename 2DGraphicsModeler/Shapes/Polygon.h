@@ -12,12 +12,14 @@ public:
      *******************************/
     Polygon();
     Polygon(int id, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor, int dimensions[]);
-    Polygon(const Polygon& obj) = delete;
+    Polygon(const Polygon& obj) = delete; //delete copy constructor
     virtual ~Polygon() override;
 
     /***********************************
      * Non-Setter/Getter Class Methods *
      ***********************************/
+    Polygon& operator= (const Polygon& obj) = delete; //delete copy assignment
+
     // Added these three methods to each shape
     virtual void Draw(QPainter& aPainter) override;
     virtual void SetDimensions(int point[]) override;

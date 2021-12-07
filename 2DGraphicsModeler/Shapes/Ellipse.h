@@ -12,12 +12,14 @@ public:
      *******************************/
     Ellipse();
     Ellipse(int id, ShapeType type, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor, int dimensions[]);
-    Ellipse(const Ellipse& obj) = delete;
+    Ellipse(const Ellipse& obj) = delete; //delete copy constructor
     virtual ~Ellipse() override;
 
     /***********************************
      * Non-Setter/Getter Class Methods *
      ***********************************/
+    Ellipse& operator= (const Ellipse& obj) = delete; //delete copy assignment
+
     virtual void Draw(QPainter& aPainter) override;
     virtual void SetDimensions(int point[]) override;
     virtual void Serialize(std::ostream& out) override;

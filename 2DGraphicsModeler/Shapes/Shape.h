@@ -18,17 +18,19 @@ public:
      *******************************/
     Shape();
     Shape(int id, ShapeType type, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor);
-    Shape(const Shape& obj) = delete;
+    Shape(const Shape& obj) = delete; //delete copy constructor
     virtual ~Shape();
 
     /***********************************
      * Non-Setter/Getter Class Methods *
      ***********************************/
+    Shape& operator= (const Shape& obj) = delete; //delete copy assignment
 
     // Each class has its own draw and setdimensions depending on the shape
     virtual void Draw(QPainter& aPainter) = 0;
     virtual void SetDimensions (int points[]) = 0;
     virtual void Serialize(std::ostream& out) = 0; //for writing to file
+
 
     //Do not remove: This is required by assignment PDF
     virtual void Move() = 0;

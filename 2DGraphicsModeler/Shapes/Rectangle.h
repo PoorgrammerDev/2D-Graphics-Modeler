@@ -12,12 +12,14 @@ public:
      *******************************/
     Rectangle();
     Rectangle(int id, ShapeType type, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor, int dimensions[]);
-    Rectangle(const Rectangle& obj) = delete;
+    Rectangle(const Rectangle& obj) = delete; //delete copy constructor
     virtual ~Rectangle() override;
 
     /***********************************
      * Non-Setter/Getter Class Methods *
      ***********************************/
+    Rectangle& operator= (const Rectangle& obj) = delete; //delete copy assignment
+
     virtual void Draw(QPainter& aPainter) override;
     virtual void SetDimensions(int point[]) override;
     virtual void Serialize(std::ostream& out) override;

@@ -12,12 +12,14 @@ public:
      *******************************/
     Polyline();
     Polyline(int id, QPen pen, Qt::GlobalColor penColor, int dimensions[]);
-    Polyline(const Polyline& obj) = delete;
+    Polyline(const Polyline& obj) = delete; //delete copy constructor
     virtual ~Polyline() override;
 
     /***********************************
      * Non-Setter/Getter Class Methods *
      ***********************************/
+    Polyline& operator= (const Polyline& obj) = delete; //delete copy assignment
+
     // Added these three methods to each shape
     virtual void Draw(QPainter& aPainter) override;
     virtual void SetDimensions(int point[]) override;

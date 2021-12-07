@@ -20,12 +20,14 @@ public:
      *******************************/
     Text();
     Text(int id, TextData textData, int dimensions[]);
-    Text(const Text& obj) = delete;
+    Text(const Text& obj) = delete; //delete copy constructor
     virtual ~Text() override;
 
     /***********************************
      * Non-Setter/Getter Class Methods *
      ***********************************/
+    Text& operator= (const Text& obj) = delete; //delete copy assignment
+
     virtual void Draw(QPainter& aPainter) override;
     virtual void SetDimensions(int point[]) override;
     virtual void Serialize(std::ostream& out) override;
