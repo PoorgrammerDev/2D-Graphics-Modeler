@@ -16,22 +16,17 @@ public:
     ~Dialog();
 
 private slots:
-
-
-    void on_pushButton_5_clicked();
-
-    void on_pushButton_4_clicked();
-
-    void on_pushButton_3_clicked();
-
-    void on_pushButton_6_clicked();
-
-    void on_pushButton_9_clicked();
-
-    void on_pushButton_10_clicked();
+    //Shape Selection (Right Column)
+    void on_shSelLine_clicked();
+    void on_shSelText_clicked();
+    void on_shSelRect_clicked();
+    void on_shSelPolygon_clicked();
+    void on_shSelEllipse_clicked();
+    void on_shSelPolyline_clicked();
 
 private:
     Ui::Dialog *ui;
+    void AddFieldValues();
 };
 
 #endif // DIALOG_H
