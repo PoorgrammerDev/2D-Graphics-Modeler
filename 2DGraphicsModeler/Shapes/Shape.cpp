@@ -54,3 +54,23 @@ QBrush Shape::GetBrush() const
 {
     return brush;
 }
+
+bool Shape::operator== (const Shape& obj) {
+    return this->shapeId == obj.shapeId;
+}
+
+bool Shape::operator< (const Shape& obj) {
+    return this->shapeId < obj.shapeId;
+}
+
+bool Shape::operator<= (const Shape& obj) {
+    return this->shapeId <= obj.shapeId;
+}
+
+bool Shape::operator> (const Shape& obj) {
+    return this->shapeId > obj.shapeId;
+}
+
+bool Shape::operator>= (const Shape& obj) {
+    return this->shapeId >= obj.shapeId;
+}

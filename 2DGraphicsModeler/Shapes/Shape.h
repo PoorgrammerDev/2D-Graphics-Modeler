@@ -26,6 +26,14 @@ public:
      ***********************************/
     Shape& operator= (const Shape& obj) = delete; //delete copy assignment
 
+    //Relational operators
+    bool operator== (const Shape& obj);
+    bool operator< (const Shape& obj);
+    bool operator<= (const Shape& obj);
+    bool operator> (const Shape& obj);
+    bool operator>= (const Shape& obj);
+
+
     // Each class has its own draw and setdimensions depending on the shape
     virtual void Draw(QPainter& aPainter) = 0;
     virtual void SetDimensions (int points[]) = 0;
