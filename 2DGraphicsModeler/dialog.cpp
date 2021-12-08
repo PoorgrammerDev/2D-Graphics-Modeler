@@ -51,6 +51,9 @@ void Dialog::AddFieldValues() {
     Qt::PenCapStyle penCapStyles[] = {Qt::FlatCap, Qt::SquareCap, Qt::RoundCap, Qt::MPenCapStyle};
     Qt::PenJoinStyle penJoinStyles[] = {Qt::MiterJoin, Qt::BevelJoin, Qt::RoundJoin, Qt::SvgMiterJoin, Qt::MPenJoinStyle};
     Qt::GlobalColor colors[] = {Qt::color0, Qt::color1, Qt::black, Qt::white, Qt::darkGray, Qt::gray, Qt::lightGray, Qt::red, Qt::green, Qt::blue, Qt::cyan, Qt::magenta, Qt::yellow, Qt::darkRed, Qt::darkGreen, Qt::darkBlue, Qt::darkCyan, Qt::darkMagenta, Qt::darkYellow, Qt::transparent};
+    QFont::Weight weights[] = {QFont::Thin, QFont::ExtraLight, QFont::Light, QFont::Normal, QFont::Medium, QFont::DemiBold, QFont::Bold, QFont::ExtraBold, QFont::Black};
+    Qt::AlignmentFlag aligns[] = {Qt::AlignLeft, Qt::AlignLeading, Qt::AlignRight, Qt::AlignTrailing, Qt::AlignHCenter, Qt::AlignJustify, Qt::AlignAbsolute, Qt::AlignHorizontal_Mask, Qt::AlignTop, Qt::AlignBottom, Qt::AlignVCenter, Qt::AlignBaseline, Qt::AlignVertical_Mask, Qt::AlignCenter};
+    Qt::BrushStyle brushes[] = {Qt::NoBrush, Qt::SolidPattern, Qt::Dense1Pattern, Qt::Dense2Pattern, Qt::Dense3Pattern, Qt::Dense4Pattern, Qt::Dense5Pattern, Qt::Dense6Pattern, Qt::Dense7Pattern, Qt::HorPattern, Qt::VerPattern, Qt::CrossPattern, Qt::BDiagPattern, Qt::FDiagPattern, Qt::DiagCrossPattern, Qt::LinearGradientPattern, Qt::RadialGradientPattern, Qt::ConicalGradientPattern, Qt::TexturePattern};
 
     //Pen Style
     for (Qt::PenStyle penStyle : penStyles) {
@@ -73,24 +76,46 @@ void Dialog::AddFieldValues() {
     //Pen Join Style
     for (Qt::PenJoinStyle penJoinStyle : penJoinStyles) {
         ui->l_penJoinBox->addItem(PenJoinStyleToStr(penJoinStyle));
-        ui->t_penJoinBox->addItem(PenJoinStyleToStr(penJoinStyle));
         ui->r_penJoinBox->addItem(PenJoinStyleToStr(penJoinStyle));
         ui->pg_penJoinBox->addItem(PenJoinStyleToStr(penJoinStyle));
         ui->e_penJoinBox->addItem(PenJoinStyleToStr(penJoinStyle));
         ui->pl_penJoinBox->addItem(PenJoinStyleToStr(penJoinStyle));
     }
 
+    //Colors
     for (Qt::GlobalColor color : colors) {
-        ui->pg_fillColorBox->addItem(GColorToStr(color));
+        ui->l_penColorBox->addItem(GColorToStr(color));
+        ui->t_textColorBox->addItem(GColorToStr(color));
+        ui->r_brushColorBox->addItem(GColorToStr(color));
+        ui->r_penColorBox->addItem(GColorToStr(color));
+        ui->e_brushColorBox->addItem(GColorToStr(color));
+        ui->e_penColorBox->addItem(GColorToStr(color));
+        ui->pg_brushColorBox->addItem(GColorToStr(color));
+        ui->pg_penColorBox->addItem(GColorToStr(color));
+        ui->pl_brushColorBox->addItem(GColorToStr(color));
+        ui->pl_penColorBox->addItem(GColorToStr(color));
     }
 
-    ui->t_fontFamilyBox->addItem(""); //TODO: What fonts?
+    //Font Weight
+    for (QFont::Weight weight : weights) {
+        ui->t_fontWeightBox->addItem(FontWeightToStr(weight));
+    }
+
+    //Alignment
+    for (Qt::AlignmentFlag align : aligns) {
+        ui->t_textAlignBox->addItem(AlignFlagToStr(align));
+    }
+
+    for (Qt::BrushStyle brush : brushes) {
+        ui->e_brushStyleBox->addItem(BrushStyleToStr(brush));
+        ui->pg_brushStyleBox->addItem(BrushStyleToStr(brush));
+        ui->pl_brushStyleBox->addItem(BrushStyleToStr(brush));
+        ui->r_brushStyleBox->addItem(BrushStyleToStr(brush));
+    }
 
     ui->t_fontStyleBox->addItem(FontStyleToStr(QFont::StyleItalic));
     ui->t_fontStyleBox->addItem(FontStyleToStr(QFont::StyleNormal));
     ui->t_fontStyleBox->addItem(FontStyleToStr(QFont::StyleOblique));
-
-    ui->pg_fillStyleBox->addItem(""); //TODO: What is this? - Thomas
 }
 
 void Dialog::on_contactUs_clicked()
