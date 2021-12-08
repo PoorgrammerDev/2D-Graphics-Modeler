@@ -68,7 +68,7 @@ void Rectangle::Serialize(std::ostream& out) {
         << "PenCapStyle: " << PenCapStyleToStr(pen.capStyle()).toStdString() << '\n'
         << "PenJoinStyle: " << PenJoinStyleToStr(pen.joinStyle()).toStdString() << '\n'
         << "BrushColor: " << GColorToStr(brushColor).toStdString() << '\n'
-        << "BrushStyle: " << BrushStyleToStr(brush.style()).toStdString() << "\n\n";
+        << "BrushStyle: " << BrushStyleToStr(brush.style()).toStdString() << '\n';
     }
     else {
         out << "ShapeId: " << shapeId << '\n'
@@ -86,7 +86,7 @@ void Rectangle::Serialize(std::ostream& out) {
         << "PenCapStyle: " << PenCapStyleToStr(pen.capStyle()).toStdString() << '\n'
         << "PenJoinStyle: " << PenJoinStyleToStr(pen.joinStyle()).toStdString() << '\n'
         << "BrushColor: " << GColorToStr(brushColor).toStdString() << '\n'
-        << "BrushStyle: " << BrushStyleToStr(brush.style()).toStdString() << "\n\n";
+        << "BrushStyle: " << BrushStyleToStr(brush.style()).toStdString() << '\n';
     }
 }
 

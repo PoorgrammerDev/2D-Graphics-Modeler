@@ -257,3 +257,9 @@ void Dialog::on_createPolylineButton_clicked()
     ui->renderArea->addPolyline(penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr, dimensionsStr);
 }
 
+
+void Dialog::on_saveButton_clicked()
+{
+    ui->renderArea->Save();
+}
+

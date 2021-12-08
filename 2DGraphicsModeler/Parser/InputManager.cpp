@@ -240,11 +240,11 @@ void InputManager::PopulateLineDimensions(std::string lineDim, int dimensions[])
     ss << lineDim;
     ss >> dimensions[0];
     ss.ignore(2, ' '); // Ignoring ", "
+    ss >> dimensions[1];
+    ss.ignore(2, ' '); // Ignoring ", "
     ss >> dimensions[2];
     ss.ignore(2, ' '); // Ignoring ", "
     ss >> dimensions[3];
-    ss.ignore(2, ' '); // Ignoring ", "
-    ss >> dimensions[4];
 }
 
 // Converting string of dimensions into individual ints
