@@ -8,6 +8,11 @@ RenderArea::RenderArea(QWidget *parent)
     QWidget::setFixedHeight(500);
     QWidget::setFixedWidth(1000);
     input.ReadShapes(shapes);
+
+    //Adds every Shape ID (shapes from input file) to the set
+    for (int i = 0; i < shapes.size(); ++i) {
+        ids.insert(shapes[i]->GetId());
+    }
 }
 
 RenderArea::~RenderArea()
@@ -114,25 +119,89 @@ void RenderArea::addEllipse(QString penColorStr, int penWidth, QString penStyleS
     Qt::GlobalColor brushColor;
     int dimensions[20] = {};
 
-    penColor = input.CheckColor(penColorStr.toStdString());
-    pen.setColor(penColor);
-
-    pen.setWidth(input.CheckSize(penWidth, 0, 20));
-    pen.setStyle(input.CheckPenStyle(penStyleStr.toStdString()));
-    pen.setCapStyle(input.CheckCapStyle(penCapStyleStr.toStdString()));
-    pen.setJoinStyle(input.CheckJoinStyle(penJoinStyleStr.toStdString()));
-
-    brushColor = input.CheckColor(brushColorStr.toStdString());
-    brush.setColor(brushColor);
-    brush.setStyle(input.CheckBrushStyle(brushStyleStr.toStdString()));
+    pen = input.GetPenInfo(penColor, penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr);
+    brush = input.GetBrushInfo(brushColor, brushColorStr, brushStyleStr);
     input.PopulateRectDimensions(dimensionsStr.toStdString(), dimensions, ShapeType::Ellipse);
 
-    ellipse = std::make_unique<Ellipse>(0, ShapeType::Ellipse, pen, penColor, brush, brushColor, dimensions);
-    //TODO: Shape ID
-
+    ellipse = std::make_unique<Ellipse>(NextID(), ShapeType::Ellipse, pen, penColor, brush, brushColor, dimensions);
     shapes.push_back(std::move(ellipse));
     update();
 }
+
+void RenderArea::addLine(QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString dimensionsStr) {
+    std::unique_ptr<Shape> line;
+    QPen pen;
+    Qt::GlobalColor penColor;
+    int dimensions[20] = {};
+
+    pen = input.GetPenInfo(penColor, penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr);
+    input.PopulateLineDimensions(dimensionsStr.toStdString(), dimensions);
+
+    line = std::make_unique<Line>(NextID(), pen, penColor, dimensions);
+    shapes.push_back(std::move(line));
+    update();
+}
+
+void RenderArea::addPolygon(QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString brushColorStr, QString brushStyleStr, QString dimensionsStr) {
+    std::unique_ptr<Shape> polygon;
+    QPen pen;
+    Qt::GlobalColor penColor;
+    QBrush brush;
+    Qt::GlobalColor brushColor;
+    int dimensions[20] = {};
+
+    pen = input.GetPenInfo(penColor, penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr);
+    brush = input.GetBrushInfo(brushColor, brushColorStr, brushStyleStr);
+    input.PopulatePolyDimensions(dimensionsStr.toStdString(), dimensions, 20);
+
+    polygon = std::make_unique<Polygon>(NextID(), pen, penColor, brush, brushColor, dimensions);
+    shapes.push_back(std::move(polygon));
+    update();
+}
+
+void RenderArea::addPolyline(QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString dimensionsStr) {
+    std::unique_ptr<Shape> polyline;
+    QPen pen;
+    Qt::GlobalColor penColor;
+    int dimensions[20] = {};
+
+    pen = input.GetPenInfo(penColor, penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr);
+    input.PopulatePolyDimensions(dimensionsStr.toStdString(), dimensions, 20);
+
+    polyline = std::make_unique<Polyline>(NextID(), pen, penColor, dimensions);
+    shapes.push_back(std::move(polyline));
+    update();
+}
+
+void RenderArea::addRectangle(QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString brushColorStr, QString brushStyleStr, QString dimensionsStr) {
+    std::unique_ptr<Shape> rectangle;
+    QPen pen;
+    Qt::GlobalColor penColor;
+    QBrush brush;
+    Qt::GlobalColor brushColor;
+    int dimensions[20] = {};
+
+    pen = input.GetPenInfo(penColor, penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr);
+    brush = input.GetBrushInfo(brushColor, brushColorStr, brushStyleStr);
+    input.PopulateRectDimensions(dimensionsStr.toStdString(), dimensions, ShapeType::Rectangle);
+
+    rectangle = std::make_unique<Rectangle>(NextID(), ShapeType::Rectangle, pen, penColor, brush, brushColor, dimensions);
+    shapes.push_back(std::move(rectangle));
+    update();
+}
+
+void RenderArea::addText(QString textContents, QString textColorStr, QString textAlignStr, int pointSize, QString fontFamilyStr, QString fontStyleStr, QString fontWeightStr, QString dimensionsStr) {
+    std::unique_ptr<Text> text;
+    TextData textData = input.GetTextData(textContents, textColorStr, textAlignStr, pointSize, fontFamilyStr, fontStyleStr, fontWeightStr);
+    int dimensions[20]= {};
+
+    input.PopulateRectDimensions(dimensionsStr.toStdString(), dimensions, ShapeType::Text);
+
+    text = std::make_unique<Text>(NextID(), textData, dimensions);
+    shapes.push_back(std::move(text));
+    update();
+}
+
 
 void RenderArea::deleteShape(int id)
 {
@@ -144,10 +213,22 @@ void RenderArea::deleteShape(int id)
         {
             found = true;
             shapes.erase(shapes.begin() + index ); // might be a mistake
+            ids.erase(id);
             update();
         }
         index++;
     }
+}
+
+int RenderArea::NextID() {
+    int id = shapes[shapes.size() - 1]->GetId();
+
+    while (ids.find(id) != ids.end()) {
+        ++id;
+    }
+
+    ids.insert(id);
+    return id;
 }
 
 

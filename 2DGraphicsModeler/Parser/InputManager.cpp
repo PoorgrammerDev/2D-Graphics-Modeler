@@ -135,7 +135,7 @@ QPen InputManager::GetPenInfo (std::ifstream& in, Qt::GlobalColor& colorOut) // 
     //Read in and set attributes from file
     in.ignore(10, ' '); // Ignoring "PenColor: "
     getline(in, penInfo);
-    pen.setColor(CheckColor(penInfo));
+    pen.setColor(CheckColor(penInfo.c_str()));
     QString colorQ(penInfo.c_str()); //delete if error checking works
 
     in.ignore(10, ' '); // Ignoring "PenWidth: "
@@ -145,15 +145,15 @@ QPen InputManager::GetPenInfo (std::ifstream& in, Qt::GlobalColor& colorOut) // 
 
     in.ignore(10, ' '); // Ignoring "PenStyle: "
     getline(in, penInfo);
-    pen.setStyle(CheckPenStyle(penInfo));
+    pen.setStyle(CheckPenStyle(penInfo.c_str()));
 
     in.ignore(13, ' '); // Ignoring "PenCapStyle: "
     getline(in, penInfo);
-    pen.setCapStyle(CheckCapStyle(penInfo));
+    pen.setCapStyle(CheckCapStyle(penInfo.c_str()));
 
     in.ignore(14, ' '); // Ignoring "PenJoinStyle: "
     getline(in, penInfo);
-    pen.setJoinStyle(CheckJoinStyle(penInfo));
+    pen.setJoinStyle(CheckJoinStyle(penInfo.c_str()));
 
     //Set attributes
     colorOut = GColorFromStr(colorQ);
@@ -170,12 +170,12 @@ QBrush InputManager::GetBrushInfo (std::ifstream& in, Qt::GlobalColor& colorOut)
     //Read and set attributes in from file
     in.ignore(12, ' '); // Ignoring "BrushColor: "
     getline(in, brushInfo);
-    brush.setColor(CheckColor(brushInfo));
+    brush.setColor(CheckColor(brushInfo.c_str()));
     QString colorQ(brushInfo.c_str());
 
     in.ignore(12, ' '); // Ignoring "BrushStyle: "
     getline(in, brushInfo);
-    brush.setStyle(CheckBrushStyle(brushInfo));
+    brush.setStyle(CheckBrushStyle(brushInfo.c_str()));
 
     //Set attributes
     colorOut = GColorFromStr(colorQ);
@@ -198,11 +198,11 @@ TextData InputManager::GetTextInfo (std::ifstream& in)
 
     in.ignore(11, ' '); // Ignoring "TextColor: "
     getline(in, textInfo);
-    output.textColor = CheckColor(textInfo);
+    output.textColor = CheckColor(textInfo.c_str());
 
     in.ignore(15, ' '); // Ignoring "TextAlignment: "
     getline (in, textInfo);
-    output.textAlign = CheckTextAlign(textInfo);
+    output.textAlign = CheckTextAlign(textInfo.c_str());
 
     in.ignore(15, ' '); // Ignoring "TextPointSize: "
     in >> size;
@@ -215,11 +215,11 @@ TextData InputManager::GetTextInfo (std::ifstream& in)
 
     in.ignore(15, ' '); // Ignoring "TextFontStyle: "
     getline(in, textInfo);
-    font.setStyle(CheckFontStyle(textInfo));
+    font.setStyle(CheckFontStyle(textInfo.c_str()));
 
     in.ignore(16, ' '); // Ignoring "TextFontWeight: "
     getline(in, textInfo);
-    font.setWeight(CheckFontWeight(textInfo));
+    font.setWeight(CheckFontWeight(textInfo.c_str()));
 
     //Setting attributes
     font.setFamily(fontFamQ);
@@ -294,6 +294,47 @@ void InputManager::PopulateRectDimensions (std::string rectDim, int dimensions[]
     }
 }
 
+QPen InputManager::GetPenInfo(Qt::GlobalColor& colorOut, QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr) {
+    QPen pen;
+
+    colorOut = CheckColor(penColorStr);
+    pen.setColor(colorOut);
+
+    pen.setWidth(CheckSize(penWidth, 0, 20));
+    pen.setStyle(CheckPenStyle(penStyleStr));
+    pen.setCapStyle(CheckCapStyle(penCapStyleStr));
+    pen.setJoinStyle(CheckJoinStyle(penJoinStyleStr));
+
+    return pen;
+}
+
+QBrush InputManager::GetBrushInfo(Qt::GlobalColor& colorOut, QString brushColorStr, QString brushStyleStr) {
+    QBrush brush;
+
+    colorOut = CheckColor(brushColorStr);
+    brush.setColor(colorOut);
+    brush.setStyle(CheckBrushStyle(brushStyleStr));
+
+    return brush;
+}
+
+TextData InputManager::GetTextData (QString textContents, QString textColorStr, QString textAlignStr, int pointSize, QString fontFamilyStr, QString fontStyleStr, QString fontWeightStr) {
+    TextData data;
+    QFont font;
+
+    font.setPointSize(pointSize);
+    font.setFamily(fontFamilyStr);
+    font.setWeight(CheckFontWeight(fontWeightStr));
+    font.setStyle(CheckFontStyle(fontStyleStr));
+
+    data.text = textContents;
+    data.textColor = CheckColor(textColorStr);
+    data.textAlign = CheckTextAlign(textAlignStr);
+    data.font = font;
+
+    return data;
+}
+
 /*
 ShapeType InputManager::CheckShapeType (std::string shape)
 {
@@ -305,10 +346,10 @@ ShapeType InputManager::CheckShapeType (std::string shape)
     }
 }
 */
-Qt::GlobalColor InputManager::CheckColor (std::string color)
+Qt::GlobalColor InputManager::CheckColor (QString color)
 {
     try {
-        return GColorFromStr(color.c_str());
+        return GColorFromStr(color);
     }  catch (std::invalid_argument&) {
         return Qt::black;
     }
@@ -322,64 +363,64 @@ int InputManager::CheckSize (int size, int min, int max)
         return min;
 }
 
-Qt::PenStyle InputManager::CheckPenStyle (std::string style)
+Qt::PenStyle InputManager::CheckPenStyle (QString style)
 {
     try {
-        return PenStyleFromStr(style.c_str());
+        return PenStyleFromStr(style);
     }  catch (std::invalid_argument&) {
         return Qt::SolidLine; // maybe no pen instead? what is no pen?
     }
 }
 
-Qt::PenCapStyle InputManager::CheckCapStyle (std::string style)
+Qt::PenCapStyle InputManager::CheckCapStyle (QString style)
 {
     try {
-        return PenCapStyleFromStr(style.c_str());
+        return PenCapStyleFromStr(style);
     }  catch (std::invalid_argument&) {
         return Qt::FlatCap;
     }
 }
 
-Qt::PenJoinStyle InputManager::CheckJoinStyle (std::string style)
+Qt::PenJoinStyle InputManager::CheckJoinStyle (QString style)
 {
     try {
-        return PenJoinStyleFromStr(style.c_str());
+        return PenJoinStyleFromStr(style);
     }  catch (std::invalid_argument&) {
         return Qt::MiterJoin;
     }
 }
 
-Qt::BrushStyle InputManager::CheckBrushStyle (std::string style)
+Qt::BrushStyle InputManager::CheckBrushStyle (QString style)
 {
     try {
-        return BrushStyleFromStr(style.c_str());
+        return BrushStyleFromStr(style);
     }  catch (std::invalid_argument&) {
         return Qt::SolidPattern; // maybe no brush, what is no brush?
     }
 }
 
-Qt::AlignmentFlag InputManager::CheckTextAlign (std::string align)
+Qt::AlignmentFlag InputManager::CheckTextAlign (QString align)
 {
     try {
-        return AlignFlagFromStr(align.c_str());
+        return AlignFlagFromStr(align);
     }  catch (std::invalid_argument&) {
         return Qt::AlignLeft;
     }
 }
 
-QFont::Style InputManager::CheckFontStyle (std::string style)
+QFont::Style InputManager::CheckFontStyle (QString style)
 {
     try {
-        return FontStyleFromStr(style.c_str());
+        return FontStyleFromStr(style);
     }  catch (std::invalid_argument&) {
         return QFont::StyleNormal;
     }
 }
 
-QFont::Weight InputManager::CheckFontWeight (std::string weight)
+QFont::Weight InputManager::CheckFontWeight (QString weight)
 {
     try {
-        return FontWeightFromStr(weight.c_str());
+        return FontWeightFromStr(weight);
     }  catch (std::invalid_argument&) {
         return QFont::Normal;
     }

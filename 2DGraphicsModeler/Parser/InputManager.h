@@ -24,26 +24,31 @@ class InputManager
 
         void ReadShapes(vector<std::unique_ptr<Shape>>& shapes);
 
-        //Moved these to public so RenderArea can use these methods
+        //This is an overload to the private methods
+        //Gets QPen from individual string fields instead of a stream (used in RenderArea)
+        QPen GetPenInfo(Qt::GlobalColor& colorOut, QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr);
+        QBrush GetBrushInfo(Qt::GlobalColor& colorOut, QString brushColorStr, QString brushStyleStr);
+        TextData GetTextData (QString textContents, QString textColorStr, QString textAlignStr, int pointSize, QString fontFamilyStr, QString fontStyleStr, QString fontWeightStr);
+
         void PopulateLineDimensions (std::string lineDim, int dimensions[]);
         void PopulateRectDimensions (std::string rectDim, int dimensions[], ShapeType type);
         void PopulatePolyDimensions (std::string polyDim, int dimensions[], int size);
-
-        ShapeType CheckShapeType (std::string shape);
-        Qt::GlobalColor CheckColor (std::string color);
-        int CheckSize (int size, int min, int max);
-        Qt::PenStyle CheckPenStyle (std::string style);
-        Qt::PenCapStyle CheckCapStyle (std::string style);
-        Qt::PenJoinStyle CheckJoinStyle (std::string style);
-        Qt::BrushStyle CheckBrushStyle (std::string style);
-        Qt::AlignmentFlag CheckTextAlign (std::string align);
-        QFont::Style CheckFontStyle (std::string style);
-        QFont::Weight CheckFontWeight (std::string weight);
 
 	private:
         QPen GetPenInfo(std::ifstream& in, Qt::GlobalColor& colorOut);
         QBrush GetBrushInfo(std::ifstream& in,  Qt::GlobalColor& colorOut);
         TextData GetTextInfo(std::ifstream& in);
+
+        ShapeType CheckShapeType (QString shape);
+        int CheckSize (int size, int min, int max);
+        Qt::PenStyle CheckPenStyle (QString style);
+        Qt::PenCapStyle CheckCapStyle (QString style);
+        Qt::PenJoinStyle CheckJoinStyle (QString style);
+        Qt::BrushStyle CheckBrushStyle (QString style);
+        Qt::AlignmentFlag CheckTextAlign (QString align);
+        QFont::Style CheckFontStyle (QString style);
+        QFont::Weight CheckFontWeight (QString weight);
+        Qt::GlobalColor CheckColor (QString color);
 
 };	
 

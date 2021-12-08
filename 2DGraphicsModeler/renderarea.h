@@ -1,6 +1,7 @@
 #ifndef RENDERAREA_H
 #define RENDERAREA_H
 
+#include <unordered_set>
 #include <QBrush>
 #include <QPen>
 #include <QWidget>
@@ -14,7 +15,6 @@
 #include "Shapes/Text.h"
 #include "Parser/InputManager.h"
 
-
 class RenderArea : public QWidget
 {
     Q_OBJECT
@@ -23,21 +23,25 @@ public:
     explicit RenderArea(QWidget *parent = nullptr);
     virtual ~RenderArea();
     void Save();
-    //void deleteShape(int id);
 
 public slots:
-    // The example had them to update the shape so I left this section just in case
     void deleteShape(int id);
     void addEllipse(QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString brushColorStr, QString brushStyleStr, QString dimensionsStr);
-    //TODO: add rest of add's
-
+    void addLine(QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString dimensionsStr);
+    void addPolygon(QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString brushColorStr, QString brushStyleStr, QString dimensionsStr);
+    void addPolyline(QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString dimensionsStr);
+    void addRectangle(QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString brushColorStr, QString brushStyleStr, QString dimensionsStr);
+    void addText(QString textContents, QString textColorStr, QString textAlignStr, int pointSize, QString fontFamilyStr, QString fontStyleStr, QString fontWeightStr, QString dimensionsStr);
 
 protected:
     void paintEvent(QPaintEvent *event) override;
 
 private:
     vector<std::unique_ptr<Shape>> shapes;
+    std::unordered_set<int> ids;
     InputManager input;
+
+    int NextID();
 };
 
 

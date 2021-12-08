@@ -30,6 +30,16 @@ private slots:
 
     void on_createEllipseButton_clicked();
 
+    void on_createLineButton_clicked();
+
+    void on_createTextButton_clicked();
+
+    void on_createRectButton_clicked();
+
+    void on_createPolygonButton_clicked();
+
+    void on_createPolylineButton_clicked();
+
 private:
     Ui::Dialog *ui;
     void AddFieldValues();

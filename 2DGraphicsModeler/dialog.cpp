@@ -137,7 +137,6 @@ void Dialog::AddFieldValues() {
         ui->e_penColorBox->addItem(GColorToStr(color));
         ui->pg_brushColorBox->addItem(GColorToStr(color));
         ui->pg_penColorBox->addItem(GColorToStr(color));
-        ui->pl_brushColorBox->addItem(GColorToStr(color));
         ui->pl_penColorBox->addItem(GColorToStr(color));
     }
 
@@ -154,7 +153,6 @@ void Dialog::AddFieldValues() {
     for (Qt::BrushStyle brush : brushes) {
         ui->e_brushStyleBox->addItem(BrushStyleToStr(brush));
         ui->pg_brushStyleBox->addItem(BrushStyleToStr(brush));
-        ui->pl_brushStyleBox->addItem(BrushStyleToStr(brush));
         ui->r_brushStyleBox->addItem(BrushStyleToStr(brush));
     }
 
@@ -186,5 +184,76 @@ void Dialog::on_createEllipseButton_clicked() {
     QString dimensionsStr = ui->e_dim->text();
 
     ui->renderArea->addEllipse(penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr, brushColorStr, brushStyleStr, dimensionsStr);
+}
+
+
+void Dialog::on_createLineButton_clicked()
+{
+    QString penColorStr = ui->l_penColorBox->currentText();
+    int penWidth = ui->l_penWidthBox->value();
+    QString penStyleStr = ui->l_penStyleBox->currentText();
+    QString penCapStyleStr = ui->l_penCapBox->currentText();
+    QString penJoinStyleStr = ui->l_penJoinBox->currentText();
+    QString dimensionsStr = ui->l_dim->text();
+
+    ui->renderArea->addLine(penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr, dimensionsStr);
+}
+
+
+void Dialog::on_createTextButton_clicked()
+{
+    QString textContents = ui->t_textBox->text();
+    QString textColorStr = ui->t_textColorBox->currentText();
+    QString textAlignStr = ui->t_textAlignBox->currentText();
+    int pointSize = ui->t_fontSizeBox->value();
+    QString fontFamilyStr = ui->t_fontFamilyBox->text();
+    QString fontStyleStr = ui->t_fontStyleBox->currentText();
+    QString fontWeightStr = ui->t_fontWeightBox->currentText();
+    QString dimensionsStr = ui->t_dim->text();
+
+    ui->renderArea->addText(textContents, textColorStr, textAlignStr, pointSize, fontFamilyStr, fontStyleStr, fontWeightStr, dimensionsStr);
+}
+
+
+void Dialog::on_createRectButton_clicked()
+{
+    QString penColorStr = ui->r_penColorBox->currentText();
+    int penWidth = ui->r_penWidthBox->value();
+    QString penStyleStr = ui->r_penStyleBox->currentText();
+    QString penCapStyleStr = ui->r_penCapBox->currentText();
+    QString penJoinStyleStr = ui->r_penJoinBox->currentText();
+    QString brushColorStr = ui->r_brushColorBox->currentText();
+    QString brushStyleStr = ui->r_brushStyleBox->currentText();
+    QString dimensionsStr = ui->r_dim->text();
+
+    ui->renderArea->addRectangle(penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr, brushColorStr, brushStyleStr, dimensionsStr);
+}
+
+
+void Dialog::on_createPolygonButton_clicked()
+{
+    QString penColorStr = ui->pg_penColorBox->currentText();
+    int penWidth = ui->pg_penWidthBox->value();
+    QString penStyleStr = ui->pg_penStyleBox->currentText();
+    QString penCapStyleStr = ui->pg_penCapBox->currentText();
+    QString penJoinStyleStr = ui->pg_penJoinBox->currentText();
+    QString brushColorStr = ui->pg_brushColorBox->currentText();
+    QString brushStyleStr = ui->pg_brushStyleBox->currentText();
+    QString dimensionsStr = ui->pg_dim->text();
+
+    ui->renderArea->addPolygon(penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr, brushColorStr, brushStyleStr, dimensionsStr);
+}
+
+
+void Dialog::on_createPolylineButton_clicked()
+{
+    QString penColorStr = ui->pl_penColorBox->currentText();
+    int penWidth = ui->pl_penWidthBox->value();
+    QString penStyleStr = ui->pl_penStyleBox->currentText();
+    QString penCapStyleStr = ui->pl_penCapBox->currentText();
+    QString penJoinStyleStr = ui->pl_penJoinBox->currentText();
+    QString dimensionsStr = ui->pl_dim->text();
+
+    ui->renderArea->addPolyline(penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr, dimensionsStr);
 }
 
