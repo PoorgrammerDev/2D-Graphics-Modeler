@@ -55,6 +55,11 @@ QBrush Shape::GetBrush() const
     return brush;
 }
 
+int Shape::GetId() const
+{
+    return shapeId;
+}
+
 bool Shape::operator== (const Shape& obj) {
     return this->shapeId == obj.shapeId;
 }

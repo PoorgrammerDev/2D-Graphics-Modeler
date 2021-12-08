@@ -24,12 +24,7 @@ class InputManager
 
         void ReadShapes(vector<std::unique_ptr<Shape>>& shapes);
 
-	private:
-        QPen GetPenInfo(std::ifstream& in, Qt::GlobalColor& colorOut);
-        QBrush GetBrushInfo(std::ifstream& in,  Qt::GlobalColor& colorOut);
-        TextData GetTextInfo(std::ifstream& in);
-
-        // Some are done, some need a little more work
+        //Moved these to public so RenderArea can use these methods
         void PopulateLineDimensions (std::string lineDim, int dimensions[]);
         void PopulateRectDimensions (std::string rectDim, int dimensions[], ShapeType type);
         void PopulatePolyDimensions (std::string polyDim, int dimensions[], int size);
@@ -45,6 +40,10 @@ class InputManager
         QFont::Style CheckFontStyle (std::string style);
         QFont::Weight CheckFontWeight (std::string weight);
 
+	private:
+        QPen GetPenInfo(std::ifstream& in, Qt::GlobalColor& colorOut);
+        QBrush GetBrushInfo(std::ifstream& in,  Qt::GlobalColor& colorOut);
+        TextData GetTextInfo(std::ifstream& in);
 
 };	
 

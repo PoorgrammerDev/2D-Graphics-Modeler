@@ -1,6 +1,7 @@
 #include "dialog.h"
 #include "ui_dialog.h"
 #include "Util/EnumStrConv.h"
+#include "QMessageBox"
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
@@ -116,3 +117,29 @@ void Dialog::AddFieldValues() {
     ui->t_fontStyleBox->addItem(FontStyleToStr(QFont::StyleNormal));
     ui->t_fontStyleBox->addItem(FontStyleToStr(QFont::StyleOblique));
 }
+
+void Dialog::on_contactUs_clicked()
+{
+    QMessageBox::information(this, "Contact Us", "WillGetAnA@gmailcom\n1800-willgetana");
+}
+
+void Dialog::on_deleteButton_clicked()
+{
+    QSpinBox *idStore = ui->idSpinBox;
+    ui->renderArea->deleteShape(idStore->value());
+}
+
+
+void Dialog::on_createEllipseButton_clicked() {
+    QString penColorStr = ui->e_penColorBox->currentText();
+    int penWidth = ui->e_penWidthBox->value();
+    QString penStyleStr = ui->e_penStyleBox->currentText();
+    QString penCapStyleStr = ui->e_penCapBox->currentText();
+    QString penJoinStyleStr = ui->e_penJoinBox->currentText();
+    QString brushColorStr = ui->e_brushColorBox->currentText();
+    QString brushStyleStr = ui->e_brushStyleBox->currentText();
+    QString dimensionsStr = ui->e_dim->text();
+
+    ui->renderArea->addEllipse(penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr, brushColorStr, brushStyleStr, dimensionsStr);
+}
+

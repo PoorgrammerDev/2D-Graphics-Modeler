@@ -78,7 +78,6 @@ void RenderArea::paintEvent(QPaintEvent * /* event */)
                 }
             }
 
-            //painter.restore(); //What is this supposed to do? It was causing an issue (not a crash) - Thomas
             ++index;
     }
 }
@@ -107,6 +106,49 @@ void RenderArea::Save() {
     file.close();
 }
 
+void RenderArea::addEllipse(QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString brushColorStr, QString brushStyleStr, QString dimensionsStr) {
+    std::unique_ptr<Shape> ellipse;
+    QPen pen;
+    Qt::GlobalColor penColor;
+    QBrush brush;
+    Qt::GlobalColor brushColor;
+    int dimensions[20] = {};
+
+    penColor = input.CheckColor(penColorStr.toStdString());
+    pen.setColor(penColor);
+
+    pen.setWidth(input.CheckSize(penWidth, 0, 20));
+    pen.setStyle(input.CheckPenStyle(penStyleStr.toStdString()));
+    pen.setCapStyle(input.CheckCapStyle(penCapStyleStr.toStdString()));
+    pen.setJoinStyle(input.CheckJoinStyle(penJoinStyleStr.toStdString()));
+
+    brushColor = input.CheckColor(brushColorStr.toStdString());
+    brush.setColor(brushColor);
+    brush.setStyle(input.CheckBrushStyle(brushStyleStr.toStdString()));
+    input.PopulateRectDimensions(dimensionsStr.toStdString(), dimensions, ShapeType::Ellipse);
+
+    ellipse = std::make_unique<Ellipse>(0, ShapeType::Ellipse, pen, penColor, brush, brushColor, dimensions);
+    //TODO: Shape ID
+
+    shapes.push_back(std::move(ellipse));
+    update();
+}
+
+void RenderArea::deleteShape(int id)
+{
+    bool found=false;
+    int index = 0;
+    while(!found && index < shapes.size())
+    {
+        if (shapes[index]->GetId() == id)
+        {
+            found = true;
+            shapes.erase(shapes.begin() + index ); // might be a mistake
+            update();
+        }
+        index++;
+    }
+}
 
 
 

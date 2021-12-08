@@ -57,6 +57,7 @@ public:
     ShapeType GetType() const;
     QPen GetPen() const;
     QBrush GetBrush() const;
+    int GetId() const;
 
 
 //I changed this to protected so Serialize() of derived could access it.
