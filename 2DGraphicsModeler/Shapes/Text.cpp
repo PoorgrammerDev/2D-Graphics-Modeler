@@ -65,7 +65,7 @@ void Text::Serialize(std::ostream& out) {
     << "TextPointSize: " << font.pointSize() << '\n'
     << "TextFontFamily: " << font.family().toStdString() << '\n'
     << "TextFontStyle: " << FontStyleToStr(font.style()).toStdString() << '\n'
-    << "TextFontWeight: " << FontWeightToStr(font.weight()).toStdString() << "\n\n";
+    << "TextFontWeight: " << FontWeightToStr(font.weight()).toStdString() << '\n';
 }
 
 void Text::Move() {

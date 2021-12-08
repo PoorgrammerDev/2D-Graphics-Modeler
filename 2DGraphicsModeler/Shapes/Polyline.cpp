@@ -52,7 +52,7 @@ void Polyline::Serialize(std::ostream& out) {
     << "PenWidth: " << pen.width() << '\n'
     << "PenStyle: " << PenStyleToStr(pen.style()).toStdString() << '\n'
     << "PenCapStyle: " << PenCapStyleToStr(pen.capStyle()).toStdString() << '\n'
-    << "PenJoinStyle: " << PenJoinStyleToStr(pen.joinStyle()).toStdString() << "\n\n";
+    << "PenJoinStyle: " << PenJoinStyleToStr(pen.joinStyle()).toStdString() << '\n';
 }
 
 void Polyline::Move() {

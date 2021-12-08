@@ -106,6 +106,7 @@ void RenderArea::Save() {
     file << '\n';
     for (int i = 0; i < shapes.size(); ++i) {
         shapes[i]->Serialize(file);
+        if (i != (shapes.size() - 1)) file << '\n';
     }
 
     file.close();

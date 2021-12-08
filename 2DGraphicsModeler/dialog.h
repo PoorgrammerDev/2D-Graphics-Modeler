@@ -40,6 +40,8 @@ private slots:
 
     void on_createPolylineButton_clicked();
 
+    void on_saveButton_clicked();
+
 private:
     Ui::Dialog *ui;
     void AddFieldValues();
