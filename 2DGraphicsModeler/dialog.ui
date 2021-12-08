@@ -19,11 +19,11 @@
      <x>920</x>
      <y>10</y>
      <width>371</width>
-     <height>421</height>
+     <height>471</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="Line">
     <widget class="QWidget" name="layoutWidget_2">
@@ -59,6 +59,9 @@
         </item>
         <item>
          <widget class="QComboBox" name="l_penJoinBox"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="l_dim"/>
         </item>
        </layout>
       </item>
@@ -99,21 +102,12 @@
           </property>
          </widget>
         </item>
-       </layout>
-      </item>
-      <item row="0" column="1">
-       <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QSpinBox" name="l_penWidthBox"/>
-        </item>
-        <item>
-         <widget class="QComboBox" name="l_penStyleBox"/>
-        </item>
-        <item>
-         <widget class="QComboBox" name="l_penCapBox"/>
-        </item>
-        <item>
-         <widget class="QComboBox" name="l_penJoinBox"/>
+         <widget class="QLabel" name="label_38">
+          <property name="text">
+           <string>Dimensions:</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -182,6 +176,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="label_39">
+          <property name="text">
+           <string>Dimensions:</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item row="1" column="0" colspan="2">
@@ -213,6 +214,9 @@
         </item>
         <item>
          <widget class="QLineEdit" name="t_textBox"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="t_dim"/>
         </item>
        </layout>
       </item>
@@ -259,6 +263,9 @@
         </item>
         <item>
          <widget class="QComboBox" name="r_brushStyleBox"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="r_dim"/>
         </item>
        </layout>
       </item>
@@ -313,6 +320,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="label_40">
+          <property name="text">
+           <string>Dimensions:</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>
@@ -358,6 +372,9 @@
         </item>
         <item>
          <widget class="QComboBox" name="pg_brushStyleBox"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="pg_dim"/>
         </item>
        </layout>
       </item>
@@ -412,6 +429,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="label_41">
+          <property name="text">
+           <string>Dimensions:</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>
@@ -429,7 +453,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_6">
       <item row="1" column="0" colspan="2">
-       <widget class="QPushButton" name="pushButton_14">
+       <widget class="QPushButton" name="createEllipseButton">
         <property name="text">
          <string>Build</string>
         </property>
@@ -457,6 +481,9 @@
         </item>
         <item>
          <widget class="QComboBox" name="e_brushStyleBox"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="e_dim"/>
         </item>
        </layout>
       </item>
@@ -511,6 +538,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="label_42">
+          <property name="text">
+           <string>Dimensions:</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>
@@ -556,6 +590,9 @@
         </item>
         <item>
          <widget class="QComboBox" name="pl_brushStyleBox"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="pl_dim"/>
         </item>
        </layout>
       </item>
@@ -610,6 +647,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="label_55">
+          <property name="text">
+           <string>Dimensions:</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>
@@ -621,7 +665,7 @@
     <rect>
      <x>1300</x>
      <y>30</y>
-     <width>103</width>
+     <width>110</width>
      <height>551</height>
     </rect>
    </property>
@@ -752,8 +796,8 @@
     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;ID to delete&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt;&quot;&gt;ID to delete&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

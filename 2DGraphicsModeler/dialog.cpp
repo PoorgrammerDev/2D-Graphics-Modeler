@@ -129,3 +129,17 @@ void Dialog::on_deleteButton_clicked()
     ui->renderArea->deleteShape(idStore->value());
 }
 
+
+void Dialog::on_createEllipseButton_clicked() {
+    QString penColorStr = ui->e_penColorBox->currentText();
+    int penWidth = ui->e_penWidthBox->value();
+    QString penStyleStr = ui->e_penStyleBox->currentText();
+    QString penCapStyleStr = ui->e_penCapBox->currentText();
+    QString penJoinStyleStr = ui->e_penJoinBox->currentText();
+    QString brushColorStr = ui->e_brushColorBox->currentText();
+    QString brushStyleStr = ui->e_brushStyleBox->currentText();
+    QString dimensionsStr = ui->e_dim->text();
+
+    ui->renderArea->addEllipse(penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr, brushColorStr, brushStyleStr, dimensionsStr);
+}
+

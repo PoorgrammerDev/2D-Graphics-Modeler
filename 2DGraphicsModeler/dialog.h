@@ -28,6 +28,8 @@ private slots:
 
     void on_deleteButton_clicked();
 
+    void on_createEllipseButton_clicked();
+
 private:
     Ui::Dialog *ui;
     void AddFieldValues();
