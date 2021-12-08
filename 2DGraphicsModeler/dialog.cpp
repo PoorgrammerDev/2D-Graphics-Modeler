@@ -3,12 +3,15 @@
 #include "Util/EnumStrConv.h"
 #include "QMessageBox"
 
+const char selectShapeStyle[] = "color: #75b6ff; font-weight: bold;"; //CSS-like Syntax
+
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
 {
     ui->setupUi(this);
     Dialog::AddFieldValues();
+    Dialog::on_shSelLine_clicked(); //Auto-selects Line (top of list)
 }
 
 Dialog::~Dialog()
@@ -19,31 +22,73 @@ Dialog::~Dialog()
 void Dialog::on_shSelLine_clicked()
 {
     ui->shapeBuilder->setCurrentWidget(ui->Line);
+
+    ui->shSelText->setStyleSheet("");
+    ui->shSelRect->setStyleSheet("");
+    ui->shSelPolygon->setStyleSheet("");
+    ui->shSelPolyline->setStyleSheet("");
+    ui->shSelEllipse->setStyleSheet("");
+    ui->shSelLine->setStyleSheet(selectShapeStyle);
 }
 
 void Dialog::on_shSelText_clicked()
 {
     ui->shapeBuilder->setCurrentWidget(ui->Text);
+
+    ui->shSelLine->setStyleSheet("");
+    ui->shSelRect->setStyleSheet("");
+    ui->shSelPolygon->setStyleSheet("");
+    ui->shSelPolyline->setStyleSheet("");
+    ui->shSelEllipse->setStyleSheet("");
+    ui->shSelText->setStyleSheet(selectShapeStyle);
 }
 
 void Dialog::on_shSelRect_clicked()
 {
     ui->shapeBuilder->setCurrentWidget(ui->Rectangle);
+
+    ui->shSelText->setStyleSheet("");
+    ui->shSelLine->setStyleSheet("");
+    ui->shSelPolygon->setStyleSheet("");
+    ui->shSelPolyline->setStyleSheet("");
+    ui->shSelEllipse->setStyleSheet("");
+    ui->shSelRect->setStyleSheet(selectShapeStyle);
 }
 
 void Dialog::on_shSelPolygon_clicked()
 {
     ui->shapeBuilder->setCurrentWidget(ui->Polygon);
+
+    ui->shSelText->setStyleSheet("");
+    ui->shSelRect->setStyleSheet("");
+    ui->shSelLine->setStyleSheet("");
+    ui->shSelPolyline->setStyleSheet("");
+    ui->shSelEllipse->setStyleSheet("");
+    ui->shSelPolygon->setStyleSheet(selectShapeStyle);
 }
 
 void Dialog::on_shSelEllipse_clicked()
 {
     ui->shapeBuilder->setCurrentWidget(ui->Ellipse);
+
+    ui->shSelText->setStyleSheet("");
+    ui->shSelRect->setStyleSheet("");
+    ui->shSelPolygon->setStyleSheet("");
+    ui->shSelPolyline->setStyleSheet("");
+    ui->shSelLine->setStyleSheet("");
+    ui->shSelEllipse->setStyleSheet(selectShapeStyle);
 }
 
 void Dialog::on_shSelPolyline_clicked()
 {
     ui->shapeBuilder->setCurrentWidget(ui->Polyline);
+
+    ui->shSelText->setStyleSheet("");
+    ui->shSelRect->setStyleSheet("");
+    ui->shSelPolygon->setStyleSheet("");
+    ui->shSelLine->setStyleSheet("");
+    ui->shSelEllipse->setStyleSheet("");
+    ui->shSelPolyline->setStyleSheet(selectShapeStyle);
 }
 
 void Dialog::AddFieldValues() {
@@ -120,7 +165,7 @@ void Dialog::AddFieldValues() {
 
 void Dialog::on_contactUs_clicked()
 {
-    QMessageBox::information(this, "Contact Us", "WillGetAnA@gmailcom\n1800-willgetana");
+    QMessageBox::information(this, "Contact Us", "Email\nWillGetAnA@gmail.com\n\nPhone\n1-800-willgetana");
 }
 
 void Dialog::on_deleteButton_clicked()
