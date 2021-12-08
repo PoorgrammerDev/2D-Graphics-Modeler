@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="Line">
     <widget class="QWidget" name="layoutWidget_2">
@@ -55,6 +55,9 @@
          <widget class="QComboBox" name="l_penCapBox"/>
         </item>
         <item>
+         <widget class="QComboBox" name="l_penColorBox"/>
+        </item>
+        <item>
          <widget class="QComboBox" name="l_penJoinBox"/>
         </item>
        </layout>
@@ -76,9 +79,16 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_7">
+         <widget class="QLabel" name="label_27">
           <property name="text">
            <string>PenCap:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>PenColor:</string>
           </property>
          </widget>
         </item>
@@ -101,7 +111,7 @@
        <x>140</x>
        <y>10</y>
        <width>231</width>
-       <height>401</height>
+       <height>449</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
@@ -129,9 +139,30 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="label_28">
+          <property name="text">
+           <string>Font Weight:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_29">
+          <property name="text">
+           <string>Text Alignment:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_30">
+          <property name="text">
+           <string>Text Color:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="label_12">
           <property name="text">
-           <string>PenJoin:</string>
+           <string>Text:</string>
           </property>
          </widget>
         </item>
@@ -153,10 +184,19 @@
          <widget class="QComboBox" name="t_fontStyleBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="t_fontFamilyBox"/>
+         <widget class="QLineEdit" name="t_fontFamilyBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="t_penJoinBox"/>
+         <widget class="QComboBox" name="t_fontWeightBox"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="t_textAlignBox"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="t_textColorBox"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="t_textBox"/>
         </item>
        </layout>
       </item>
@@ -195,6 +235,15 @@
         <item>
          <widget class="QComboBox" name="r_penJoinBox"/>
         </item>
+        <item>
+         <widget class="QComboBox" name="r_penColorBox"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="r_brushColorBox"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="r_brushStyleBox"/>
+        </item>
        </layout>
       </item>
       <item row="0" column="0">
@@ -221,9 +270,30 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_16">
+         <widget class="QLabel" name="label_31">
           <property name="text">
            <string>PenJoin:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_32">
+          <property name="text">
+           <string>PenColor:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string>BrushColor:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_33">
+          <property name="text">
+           <string>BrushStyle:</string>
           </property>
          </widget>
         </item>
@@ -265,10 +335,13 @@
          <widget class="QComboBox" name="pg_penJoinBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="pg_fillColorBox"/>
+         <widget class="QComboBox" name="pg_penColorBox"/>
         </item>
         <item>
-         <widget class="QComboBox" name="pg_fillStyleBox"/>
+         <widget class="QComboBox" name="pg_brushColorBox"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="pg_brushStyleBox"/>
         </item>
        </layout>
       </item>
@@ -305,14 +378,21 @@
         <item>
          <widget class="QLabel" name="label_25">
           <property name="text">
-           <string>FillColor</string>
+           <string>PenColor:</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_26">
           <property name="text">
-           <string>FillStyle</string>
+           <string>BrushColor:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_34">
+          <property name="text">
+           <string>BrushStyle:</string>
           </property>
          </widget>
         </item>
@@ -353,6 +433,15 @@
         <item>
          <widget class="QComboBox" name="e_penJoinBox"/>
         </item>
+        <item>
+         <widget class="QComboBox" name="e_penColorBox"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="e_brushColorBox"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="e_brushStyleBox"/>
+        </item>
        </layout>
       </item>
       <item row="0" column="0">
@@ -382,6 +471,27 @@
          <widget class="QLabel" name="label_24">
           <property name="text">
            <string>PenJoin:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_35">
+          <property name="text">
+           <string>PenColor:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_36">
+          <property name="text">
+           <string>BrushColor:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_37">
+          <property name="text">
+           <string>BrushStyle:</string>
           </property>
          </widget>
         </item>
@@ -422,6 +532,15 @@
         <item>
          <widget class="QComboBox" name="pl_penJoinBox"/>
         </item>
+        <item>
+         <widget class="QComboBox" name="pl_penColorBox"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="pl_brushColorBox"/>
+        </item>
+        <item>
+         <widget class="QComboBox" name="pl_brushStyleBox"/>
+        </item>
        </layout>
       </item>
       <item row="0" column="0">
@@ -451,6 +570,27 @@
          <widget class="QLabel" name="label_5">
           <property name="text">
            <string>PenJoin:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_52">
+          <property name="text">
+           <string>PenColor:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_53">
+          <property name="text">
+           <string>BrushColor:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_54">
+          <property name="text">
+           <string>BrushStyle:</string>
           </property>
          </widget>
         </item>
@@ -517,8 +657,8 @@
   <widget class="QLabel" name="logo">
    <property name="geometry">
     <rect>
-     <x>625</x>
-     <y>260</y>
+     <x>460</x>
+     <y>160</y>
      <width>481</width>
      <height>361</height>
     </rect>
@@ -541,12 +681,15 @@
    </property>
   </widget>
   <widget class="RenderArea" name="renderArea" native="true">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>30</x>
      <y>50</y>
-     <width>1000</width>
-     <height>500</height>
+     <width>0</width>
+     <height>0</height>
     </rect>
    </property>
   </widget>
