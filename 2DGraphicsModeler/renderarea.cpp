@@ -107,6 +107,21 @@ void RenderArea::Save() {
     file.close();
 }
 
+void RenderArea::deleteShape(int id)
+{
+    bool found=false;
+    int index = 0;
+    while(!found)
+    {
+        if (shapes[index]->GetId() == id)
+        {
+            found = true;
+            shapes.erase(shapes.begin() + index ); // might be a mistake
+        }
+        index++;
+    }
+    update();
+}
 
 
 

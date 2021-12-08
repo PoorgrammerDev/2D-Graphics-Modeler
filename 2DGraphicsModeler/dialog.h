@@ -24,6 +24,10 @@ private slots:
     void on_shSelEllipse_clicked();
     void on_shSelPolyline_clicked();
 
+    void on_contactUs_clicked();
+
+    void on_deleteButton_clicked();
+
 private:
     Ui::Dialog *ui;
     void AddFieldValues();

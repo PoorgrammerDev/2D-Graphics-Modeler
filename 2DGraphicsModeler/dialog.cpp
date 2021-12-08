@@ -1,6 +1,7 @@
 #include "dialog.h"
 #include "ui_dialog.h"
 #include "Util/EnumStrConv.h"
+#include "QMessageBox"
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
@@ -91,3 +92,15 @@ void Dialog::AddFieldValues() {
 
     ui->pg_fillStyleBox->addItem(""); //TODO: What is this? - Thomas
 }
+
+void Dialog::on_contactUs_clicked()
+{
+    QMessageBox::information(this, "Contact Us", "WillGetAnA@gmailcom\n1800-willgetana");
+}
+
+void Dialog::on_deleteButton_clicked()
+{
+    QSpinBox *idStore = ui->idSpinBox;
+    ui->renderArea->deleteShape(idStore->value());
+}
+

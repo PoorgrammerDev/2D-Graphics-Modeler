@@ -17,10 +17,11 @@ public:
     explicit RenderArea(QWidget *parent = nullptr);
     virtual ~RenderArea();
     void Save();
-
+    //void deleteShape(int id);
 
 public slots:
     // The example had them to update the shape so I left this section just in case
+    void deleteShape(int id);
 
 
 protected:
