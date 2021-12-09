@@ -7,6 +7,7 @@
 #include "Shapes/Polyline.h"
 #include "Shapes/Rectangle.h"
 #include "Shapes/Text.h"
+#include <exception>
 
 
 /**********************
@@ -114,6 +115,10 @@ void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
             brush = GetBrushInfo(in, brushColor);
             PopulatePolyDimensions(dimensions, points, 20); //TODO: remove magic number
             aShape = std::make_unique<Polygon>(id, pen, penColor, brush, brushColor, points);
+        }
+        else {
+            in.close();
+            throw std::runtime_error("Shapes input file corrupted!");
         }
 
         shapes.push_back(std::move(aShape));
@@ -333,17 +338,6 @@ TextData InputManager::GetTextData (QString textContents, QString textColorStr, 
     return data;
 }
 
-/*
-ShapeType InputManager::CheckShapeType (std::string shape)
-{
-    try {
-        return ShapeFromStr(shape.c_str());
-    }  catch (std::invalid_argument) {
-        // Maybe add invalid in enum and handle in switch by ignoring all the rest of the lines of that shape (skip the shape)
-        // return ShapeType::Invalid;
-    }
-}
-*/
 Qt::GlobalColor InputManager::CheckColor (QString color)
 {
     try {

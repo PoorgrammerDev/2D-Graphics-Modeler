@@ -39,7 +39,6 @@ class InputManager
         QBrush GetBrushInfo(std::ifstream& in,  Qt::GlobalColor& colorOut);
         TextData GetTextInfo(std::ifstream& in);
 
-        ShapeType CheckShapeType (QString shape);
         int CheckSize (int size, int min, int max);
         Qt::PenStyle CheckPenStyle (QString style);
         Qt::PenCapStyle CheckCapStyle (QString style);

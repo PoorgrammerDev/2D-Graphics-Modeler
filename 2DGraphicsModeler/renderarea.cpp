@@ -1,13 +1,20 @@
 #include "renderarea.h"
 #include <QPainter>
 #include <fstream>
+#include <QMessageBox>
 
 RenderArea::RenderArea(QWidget *parent)
     : QWidget(parent)
 {
     QWidget::setFixedHeight(500);
     QWidget::setFixedWidth(1000);
-    input.ReadShapes(shapes);
+
+    try {
+        input.ReadShapes(shapes);
+    }
+    catch (std::runtime_error& error) {
+        QMessageBox::critical(this, "File Error", error.what());
+    }
 
     //Adds every Shape ID (shapes from input file) to the set
     for (int i = 0; i < shapes.size(); ++i) {
@@ -17,7 +24,8 @@ RenderArea::RenderArea(QWidget *parent)
 
 RenderArea::~RenderArea()
 {
-//   Save(); //TODO: un-comment this
+    //SAVING ALL CHANGES BETWEEN EXECUTIONS
+    Save();
 }
 
 void RenderArea::paintEvent(QPaintEvent * /* event */)
@@ -112,19 +120,21 @@ void RenderArea::Save() {
     file.close();
 }
 
-void RenderArea::addEllipse(QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString brushColorStr, QString brushStyleStr, QString dimensionsStr) {
+void RenderArea::addEllipse(bool isCircle, QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString brushColorStr, QString brushStyleStr, QString dimensionsStr) {
     std::unique_ptr<Shape> ellipse;
     QPen pen;
     Qt::GlobalColor penColor;
     QBrush brush;
     Qt::GlobalColor brushColor;
+    ShapeType type;
     int dimensions[20] = {};
 
     pen = input.GetPenInfo(penColor, penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr);
     brush = input.GetBrushInfo(brushColor, brushColorStr, brushStyleStr);
-    input.PopulateRectDimensions(dimensionsStr.toStdString(), dimensions, ShapeType::Ellipse);
+    type = (isCircle ? ShapeType::Circle : ShapeType::Ellipse);
+    input.PopulateRectDimensions(dimensionsStr.toStdString(), dimensions, type);
 
-    ellipse = std::make_unique<Ellipse>(NextID(), ShapeType::Ellipse, pen, penColor, brush, brushColor, dimensions);
+    ellipse = std::make_unique<Ellipse>(NextID(), type, pen, penColor, brush, brushColor, dimensions);
     shapes.push_back(std::move(ellipse));
     update();
 }
@@ -174,19 +184,21 @@ void RenderArea::addPolyline(QString penColorStr, int penWidth, QString penStyle
     update();
 }
 
-void RenderArea::addRectangle(QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString brushColorStr, QString brushStyleStr, QString dimensionsStr) {
+void RenderArea::addRectangle(bool isSquare, QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString brushColorStr, QString brushStyleStr, QString dimensionsStr) {
     std::unique_ptr<Shape> rectangle;
     QPen pen;
     Qt::GlobalColor penColor;
     QBrush brush;
     Qt::GlobalColor brushColor;
+    ShapeType type;
     int dimensions[20] = {};
 
     pen = input.GetPenInfo(penColor, penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr);
     brush = input.GetBrushInfo(brushColor, brushColorStr, brushStyleStr);
-    input.PopulateRectDimensions(dimensionsStr.toStdString(), dimensions, ShapeType::Rectangle);
+    type = (isSquare ? ShapeType::Square : ShapeType::Rectangle);
+    input.PopulateRectDimensions(dimensionsStr.toStdString(), dimensions, type);
 
-    rectangle = std::make_unique<Rectangle>(NextID(), ShapeType::Rectangle, pen, penColor, brush, brushColor, dimensions);
+    rectangle = std::make_unique<Rectangle>(NextID(), type, pen, penColor, brush, brushColor, dimensions);
     shapes.push_back(std::move(rectangle));
     update();
 }

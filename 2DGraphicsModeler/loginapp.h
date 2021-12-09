@@ -21,6 +21,8 @@ public:
 private slots:
     void on_pushButton_login_clicked();
 
+    void on_hackButton_clicked();
+
 private:
     Ui::LoginApp *ui;
     Dialog *dialog1;

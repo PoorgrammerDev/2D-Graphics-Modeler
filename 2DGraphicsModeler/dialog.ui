@@ -267,6 +267,13 @@
         <item>
          <widget class="QLineEdit" name="r_dim"/>
         </item>
+        <item>
+         <widget class="QCheckBox" name="r_square">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item row="0" column="0">
@@ -324,6 +331,13 @@
          <widget class="QLabel" name="label_40">
           <property name="text">
            <string>Dimensions:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_46">
+          <property name="text">
+           <string>Square:</string>
           </property>
          </widget>
         </item>
@@ -485,6 +499,13 @@
         <item>
          <widget class="QLineEdit" name="e_dim"/>
         </item>
+        <item>
+         <widget class="QCheckBox" name="e_circle">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item row="0" column="0">
@@ -542,6 +563,13 @@
          <widget class="QLabel" name="label_42">
           <property name="text">
            <string>Dimensions:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_47">
+          <property name="text">
+           <string>Circle:</string>
           </property>
          </widget>
         </item>
@@ -696,6 +724,13 @@
      <widget class="QPushButton" name="contactUs">
       <property name="text">
        <string>Contact Us</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="help">
+      <property name="text">
+       <string>Help</string>
       </property>
      </widget>
     </item>

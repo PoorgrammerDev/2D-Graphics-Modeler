@@ -44,6 +44,8 @@ private slots:
 
     void on_moveButton_clicked();
 
+    void on_help_clicked();
+
 private:
     Ui::Dialog *ui;
     void AddFieldValues();

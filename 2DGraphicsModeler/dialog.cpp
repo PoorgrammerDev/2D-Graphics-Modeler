@@ -182,8 +182,9 @@ void Dialog::on_createEllipseButton_clicked() {
     QString brushColorStr = ui->e_brushColorBox->currentText();
     QString brushStyleStr = ui->e_brushStyleBox->currentText();
     QString dimensionsStr = ui->e_dim->text();
+    bool isCircle = (ui->e_circle->checkState() != Qt::Unchecked);
 
-    ui->renderArea->addEllipse(penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr, brushColorStr, brushStyleStr, dimensionsStr);
+    ui->renderArea->addEllipse(isCircle, penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr, brushColorStr, brushStyleStr, dimensionsStr);
 }
 
 
@@ -225,8 +226,9 @@ void Dialog::on_createRectButton_clicked()
     QString brushColorStr = ui->r_brushColorBox->currentText();
     QString brushStyleStr = ui->r_brushStyleBox->currentText();
     QString dimensionsStr = ui->r_dim->text();
+    bool isSquare = (ui->r_square->checkState() != Qt::Unchecked);
 
-    ui->renderArea->addRectangle(penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr, brushColorStr, brushStyleStr, dimensionsStr);
+    ui->renderArea->addRectangle(isSquare, penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr, brushColorStr, brushStyleStr, dimensionsStr);
 }
 
 
@@ -267,5 +269,11 @@ void Dialog::on_saveButton_clicked()
 void Dialog::on_moveButton_clicked()
 {
     ui->renderArea->MoveShape(ui->moveID->value(), ui->moveDim->text());
+}
+
+
+void Dialog::on_help_clicked()
+{
+    QMessageBox::information(this, "Help", "Dimensions:\nEnter dimensions as a comma separated list.\ni.e.)\n300, 500, 200, 100\n\n");
 }
 

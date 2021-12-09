@@ -34,3 +34,9 @@ void LoginApp::on_pushButton_login_clicked()
 
 }
 
+
+void LoginApp::on_hackButton_clicked()
+{
+    QMessageBox::information(this, "H4CK-L0G1N-F0UND",  "LOGIN: guest\nPASSWORD: guest");
+}
+
