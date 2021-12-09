@@ -44,12 +44,13 @@ void Text::DrawId(QPainter& aPainter)
     int coords[4] = {};
     QString id = std::to_string(shapeId).c_str();
     textBox.getCoords(&coords[0], &coords[1], &coords[2], &coords[3]);
+    aPainter.setPen(QPen());
     aPainter.drawText(coords[0], coords[3], id);
 }
 
 void Text::Serialize(std::ostream& out) {
     int coords[4] = {};
-    textBox.getCoords(&coords[0], &coords[1], &coords[2], &coords[3]);
+    textBox.getRect(&coords[0], &coords[1], &coords[2], &coords[3]);
 
     out << "ShapeId: " << shapeId << '\n'
     << "ShapeType: Text\n"
@@ -87,7 +88,7 @@ double Text::Area() {
 // Setting Rectangle dimensions from input for rendering
 void Text::SetDimensions(int point[])
 {
-    textBox.setCoords(point[0], point[1], point[2], point[3]);
+    textBox.setRect(point[0], point[1], point[2], point[3]);
 }
 
 

@@ -36,13 +36,15 @@ void Ellipse::DrawId(QPainter& aPainter)
     int coords[4] = {};
     QString id = std::to_string(shapeId).c_str();
     ellipse.getCoords(&coords[0], &coords[1], &coords[2], &coords[3]);
+
+    aPainter.setPen(QPen());
     aPainter.drawText(coords[0], coords[3], id);
 }
 
 
 void Ellipse::Serialize(std::ostream& out) {
     int coords[4] = {};
-    ellipse.getCoords(&coords[0], &coords[1], &coords[2], &coords[3]);
+    ellipse.getRect(&coords[0], &coords[1], &coords[2], &coords[3]);
 
     if (shapeType == ShapeType::Circle) {
         out << "ShapeId: " << shapeId << '\n'
@@ -101,7 +103,7 @@ double Ellipse::Area() {
 // Using an array loaded in input parser to set dimensions for painter
 void Ellipse::SetDimensions(int point[])
 {
-    ellipse.setCoords(point[0], point[1], point[2], point[3]);
+    ellipse.setRect(point[0], point[1], point[2], point[3]);
 }
 
 // May not actually need this as mentioned before

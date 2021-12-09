@@ -33,6 +33,7 @@ void Polygon::Draw(QPainter& aPainter)
 void Polygon::DrawId(QPainter& aPainter)
 {
     QString id = std::to_string(shapeId).c_str();
+    aPainter.setPen(QPen());
     aPainter.drawText(points[pointCount-1], id);
 }
 

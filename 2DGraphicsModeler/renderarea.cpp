@@ -222,7 +222,7 @@ void RenderArea::deleteShape(int id)
 }
 
 int RenderArea::NextID() {
-    int id = shapes[shapes.size() - 1]->GetId();
+    int id = ((shapes.size() != 0) ? shapes[shapes.size() - 1]->GetId() : 0);
 
     while (ids.find(id) != ids.end()) {
         ++id;
@@ -232,6 +232,49 @@ int RenderArea::NextID() {
     return id;
 }
 
+void RenderArea::MoveShape(int id, QString newDimensions) {
+    bool found = false;
+    int i = 0;
+    int dimensions[20] = {};
 
+    while (!found && i < shapes.size()) {
+        if (shapes[i]->GetId() == id) {
+            found = true;
+        }
+        else {
+            ++i;
+        }
+    }
+
+    switch (shapes[i]->GetType()) {
+    case ShapeType::Line :
+        input.PopulateLineDimensions(newDimensions.toStdString(), dimensions);
+        break;
+    case ShapeType::Polyline :
+        input.PopulatePolyDimensions(newDimensions.toStdString(), dimensions, 20);
+        break;
+    case ShapeType::Ellipse :
+        input.PopulateRectDimensions(newDimensions.toStdString(), dimensions, ShapeType::Ellipse);
+        break;
+    case ShapeType::Circle :
+        input.PopulateRectDimensions(newDimensions.toStdString(), dimensions, ShapeType::Circle);
+        break;
+    case ShapeType::Polygon :
+        input.PopulatePolyDimensions(newDimensions.toStdString(), dimensions, 20);
+        break;
+    case ShapeType::Rectangle :
+        input.PopulateRectDimensions(newDimensions.toStdString(), dimensions, ShapeType::Rectangle);
+        break;
+    case ShapeType::Square :
+        input.PopulateRectDimensions(newDimensions.toStdString(), dimensions, ShapeType::Square);
+        break;
+    case ShapeType::Text :
+        input.PopulateRectDimensions(newDimensions.toStdString(), dimensions, ShapeType::Text);
+        break;
+    }
+
+    shapes[i]->SetDimensions(dimensions);
+    update();
+}
 
 

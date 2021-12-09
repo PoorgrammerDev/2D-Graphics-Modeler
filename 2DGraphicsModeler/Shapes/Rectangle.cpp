@@ -33,6 +33,7 @@ void Rectangle::DrawId(QPainter& aPainter)
     int coords[4] = {};
     QString id = std::to_string(shapeId).c_str();
     rectangle.getCoords(&coords[0], &coords[1], &coords[2], &coords[3]);
+    aPainter.setPen(QPen());
     aPainter.drawText(coords[0], coords[3], id);
 }
 
@@ -51,7 +52,7 @@ double Rectangle::Area() {
 // Thomas I changed line 64 from penWidth to pen.width() purely for compilation this is here in case I forgot to change it back!
 void Rectangle::Serialize(std::ostream& out) {
     int coords[4] = {};
-    rectangle.getCoords(&coords[0], &coords[1], &coords[2], &coords[3]);
+    rectangle.getRect(&coords[0], &coords[1], &coords[2], &coords[3]);
 
     if (shapeType == ShapeType::Square) {
         out << "ShapeId: " << shapeId << '\n'
@@ -97,7 +98,7 @@ void Rectangle::Serialize(std::ostream& out) {
 // Setting Rectangle dimensions from input for rendering
 void Rectangle::SetDimensions(int point[])
 {
-    rectangle.setCoords(point[0], point[1], point[2], point[3]);
+    rectangle.setRect(point[0], point[1], point[2], point[3]);
 }
 
 // May not actually need this

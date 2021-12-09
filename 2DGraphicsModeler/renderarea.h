@@ -24,6 +24,8 @@ public:
     virtual ~RenderArea();
     void Save();
 
+    void MoveShape(int id, QString newDimensions);
+
 public slots:
     void deleteShape(int id);
     void addEllipse(QString penColorStr, int penWidth, QString penStyleStr, QString penCapStyleStr, QString penJoinStyleStr, QString brushColorStr, QString brushStyleStr, QString dimensionsStr);

@@ -263,3 +263,9 @@ void Dialog::on_saveButton_clicked()
     ui->renderArea->Save();
 }
 
+
+void Dialog::on_moveButton_clicked()
+{
+    ui->renderArea->MoveShape(ui->moveID->value(), ui->moveDim->text());
+}
+

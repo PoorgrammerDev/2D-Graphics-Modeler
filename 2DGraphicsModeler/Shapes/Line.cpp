@@ -31,6 +31,7 @@ void Line::Draw(QPainter& aPainter)
 void Line::DrawId(QPainter& aPainter)
 {
     QString id = std::to_string(shapeId).c_str();
+    aPainter.setPen(QPen());
     aPainter.drawText(line.p2(), id);
 }
 

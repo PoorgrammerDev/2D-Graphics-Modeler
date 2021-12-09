@@ -284,8 +284,6 @@ void InputManager::PopulateRectDimensions (std::string rectDim, int dimensions[]
     if(type == ShapeType::Square || type == ShapeType::Circle)
     {
         dimensions[3] = dimensions[2];
-
-        std::cout << dimensions[2] << "   " << dimensions[3];
     }
     else
     {
