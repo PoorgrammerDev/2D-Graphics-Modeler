@@ -30,7 +30,7 @@ public:
 
     virtual void Draw(QPainter& aPainter) override;
     virtual void DrawId(QPainter& aPainter) override;
-    virtual void SetDimensions(int point[]) override;
+    virtual void SetDimensions(int point[], const int SIZE) override;
     virtual void Serialize(std::ostream& out) override;
 
     // Reading more on text with the enums and datatypes to assign to

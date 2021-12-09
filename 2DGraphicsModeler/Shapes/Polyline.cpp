@@ -12,9 +12,9 @@ Polyline::Polyline() : Shape()
 
 }
 
-Polyline::Polyline(int id, QPen pen, Qt::GlobalColor penColor, int dimensions[])
+Polyline::Polyline(int id, QPen pen, Qt::GlobalColor penColor, int dimensions[], const int DIM_SIZE)
     : Shape(id, ShapeType::Polyline, pen, penColor, QBrush(), Qt::GlobalColor()) {
-    Polyline::SetDimensions(dimensions);
+    Polyline::SetDimensions(dimensions, DIM_SIZE);
 }
 
 Polyline::~Polyline() {}
@@ -61,12 +61,12 @@ void Polyline::Serialize(std::ostream& out) {
  ***********************/
 
 // Have not implemented these until done with polygon as they are very similar and having the same todo list for both
-void Polyline::SetDimensions(int point[])
+void Polyline::SetDimensions(int point[], const int SIZE)
 {
     int index = 0;
     int index2 = 0;
     pointCount = 0;
-    while(index < 20 && point[index+1] != 0)
+    while(index < SIZE)
     {
         points[index2].setX(point[index]);
         points[index2].setY(point[index+1]);

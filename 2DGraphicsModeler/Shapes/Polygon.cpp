@@ -12,9 +12,9 @@ Polygon::Polygon() : Shape()
 
 }
 
-Polygon::Polygon(int id, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor, int dimensions[])
+Polygon::Polygon(int id, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor, int dimensions[], const int DIM_SIZE)
     : Shape(id, ShapeType::Polygon, pen, penColor, brush, brushColor) {
-    Polygon::SetDimensions(dimensions);
+    Polygon::SetDimensions(dimensions, DIM_SIZE);
 }
 
 Polygon::~Polygon() {}
@@ -63,12 +63,12 @@ void Polygon::Serialize(std::ostream& out) {
  ***********************/
 
 // Not done, need to add some sort of loop to add all of the points
-void Polygon::SetDimensions(int point[])
+void Polygon::SetDimensions(int point[], const int SIZE)
 {
     int index = 0;
     int index2 = 0;
     pointCount = 0;
-    while(index < 20 && point[index+1] != 0)
+    while(index < SIZE)
     {
         points[index2].setX(point[index]);
         points[index2].setY(point[index+1]);

@@ -11,7 +11,7 @@ public:
      * Constructors and Destructor *
      *******************************/
     Polygon();
-    Polygon(int id, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor, int dimensions[]);
+    Polygon(int id, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor, int dimensions[], const int DIM_SIZE);
     Polygon(const Polygon& obj) = delete; //delete copy constructor
     virtual ~Polygon() override;
 
@@ -23,7 +23,7 @@ public:
     // Added these three methods to each shape
     virtual void Draw(QPainter& aPainter) override;
     virtual void DrawId(QPainter& aPainter) override;
-    virtual void SetDimensions(int point[]) override;
+    virtual void SetDimensions(int point[], const int SIZE) override;
     virtual void Serialize(std::ostream& out) override;
 
     /***********************

@@ -24,6 +24,7 @@ void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
 {
     int id;
     int points[20] = {};
+    int polySize;
     std::string type;
     std::string dimensions;
     std::unique_ptr<Shape> aShape;
@@ -74,8 +75,8 @@ void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
         else if(type == "Polyline")
         {
             pen = GetPenInfo(in, penColor);
-            PopulatePolyDimensions(dimensions, points, 20);
-            aShape = std::make_unique<Polyline>(id, pen, penColor, points);
+            polySize = PopulatePolyDimensions(dimensions, points, 20);
+            aShape = std::make_unique<Polyline>(id, pen, penColor, points, polySize);
         }
         else if (type == "Text")
         {
@@ -113,8 +114,8 @@ void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
         {
             pen = GetPenInfo(in, penColor);
             brush = GetBrushInfo(in, brushColor);
-            PopulatePolyDimensions(dimensions, points, 20); //TODO: remove magic number
-            aShape = std::make_unique<Polygon>(id, pen, penColor, brush, brushColor, points);
+            polySize = PopulatePolyDimensions(dimensions, points, 20); //TODO: remove magic number
+            aShape = std::make_unique<Polygon>(id, pen, penColor, brush, brushColor, points, polySize);
         }
         else {
             in.close();
@@ -253,7 +254,7 @@ void InputManager::PopulateLineDimensions(std::string lineDim, int dimensions[])
 }
 
 // Converting string of dimensions into individual ints
-void InputManager::PopulatePolyDimensions (std::string polyDim, int dimensions[], int size)
+int InputManager::PopulatePolyDimensions (std::string polyDim, int dimensions[], int maxSize)
 {
     int index = 0;
 
@@ -261,7 +262,7 @@ void InputManager::PopulatePolyDimensions (std::string polyDim, int dimensions[]
     std::stringstream ss;
 
     ss << polyDim;
-    while(index < size && ss)
+    while(index < maxSize && ss)
     {
         ss >> dimensions[index];
         ss.ignore(2, ' '); // Ignoring ", "
@@ -271,6 +272,8 @@ void InputManager::PopulatePolyDimensions (std::string polyDim, int dimensions[]
         ss.ignore(2, ' '); // Ignoring ", "
         ++index;
     }
+
+    return index;
 }
 
 // Converting string of dimensions into individual ints

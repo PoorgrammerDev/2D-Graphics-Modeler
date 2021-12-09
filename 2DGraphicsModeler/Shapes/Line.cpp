@@ -13,7 +13,7 @@ Line::Line() : Shape()
 
 Line::Line(int id, QPen pen, Qt::GlobalColor penColor, int dimensions[])
     : Shape(id, ShapeType::Line, pen, penColor, QBrush(), Qt::GlobalColor()) {
-    Line::SetDimensions(dimensions);
+    Line::SetDimensions(dimensions, 4);
 }
 
 Line::~Line() {}
@@ -58,9 +58,9 @@ void Line::Serialize(std::ostream& out) {
  ***********************/
 
 // Setting line dimensions from an array loaded in input for rendering
-void Line::SetDimensions(int point[])
+void Line::SetDimensions(int point[], const int SIZE)
 {
-    line.setLine(point[0], point[1], point[2], point[3]);
+    if (SIZE >= 4) line.setLine(point[0], point[1], point[2], point[3]);
 }
 
 // May not actually need

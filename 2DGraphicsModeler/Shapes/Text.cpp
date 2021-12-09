@@ -15,7 +15,7 @@ Text::Text() : Shape()
 
 Text::Text(int id, TextData textData, int dimensions[])
     : Shape(id, ShapeType::Text, QPen(), Qt::GlobalColor(), QBrush(), Qt::GlobalColor()) {
-    Text::SetDimensions(dimensions);
+    Text::SetDimensions(dimensions, 4);
 
     QFont font = textData.font;
     SetFont(font.pointSize(), font.family(), font.style(), font.weight());
@@ -74,9 +74,9 @@ void Text::Serialize(std::ostream& out) {
  ***********************/
 
 // Setting Rectangle dimensions from input for rendering
-void Text::SetDimensions(int point[])
+void Text::SetDimensions(int point[], const int SIZE)
 {
-    textBox.setRect(point[0], point[1], point[2], point[3]);
+    if (SIZE >= 4) textBox.setRect(point[0], point[1], point[2], point[3]);
 }
 
 

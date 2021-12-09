@@ -13,7 +13,7 @@ Rectangle::Rectangle() : Shape()
 
 Rectangle::Rectangle(int id, ShapeType type, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor, int dimensions[])
     : Shape(id, type, pen, penColor, brush, brushColor) {
-    Rectangle::SetDimensions(dimensions);
+    Rectangle::SetDimensions(dimensions, 4);
 }
 
 Rectangle::~Rectangle() {}
@@ -84,9 +84,9 @@ void Rectangle::Serialize(std::ostream& out) {
  ***********************/
 
 // Setting Rectangle dimensions from input for rendering
-void Rectangle::SetDimensions(int point[])
+void Rectangle::SetDimensions(int point[], const int SIZE)
 {
-    rectangle.setRect(point[0], point[1], point[2], point[3]);
+    if (SIZE >= 4) rectangle.setRect(point[0], point[1], point[2], point[3]);
 }
 
 // May not actually need this

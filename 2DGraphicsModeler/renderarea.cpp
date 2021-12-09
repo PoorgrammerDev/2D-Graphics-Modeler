@@ -161,12 +161,13 @@ void RenderArea::addPolygon(QString penColorStr, int penWidth, QString penStyleS
     QBrush brush;
     Qt::GlobalColor brushColor;
     int dimensions[20] = {};
+    int polySize;
 
     pen = input.GetPenInfo(penColor, penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr);
     brush = input.GetBrushInfo(brushColor, brushColorStr, brushStyleStr);
-    input.PopulatePolyDimensions(dimensionsStr.toStdString(), dimensions, 20);
+    polySize = input.PopulatePolyDimensions(dimensionsStr.toStdString(), dimensions, 20);
 
-    polygon = std::make_unique<Polygon>(NextID(), pen, penColor, brush, brushColor, dimensions);
+    polygon = std::make_unique<Polygon>(NextID(), pen, penColor, brush, brushColor, dimensions, polySize);
     shapes.push_back(std::move(polygon));
     update();
 }
@@ -176,11 +177,12 @@ void RenderArea::addPolyline(QString penColorStr, int penWidth, QString penStyle
     QPen pen;
     Qt::GlobalColor penColor;
     int dimensions[20] = {};
+    int polySize;
 
     pen = input.GetPenInfo(penColor, penColorStr, penWidth, penStyleStr, penCapStyleStr, penJoinStyleStr);
-    input.PopulatePolyDimensions(dimensionsStr.toStdString(), dimensions, 20);
+    polySize = input.PopulatePolyDimensions(dimensionsStr.toStdString(), dimensions, 20);
 
-    polyline = std::make_unique<Polyline>(NextID(), pen, penColor, dimensions);
+    polyline = std::make_unique<Polyline>(NextID(), pen, penColor, dimensions, polySize);
     shapes.push_back(std::move(polyline));
     update();
 }
@@ -249,6 +251,7 @@ void RenderArea::MoveShape(int id, QString newDimensions) {
     bool found = false;
     int i = 0;
     int dimensions[20] = {};
+    int dimSize = 4;
 
     while (!found && i < shapes.size()) {
         if (shapes[i]->GetId() == id) {
@@ -264,7 +267,7 @@ void RenderArea::MoveShape(int id, QString newDimensions) {
         input.PopulateLineDimensions(newDimensions.toStdString(), dimensions);
         break;
     case ShapeType::Polyline :
-        input.PopulatePolyDimensions(newDimensions.toStdString(), dimensions, 20);
+        dimSize = input.PopulatePolyDimensions(newDimensions.toStdString(), dimensions, 20);
         break;
     case ShapeType::Ellipse :
         input.PopulateRectDimensions(newDimensions.toStdString(), dimensions, ShapeType::Ellipse);
@@ -273,7 +276,7 @@ void RenderArea::MoveShape(int id, QString newDimensions) {
         input.PopulateRectDimensions(newDimensions.toStdString(), dimensions, ShapeType::Circle);
         break;
     case ShapeType::Polygon :
-        input.PopulatePolyDimensions(newDimensions.toStdString(), dimensions, 20);
+        dimSize = input.PopulatePolyDimensions(newDimensions.toStdString(), dimensions, 20);
         break;
     case ShapeType::Rectangle :
         input.PopulateRectDimensions(newDimensions.toStdString(), dimensions, ShapeType::Rectangle);
@@ -286,7 +289,7 @@ void RenderArea::MoveShape(int id, QString newDimensions) {
         break;
     }
 
-    shapes[i]->SetDimensions(dimensions);
+    shapes[i]->SetDimensions(dimensions, dimSize);
     update();
 }
 

@@ -15,7 +15,7 @@ Ellipse::Ellipse() : Shape()
 
 Ellipse::Ellipse(int id, ShapeType type, QPen pen, Qt::GlobalColor penColor, QBrush brush, Qt::GlobalColor brushColor, int dimensions[])
     : Shape(id, type, pen, penColor, brush, brushColor){
-    Ellipse::SetDimensions(dimensions);
+    Ellipse::SetDimensions(dimensions, 4);
 }
 
 Ellipse::~Ellipse() {}
@@ -89,9 +89,9 @@ void Ellipse::Serialize(std::ostream& out) {
  ***********************/
 
 // Using an array loaded in input parser to set dimensions for painter
-void Ellipse::SetDimensions(int point[])
+void Ellipse::SetDimensions(int point[], const int SIZE)
 {
-    ellipse.setRect(point[0], point[1], point[2], point[3]);
+    if (SIZE >= 4) ellipse.setRect(point[0], point[1], point[2], point[3]);
 }
 
 // May not actually need this as mentioned before
