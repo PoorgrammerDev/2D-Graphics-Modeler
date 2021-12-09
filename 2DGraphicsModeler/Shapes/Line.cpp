@@ -53,18 +53,6 @@ void Line::Serialize(std::ostream& out) {
     << "PenJoinStyle: " << PenJoinStyleToStr(pen.joinStyle()).toStdString() << '\n';
 }
 
-void Line::Move() {
-    //TODO: Unimplemented method stub
-}
-
-double Line::Perimeter() {
-    return 0.0; //TODO: Unimplemented method stub
-}
-
-double Line::Area() {
-    return 0.0; //TODO: Unimplemented method stub
-}
-
 /***********************
  * Setters and Getters *
  ***********************/

@@ -4,6 +4,7 @@
 #include <QString>
 #include "Shape.h"
 
+//HIGHLIGHT: INHERITANCE
 class Ellipse: public Shape
 {
 public:
@@ -24,10 +25,6 @@ public:
     virtual void DrawId(QPainter& aPainter) override;
     virtual void SetDimensions(int point[]) override;
     virtual void Serialize(std::ostream& out) override;
-
-    virtual void Move() override;
-    virtual double Perimeter() override;
-    virtual double Area() override;
 
     /***********************
      * Setters and Getters *

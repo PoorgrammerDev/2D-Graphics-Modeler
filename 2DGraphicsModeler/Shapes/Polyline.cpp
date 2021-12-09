@@ -56,18 +56,6 @@ void Polyline::Serialize(std::ostream& out) {
     << "PenJoinStyle: " << PenJoinStyleToStr(pen.joinStyle()).toStdString() << '\n';
 }
 
-void Polyline::Move() {
-    //TODO: Unimplemented method stub
-}
-
-double Polyline::Perimeter() {
-    return 0.0; //TODO: Unimplemented method stub
-}
-
-double Polyline::Area() {
-    return 0.0; //TODO: Unimplemented method stub
-}
-
 /***********************
  * Setters and Getters *
  ***********************/

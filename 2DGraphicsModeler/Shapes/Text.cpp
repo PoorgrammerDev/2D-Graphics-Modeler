@@ -69,18 +69,6 @@ void Text::Serialize(std::ostream& out) {
     << "TextFontWeight: " << FontWeightToStr(font.weight()).toStdString() << '\n';
 }
 
-void Text::Move() {
-    //TODO: Unimplemented method stub
-}
-
-double Text::Perimeter() {
-    return 0.0; //TODO: Unimplemented method stub
-}
-
-double Text::Area() {
-    return 0.0; //TODO: Unimplemented method stub
-}
-
 /***********************
  * Setters and Getters *
  ***********************/

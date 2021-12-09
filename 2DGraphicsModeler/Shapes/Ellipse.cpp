@@ -84,18 +84,6 @@ void Ellipse::Serialize(std::ostream& out) {
     }
 }
 
-void Ellipse::Move() {
-    //TODO: Unimplemented method stub
-}
-
-double Ellipse::Perimeter() {
-    return 0.0; //TODO: Unimplemented method stub
-}
-
-double Ellipse::Area() {
-    return 0.0; //TODO: Unimplemented method stub
-}
-
 /***********************
  * Setters and Getters *
  ***********************/

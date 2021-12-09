@@ -33,10 +33,6 @@ public:
     virtual void SetDimensions(int point[]) override;
     virtual void Serialize(std::ostream& out) override;
 
-    virtual void Move() override;
-    virtual double Perimeter() override;
-    virtual double Area() override;
-
     // Reading more on text with the enums and datatypes to assign to
     // Will likely add a QRect to store the dimensions as this is used in the painter.drawText() call
 

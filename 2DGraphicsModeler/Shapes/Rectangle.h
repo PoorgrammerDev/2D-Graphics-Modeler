@@ -25,10 +25,6 @@ public:
     virtual void SetDimensions(int point[]) override;
     virtual void Serialize(std::ostream& out) override;
 
-    virtual void Move() override;
-    virtual double Perimeter() override;
-    virtual double Area() override;
-
     /***********************
      * Setters and Getters *
      ***********************/

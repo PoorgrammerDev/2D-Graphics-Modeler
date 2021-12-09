@@ -58,18 +58,6 @@ void Polygon::Serialize(std::ostream& out) {
     << "BrushStyle: " << BrushStyleToStr(brush.style()).toStdString() << '\n';
 }
 
-void Polygon::Move() {
-    //TODO: Unimplemented method stub
-}
-
-double Polygon::Perimeter() {
-    return 0.0; //TODO: Unimplemented method stub
-}
-
-double Polygon::Area() {
-    return 0.0; //TODO: Unimplemented method stub
-}
-
 /***********************
  * Setters and Getters *
  ***********************/

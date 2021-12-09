@@ -9,6 +9,7 @@ RenderArea::RenderArea(QWidget *parent)
     QWidget::setFixedHeight(500);
     QWidget::setFixedWidth(1000);
 
+    //HIGHLIGHT: EXCEPTION HANDLING
     try {
         input.ReadShapes(shapes);
     }
@@ -24,7 +25,7 @@ RenderArea::RenderArea(QWidget *parent)
 
 RenderArea::~RenderArea()
 {
-    //SAVING ALL CHANGES BETWEEN EXECUTIONS
+    //HIGHLIGHT: SAVING ALL CHANGES BETWEEN EXECUTIONS
     Save();
 }
 

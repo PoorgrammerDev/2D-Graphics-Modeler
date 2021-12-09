@@ -12,6 +12,7 @@ LoginApp::LoginApp(QWidget *parent)
 LoginApp::~LoginApp()
 {
     delete ui;
+    delete dialog1;
 }
 
 
@@ -22,7 +23,6 @@ void LoginApp::on_pushButton_login_clicked()
 
     if (username == "guest" && password == "guest")
     {
-        //QMessageBox::information(this, "Login", "Username and password is correct");
         hide();
         dialog1 = new Dialog(this);
         dialog1->show();

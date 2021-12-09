@@ -37,18 +37,6 @@ void Rectangle::DrawId(QPainter& aPainter)
     aPainter.drawText(coords[0], coords[3], id);
 }
 
-void Rectangle::Move() {
-    //TODO: Unimplemented method stub
-}
-
-double Rectangle::Perimeter() {
-    return 0.0; //TODO: Unimplemented method stub
-}
-
-double Rectangle::Area() {
-    return 0.0; //TODO: Unimplemented method stub
-}
-
 // Thomas I changed line 64 from penWidth to pen.width() purely for compilation this is here in case I forgot to change it back!
 void Rectangle::Serialize(std::ostream& out) {
     int coords[4] = {};
