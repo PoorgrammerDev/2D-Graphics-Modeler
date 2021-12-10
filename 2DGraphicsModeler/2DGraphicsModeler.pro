@@ -18,6 +18,7 @@ SOURCES += \
     Shapes/Shape.cpp \
     Shapes/Text.cpp \
     Util/EnumStrConv.cpp \
+    contact.cpp \
     loginapp.cpp \
     main.cpp \
     dialog.cpp \
@@ -34,11 +35,13 @@ HEADERS += \
     Shapes/Text.h \
     Util/EnumStrConv.h \
     Util/vector.h \
+    contact.h \
     dialog.h \
     loginapp.h \
     renderarea.h
 
 FORMS += \
+    contact.ui \
     dialog.ui \
     loginapp.ui
 

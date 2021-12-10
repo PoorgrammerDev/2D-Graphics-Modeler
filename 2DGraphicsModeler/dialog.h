@@ -3,6 +3,9 @@
 
 #include <QDialog>
 #include <QPixmap>
+#include <memory>
+#include "contact.h"
+
 namespace Ui {
 class Dialog;
 }
@@ -48,6 +51,7 @@ private slots:
 
 private:
     Ui::Dialog *ui;
+    std::unique_ptr<Contact> contact;
     void AddFieldValues();
 };
 

@@ -10,6 +10,8 @@ Dialog::Dialog(QWidget *parent) :
     ui(new Ui::Dialog)
 {
     ui->setupUi(this);
+    contact = std::make_unique<Contact>();
+
     Dialog::AddFieldValues();
     Dialog::on_shSelLine_clicked(); //Auto-selects Line (top of list)
 }
@@ -163,7 +165,7 @@ void Dialog::AddFieldValues() {
 
 void Dialog::on_contactUs_clicked()
 {
-    QMessageBox::information(this, "Contact Us", "Email\nWillGetAnA@gmail.com\n\nPhone\n1-800-willgetana");
+    contact->show();
 }
 
 void Dialog::on_deleteButton_clicked()
