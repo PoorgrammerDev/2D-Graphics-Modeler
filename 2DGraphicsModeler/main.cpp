@@ -7,5 +7,6 @@ int main(int argc, char *argv[])
 
     LoginApp w;
     w.show();
+
     return a.exec();
 }

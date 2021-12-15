@@ -82,3 +82,23 @@ TextPointSize: 10
 TextFontFamily: Comic Sans MS
 TextFontStyle: StyleItalic
 TextFontWeight: Normal
+
+ShapeId: 9
+ShapeType: Line
+ShapeDimensions: 0, 0, 0, 0
+PenColor: color0
+PenWidth: 0
+PenStyle: NoPen
+PenCapStyle: FlatCap
+PenJoinStyle: MiterJoin
+
+ShapeId: 10
+ShapeType: Rectangle
+ShapeDimensions: 0, 0, 300, 200
+PenColor: darkGray
+PenWidth: 5
+PenStyle: DotLine
+PenCapStyle: FlatCap
+PenJoinStyle: MiterJoin
+BrushColor: red
+BrushStyle: SolidPattern

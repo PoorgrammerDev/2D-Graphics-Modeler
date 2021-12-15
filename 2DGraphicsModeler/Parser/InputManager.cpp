@@ -41,6 +41,8 @@ void InputManager::ReadShapes(vector<std::unique_ptr<Shape>>& shapes)
     //So I added some pre-processor directives that (hopefully) detect this
 #if __APPLE__ && TARGET_OS_MAC
     in.open("../../../../2DGraphicsModeler/shapes.txt");
+#elif __linux__
+    in.open("../2DGraphicsModeler/shapes.txt");
 #else
     in.open("..\\2DGraphicsModeler\\shapes.txt");
 #endif
