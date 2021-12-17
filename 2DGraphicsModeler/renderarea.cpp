@@ -103,6 +103,8 @@ void RenderArea::Save() {
     //So I added some pre-processor directives that (hopefully) detect this
 #if __APPLE__ && TARGET_OS_MAC
     file.open("../../../../2DGraphicsModeler/shapes.txt");
+#elif __linux__
+    file.open("../2DGraphicsModeler/shapes.txt");
 #else
     file.open("..\\2DGraphicsModeler\\shapes.txt");
 #endif
